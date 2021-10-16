@@ -1,0 +1,82 @@
+import { Button, Form, Modal } from 'semantic-ui-react'
+import { useState } from 'react'
+import axios from 'axios'
+
+export const userTypeOptions = [
+  { key: 'STUDENT', text: '학생', value: 'STUDENT' },
+  { key: 'FACULTY', text: '교직원', value: 'FACULTY' },
+  { key: 'CLUB', text: '동아리', value: 'CLUB' },
+  { key: 'ASSOCIATION', text: '학생단체', value: 'ASSOCIATION' },
+  { key: 'ADMIN', text: '관리자', value: 'ADMIN' },
+  { key: 'STAFF', text: 'Staff', value: 'STAFF' },
+  { key: 'OTHERS', text: 'OTHERS', value: 'OTHERS' },
+]
+
+const UserCreateModal = () => {
+  const [open, setOpen] = useState(false)
+  const [email, setEmail] = useState()
+  const [id, setID] = useState()
+  const [password, setPW] = useState()
+  const [name, setName] = useState()
+  const [userType, setUserType] = useState()
+
+  const handleSubmit = async () => {
+    try {
+      await axios.post(`${process.env.NEXT_PUBLIC_API}/user`, {
+        'email': email,
+        'id': id,
+        'password': password,
+        'name': name,
+        'userType': userType,
+      })
+    } catch (err) {
+      alert('유저 생성에 실패했습니다.')
+      console.log(err)
+    }
+  }
+
+  return (
+    <Modal
+      size="small"
+      trigger={<Button>유저 생성</Button>}
+      open={open}
+      onClose={() => setOpen(false)}
+      onOpen={() => setOpen(true)}
+    >
+      <Modal.Header>유저 생성</Modal.Header>
+      <Modal.Content>
+        <Form onSubmit={handleSubmit}>
+          <Form.Input
+            required
+            label={'email'} name="email"
+            onChange={e => setEmail(e.target.value)}/>
+          <Form.Input
+            required
+            label={'ID'} name="id"
+            onChange={e => setID(e.target.value)}/>
+          <Form.Input
+            required
+            label={'password'} name="password"
+            onChange={e => setPW(e.target.value)}/>
+          <Form.Input
+            required
+            label={'이름'} name="name"
+            onChange={e => setName(e.target.value)}/>
+          <Form.Select
+            required
+            label={'유저 타입'} name="userType"
+            placeholder="유저 타입을 선택하세요."
+            options={userTypeOptions}
+            onChange={e => setUserType(e.target.value)}/>
+          <Modal.Actions>
+            <Form.Button type="submit">
+              생성
+            </Form.Button>
+          </Modal.Actions>
+        </Form>
+      </Modal.Content>
+    </Modal>
+  )
+}
+
+export default UserCreateModal
