@@ -3,7 +3,7 @@ import PlaceTable from '../../components/place/place.table'
 import PlaceCreateModal from '../../components/place/place.create.modal'
 import { Button } from 'semantic-ui-react'
 
-const PlaceListPage = () => {
+const PlacePage = () => {
   return (
     <ReservationLayout>
       <PlaceCreateModal
@@ -14,4 +14,4 @@ const PlaceListPage = () => {
   )
 }
 
-export default PlaceListPage
+export default PlacePage

@@ -2,7 +2,7 @@ import ReservationLayout from '../../components/reservation/reservation.layout'
 import PlaceReservationTable
   from '../../components/place/place.reservation.table'
 
-const PlaceReservationListPage = () => {
+const PlaceReservationPage = () => {
   return (
     <ReservationLayout>
       <PlaceReservationTable/>
@@ -10,4 +10,4 @@ const PlaceReservationListPage = () => {
   )
 }
 
-export default PlaceReservationListPage
+export default PlaceReservationPage
