@@ -1,10 +1,12 @@
 import React from 'react'
 import { Table } from 'semantic-ui-react'
 import moment from 'moment'
+import PlaceReservationConfirmModal
+  from './place.reservation.confirm.modal'
 
 const PlaceReservationTable = (props) => {
-  const reservations = props.reservations;
-  const start_idx = props.startIdx;
+  const reservations = props.reservations
+  const start_idx = props.startIdx
 
   return (
     <>
@@ -24,25 +26,31 @@ const PlaceReservationTable = (props) => {
         <Table.Body>
           {
             reservations.map((reservation, idx) =>
-              <Table.Row key={reservation.uuid}>
-                <Table.Cell>{start_idx + idx + 1}</Table.Cell>
-                <Table.Cell>{reservation.place.name}</Table.Cell>
-                <Table.Cell>{reservation.booker.name}</Table.Cell>
-                <Table.Cell>{reservation.title}</Table.Cell>
-                <Table.Cell>
-                  <b>
-                    {moment(reservation.date, 'YYYYMMDD').
-                      format('YYYY년 MM월 DD일')}
-                    <br/>
-                    {moment(reservation.start_time, 'HHmm').
-                      format('HH:mm')}
-                    &nbsp;~&nbsp;
-                    {moment(reservation.end_time, 'HHmm').
-                      format('HH:mm')}
-                  </b>
-                </Table.Cell>
-                <Table.Cell>{reservation.status}</Table.Cell>
-              </Table.Row>)
+              <PlaceReservationConfirmModal
+                reservation={reservation}
+                trigger={
+                  <Table.Row key={reservation.uuid}>
+                    <Table.Cell>{start_idx + idx + 1}</Table.Cell>
+                    <Table.Cell>{reservation.place.name}</Table.Cell>
+                    <Table.Cell>{reservation.booker.name}</Table.Cell>
+                    <Table.Cell>{reservation.title}</Table.Cell>
+                    <Table.Cell>
+                      <b>
+                        {moment(reservation.date, 'YYYYMMDD').
+                          format('YYYY년 MM월 DD일')}
+                        <br/>
+                        {moment(reservation.start_time, 'HHmm').
+                          format('HH:mm')}
+                        &nbsp;~&nbsp;
+                        {moment(reservation.end_time, 'HHmm').
+                          format('HH:mm')}
+                      </b>
+                    </Table.Cell>
+                    <Table.Cell>{reservation.status}</Table.Cell>
+                  </Table.Row>
+                }
+              />,
+            )
           }
         </Table.Body>
       </Table>
