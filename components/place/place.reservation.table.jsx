@@ -1,39 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { Pagination, Table } from 'semantic-ui-react'
+import React from 'react'
+import { Table } from 'semantic-ui-react'
 import moment from 'moment'
-import axios from 'axios'
 
-const PlaceReservationTable = () => {
-  const [reservations, setReservations] = useState([])
-  const [page, setPage] = useState(1)
-  const [total_count, setTotalCount] = useState(0)
-  const page_size = 10
-
-  useEffect(async () => {
-    try {
-      const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_API}/reservation-place?take=${page_size}`, {
-          withCredentials: true,
-        })
-      setReservations(res.data)
-      const res2 = await axios.get(
-        `${process.env.NEXT_PUBLIC_API}/reservation-place/count`,
-      )
-      setTotalCount(res2.data)
-    } catch (err) {
-      alert('장소 예약 목록을 불러오는데 실패했습니다.')
-      console.log(err)
-    }
-  }, [])
-
-  const handlePageChange = async (e, target) => {
-    const activePage = target.activePage
-    const ret = await axios.get(
-      `${process.env.NEXT_PUBLIC_API}/reservation-place?take=10&skip=${page_size *
-      (activePage - 1)}`, { withCredentials: true })
-    setReservations(ret.data)
-    setPage(activePage)
-  }
+const PlaceReservationTable = (props) => {
+  const reservations = props.reservations;
+  const start_idx = props.startIdx;
 
   return (
     <>
@@ -53,8 +24,8 @@ const PlaceReservationTable = () => {
         <Table.Body>
           {
             reservations.map((reservation, idx) =>
-              <Table.Row key={(page - 1) * page_size + idx}>
-                <Table.Cell>{(page - 1) * page_size + idx + 1}</Table.Cell>
+              <Table.Row key={reservation.uuid}>
+                <Table.Cell>{start_idx + idx + 1}</Table.Cell>
                 <Table.Cell>{reservation.place.name}</Table.Cell>
                 <Table.Cell>{reservation.booker.name}</Table.Cell>
                 <Table.Cell>{reservation.title}</Table.Cell>
@@ -75,16 +46,6 @@ const PlaceReservationTable = () => {
           }
         </Table.Body>
       </Table>
-      <div style={{ display: 'flex' }}>
-        <Pagination
-          style={{ margin: '0 auto' }}
-          activePage={page}
-          totalPages={Math.ceil(total_count / page_size)}
-          prevItem={null} nextItem={null}
-          onPageChange={handlePageChange}
-        />
-      </div>
-
     </>
   )
 }
