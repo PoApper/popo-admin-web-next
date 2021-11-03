@@ -2,7 +2,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import { Button, Modal } from 'semantic-ui-react'
 
-const DeleteConformModal = (props) => {
+const DeleteConfirmModal = (props) => {
   const deleteTarget = props.target
   const deleteURI = props.deleteURI
   const [open, setOpen] = useState(props.open)
@@ -44,4 +44,4 @@ const DeleteConformModal = (props) => {
   )
 }
 
-export default DeleteConformModal
+export default DeleteConfirmModal

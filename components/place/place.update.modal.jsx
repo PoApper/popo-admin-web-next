@@ -1,7 +1,7 @@
 import { Button, Form, Icon, Image, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
 import axios from 'axios'
-import DeleteConformModal from '../common/delete.modal'
+import DeleteConfirmModal from '../common/delete.confirm.modal'
 
 const PlaceUpdateModal = (props) => {
   const placeInfo = props.placeInfo
@@ -113,7 +113,7 @@ const PlaceUpdateModal = (props) => {
                 onClick={handleSubmit}>
                 생성
               </Form.Button>
-              <DeleteConformModal
+              <DeleteConfirmModal
                 open={deleteModalOpen}
                 target={name}
                 deleteURI={`'place/${placeInfo.uuid}`}
