@@ -10,7 +10,7 @@ const PlaceReservationTable = (props) => {
     <>
       <Table
         celled selectable
-        textAlign={'center'} color={'orange'}>
+        textAlign={'center'}>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell width={1}>idx.</Table.HeaderCell>
