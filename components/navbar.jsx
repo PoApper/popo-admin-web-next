@@ -11,7 +11,7 @@ const Navbar = () => {
             <Menu.Item position={'left'} style={{paddingLeft: 0}}>
               <span style={{textAlign: "center"}}>
                 <Image centered src={'/popo.svg'} size={'small'}/>
-                Postechian's Portal
+                Postechian&apos;s Portal
               </span>
               <AdminSite>
                 관리자

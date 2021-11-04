@@ -46,7 +46,7 @@ const UserTable = () => {
         {
           users.map((user, idx) => {
             return (
-              <Table.Row>
+              <Table.Row key={user.uuid}>
                 <Table.Cell>{idx + 1}</Table.Cell>
                 <Table.Cell>{user.id}</Table.Cell>
                 <Table.Cell>{user.name}</Table.Cell>
