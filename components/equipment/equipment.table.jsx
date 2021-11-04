@@ -27,7 +27,7 @@ const EquipmentTable = () => {
   return (
     <Table
       celled selectable
-      textAlign={'center'} color={'orange'}>
+      textAlign={'center'}>
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell>idx.</Table.HeaderCell>
