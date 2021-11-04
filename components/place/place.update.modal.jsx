@@ -116,7 +116,7 @@ const PlaceUpdateModal = (props) => {
               <DeleteConfirmModal
                 open={deleteModalOpen}
                 target={name}
-                deleteURI={`'place/${placeInfo.uuid}`}
+                deleteURI={`place/${placeInfo.uuid}`}
                 trigger={(
                   <Button negative
                           onClick={() => setDeleteModalOpen(true)}>

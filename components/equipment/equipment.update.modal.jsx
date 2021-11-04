@@ -111,12 +111,12 @@ const EquipmentUpdateModal = (props) => {
               <Form.Button
                 type={'submit'}
                 onClick={handleSubmit}>
-                생성
+                수정
               </Form.Button>
               <DeleteConfirmModal
                 open={deleteModalOpen}
                 target={name}
-                deleteURI={`'equip/${equipmentInfo.uuid}`}
+                deleteURI={`equip/${equipmentInfo.uuid}`}
                 trigger={(
                   <Button negative
                           onClick={() => setDeleteModalOpen(true)}>
