@@ -3,6 +3,8 @@ import axios from 'axios'
 import ReservationLayout from '../../components/reservation/reservation.layout'
 import PlaceReservationTable
   from '../../components/place/place.reservation.table'
+import EquipmentReservationTable
+  from '../../components/equipment/equipment.reservation.table'
 
 const ReservationPage = () => {
   const [place_reservations, setPlaceReservations] = useState([])
@@ -23,12 +25,22 @@ const ReservationPage = () => {
     <ReservationLayout>
       <h3>예약 대기 목록</h3>
       <p>"심사중"인 모든 예약이 이곳에 표시됩니다.</p>
-      <div>
+      <div style={{marginBottom: "1rem"}}>
         <h4>장소 예약</h4>
         {
           place_reservations.length ?
             <PlaceReservationTable
               reservations={place_reservations}
+              startIdx={0}
+            /> : null
+        }
+      </div>
+      <div style={{marginBottom: "1rem"}}>
+        <h4>장비 예약</h4>
+        {
+          equip_reservations.length ?
+            <EquipmentReservationTable
+              reservations={equip_reservations}
               startIdx={0}
             /> : null
         }
