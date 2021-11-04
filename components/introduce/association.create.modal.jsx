@@ -47,13 +47,11 @@ const AssociationCreateModal = (props) => {
       <Modal.Header>자치단체 생성</Modal.Header>
       <Modal.Content>
         <Form>
-          <Form.Group>
-            <Form.Input
-              required
-              label={'자치단체 이름'}
-              onChange={e => setName(e.target.value)}
-            />
-          </Form.Group>
+          <Form.Input
+            required
+            label={'자치단체 이름'}
+            onChange={e => setName(e.target.value)}
+          />
           <Form.TextArea
             required
             label={'소개글'}
@@ -62,17 +60,17 @@ const AssociationCreateModal = (props) => {
           <Form.Input
             required
             label={'위치'}
-            placeholder={"예: 학생회관 OOO호"}
+            placeholder={'예: 학생회관 OOO호'}
             onChange={e => setLocation(e.target.value)}
           />
           <Form.Input
             label={'대표자'}
-            placeholder={"홍길동"}
+            placeholder={'홍길동'}
             onChange={e => setRepresentative(e.target.value)}
           />
           <Form.Input
             label={'연락처'}
-            placeholder={"OOOOO@postech.ac.kr"}
+            placeholder={'OOOOO@postech.ac.kr'}
             onChange={e => setContact(e.target.value)}
           />
           <Form.Input
