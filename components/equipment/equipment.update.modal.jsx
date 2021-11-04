@@ -98,7 +98,7 @@ const EquipmentUpdateModal = (props) => {
             type={'file'}
             onChange={e => setImage(e.target.files[0])}
           />
-          <p>이미지가 없으면 기본 이미지가 등록됩니다.</p>
+          <p>이미지가 없으면 기본 이미지가 표시됩니다.</p>
           <div style={{ margin: '10px 0' }}>
             <Image
               src={`${process.env.NEXT_PUBLIC_API}/equip/image/${equipmentInfo.imageName}`

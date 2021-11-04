@@ -14,6 +14,7 @@ const ownerNames = {
 const EquipmentTable = () => {
   const [equipments, setEquipments] = useState([])
 
+  // TODO: move out to caller component
   useEffect(async () => {
     try {
       const res = await axios.get(`${process.env.NEXT_PUBLIC_API}/equip`)

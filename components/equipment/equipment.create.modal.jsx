@@ -3,8 +3,6 @@ import { useState } from 'react'
 import axios from 'axios'
 
 const EquipmentCreateModal = (props) => {
-  const equipmentInfo = props.equipmentInfo
-
   const [open, setOpen] = useState(false)
   const [name, setName] = useState('')
   const [equip_owner, setEquipOwner] = useState('')
@@ -24,8 +22,8 @@ const EquipmentCreateModal = (props) => {
       if (image) {
         formData.append('image', image)
       }
-      await axios.put(
-        `${process.env.NEXT_PUBLIC_API}/equip/${equipmentInfo.uuid}`,
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_API}/equip`,
         formData,
         {
           withCredentials: true,
@@ -54,7 +52,7 @@ const EquipmentCreateModal = (props) => {
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
     >
-      <Modal.Header>장비 수정</Modal.Header>
+      <Modal.Header>장비 생성</Modal.Header>
       <Modal.Content>
         <Form>
           <Form.Group>
@@ -96,7 +94,7 @@ const EquipmentCreateModal = (props) => {
             type={'file'}
             onChange={e => setImage(e.target.files[0])}
           />
-          <p>이미지가 없으면 기본 이미지가 등록됩니다.</p>
+          <p>이미지가 없으면 기본 이미지가 표시됩니다.</p>
           <Modal.Actions>
             <Form.Group>
               <Form.Button
