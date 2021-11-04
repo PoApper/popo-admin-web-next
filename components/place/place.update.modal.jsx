@@ -4,7 +4,7 @@ import axios from 'axios'
 import DeleteConfirmModal from '../common/delete.confirm.modal'
 
 const PlaceUpdateModal = (props) => {
-  const placeInfo = props.placeInfo
+  const placeInfo = props.equipmentInfo
 
   const [open, setOpen] = useState(false)
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
@@ -37,7 +37,7 @@ const PlaceUpdateModal = (props) => {
       setOpen(false)
       window.location.reload()
     } catch (e) {
-      alert('장소 생성에 실패했습니다.')
+      alert('장소 정보 수정에 실패했습니다.')
       console.log(e)
     }
   }
@@ -111,7 +111,7 @@ const PlaceUpdateModal = (props) => {
               <Form.Button
                 type={'submit'}
                 onClick={handleSubmit}>
-                생성
+                수정
               </Form.Button>
               <DeleteConfirmModal
                 open={deleteModalOpen}

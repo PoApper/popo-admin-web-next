@@ -40,6 +40,11 @@ const PlaceReservationPage = () => {
 
   return (
     <ReservationLayout>
+      <h3>장소 예약 목록</h3>
+      <p>
+        예약은 생성일 순서로 정렬되어 표시됩니다!<br/>
+        예약 내용을 수정하는 건 <b>불가능</b>합니다. 예약 승인/거절/삭제만 가능합니다.
+      </p>
       <PlaceReservationTable
         reservations={reservations}
         startIdx={(page - 1) * page_size}

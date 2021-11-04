@@ -25,7 +25,7 @@ const PlaceTable = () => {
   return (
     <Table
       celled selectable
-      textAlign={'center'} color={'orange'}>
+      textAlign={'center'}>
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell>idx.</Table.HeaderCell>
@@ -39,8 +39,9 @@ const PlaceTable = () => {
         {
           places.map((place, idx) =>
             <PlaceUpdateModal
-              placeInfo={place}
-              trigger={<Table.Row key={idx}>
+              key={place.uuid}
+              equipmentInfo={place}
+              trigger={<Table.Row key={place.uuid}>
                 <Table.Cell>{idx + 1}</Table.Cell>
                 <Table.Cell>{place.name}</Table.Cell>
                 <Table.Cell>{place.location}</Table.Cell>
