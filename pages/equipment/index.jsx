@@ -7,8 +7,12 @@ import EquipmentCreateModal
 const EquipmentPage = () => {
   return (
     <ReservationLayout>
+      <h3>장비 목록</h3>
+      <p>
+        장비는 마지막 수정일 순서로 정렬되어 표시됩니다!
+      </p>
       <EquipmentCreateModal
-        trigger={<Button>장소 생성</Button>}
+        trigger={<Button>장비 생성</Button>}
       />
       <EquipmentTable/>
     </ReservationLayout>

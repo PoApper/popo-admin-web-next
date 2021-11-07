@@ -19,7 +19,7 @@ const ReservationPage = () => {
       `${process.env.NEXT_PUBLIC_API}/reservation-equip?status=심사중`,
     )
     setEquipReservations(res2.data)
-  })
+  }, [])
 
   return (
     <ReservationLayout>
