@@ -1,6 +1,4 @@
 import { Table } from 'semantic-ui-react'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
 import moment from 'moment'
 
 const userTypes = {
@@ -13,24 +11,11 @@ const userTypes = {
   'OTHERS': 'OTHERS',
 }
 
-const UserTable = () => {
-  const [users, setUsers] = useState([])
-
-  useEffect(async () => {
-    try {
-      const res = await axios.get(`${process.env.NEXT_PUBLIC_API}/user`,
-        { withCredentials: true })
-      setUsers(res.data)
-    } catch (err) {
-      alert('유저 목록을 불러오는데 실패했습니다.')
-      console.log(err)
-    }
-  })
-
+const UserTable = ({ users }) => {
   return (
     <Table
       celled selectable
-      textAlign={'center'} color={'orange'}>
+      textAlign={'center'}>
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell>idx.</Table.HeaderCell>
@@ -51,8 +36,10 @@ const UserTable = () => {
                 <Table.Cell>{user.id}</Table.Cell>
                 <Table.Cell>{user.name}</Table.Cell>
                 <Table.Cell>{userTypes[user.userType]}</Table.Cell>
-                <Table.Cell>{moment(user.createdAt).format("YYYY년 MM월 DD일 HH:mm")}</Table.Cell>
-                <Table.Cell>{moment(user.lastLoginAt).format("YYYY년 MM월 DD일 HH:mm")}</Table.Cell>
+                <Table.Cell>{moment(user.createdAt).
+                  format('YYYY-MM-DD HH:mm')}</Table.Cell>
+                <Table.Cell>{moment(user.lastLoginAt).
+                  format('YYYY-MM-DD HH:mm')}</Table.Cell>
               </Table.Row>
             )
           })
