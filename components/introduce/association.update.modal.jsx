@@ -94,6 +94,7 @@ const AssociationUpdateModal = (props) => {
             <Image
               src={`${process.env.NEXT_PUBLIC_API}/introduce/association/image/${association.logoName}`
               ?? 'https://react.semantic-ui.com/images/wireframe/image.png'}
+              alt={"association_image"}
               size={'medium'}
             />
           </div>

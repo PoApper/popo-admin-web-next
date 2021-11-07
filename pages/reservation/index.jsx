@@ -24,7 +24,7 @@ const ReservationPage = () => {
   return (
     <ReservationLayout>
       <h3>예약 대기 목록</h3>
-      <p>"심사중"인 모든 예약이 이곳에 표시됩니다.</p>
+      <p><b>심사중</b>인 모든 예약이 이곳에 표시됩니다.</p>
       <div style={{marginBottom: "1rem"}}>
         <h4>장소 예약</h4>
         {

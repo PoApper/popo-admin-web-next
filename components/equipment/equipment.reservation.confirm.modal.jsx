@@ -38,7 +38,10 @@ const EquipmentReservationConfirmModal = (props) => {
               {
                 reservation.equipments.map(equipment => {
                   return (
-                    <Label style={{margin: "4px"}}>
+                    <Label
+                      key={equipment.uuid}
+                      style={{margin: "4px"}}
+                    >
                       {equipment.name}
                     </Label>
                   )

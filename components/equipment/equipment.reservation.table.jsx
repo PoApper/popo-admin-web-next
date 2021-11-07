@@ -27,6 +27,7 @@ const EquipmentReservationTable = (props) => {
           {
             reservations.map((reservation, idx) =>
               <EquipmentReservationConfirmModal
+                key={reservation.uuid}
                 reservation={reservation}
                 trigger={
                   <Table.Row key={reservation.uuid}>
@@ -35,7 +36,11 @@ const EquipmentReservationTable = (props) => {
                       {
                         reservation.equipments.map(equipment => {
                           return (
-                            <Label size={"tiny"} style={{margin: "2px"}}>
+                            <Label
+                              size={"tiny"}
+                              key={equipment.uuid}
+                              style={{margin: "2px"}}
+                            >
                               {equipment.name}
                             </Label>
                           )

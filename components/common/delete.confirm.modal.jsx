@@ -26,7 +26,7 @@ const DeleteConfirmModal = (props) => {
     >
       <Modal.Header>삭제 확인</Modal.Header>
       <Modal.Content>
-        "{deleteTarget}"이 삭제 됩니다. 정말 삭제 하시겠습니까?
+        <b>{deleteTarget}</b>이 삭제 됩니다. 정말 삭제 하시겠습니까?
       </Modal.Content>
       <Modal.Actions>
         <Button

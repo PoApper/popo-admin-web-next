@@ -10,7 +10,10 @@ const Navbar = () => {
           <Link href={'/'}>
             <Menu.Item position={'left'} style={{paddingLeft: 0}}>
               <span style={{textAlign: "center"}}>
-                <Image centered src={'/popo.svg'} size={'small'}/>
+                <Image
+                  centered
+                  src={'/popo.svg'} alt={"logo"}
+                  size={'small'}/>
                 Postechian&apos;s Portal
               </span>
               <AdminSite>

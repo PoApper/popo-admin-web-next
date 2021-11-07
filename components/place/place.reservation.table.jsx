@@ -27,6 +27,7 @@ const PlaceReservationTable = (props) => {
           {
             reservations.map((reservation, idx) =>
               <PlaceReservationConfirmModal
+                key={reservation.uuid}
                 reservation={reservation}
                 trigger={
                   <Table.Row key={reservation.uuid}>

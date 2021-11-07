@@ -103,6 +103,7 @@ const PlaceUpdateModal = (props) => {
             <Image
               src={`${process.env.NEXT_PUBLIC_API}/place/image/${placeInfo.imageName}`
               ?? 'https://react.semantic-ui.com/images/wireframe/image.png'}
+              atl={"place_image"}
               size={'medium'}
             />
           </div>

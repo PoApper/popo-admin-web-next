@@ -103,6 +103,7 @@ const EquipmentUpdateModal = (props) => {
             <Image
               src={`${process.env.NEXT_PUBLIC_API}/equip/image/${equipmentInfo.imageName}`
               ?? 'https://react.semantic-ui.com/images/wireframe/image.png'}
+              atl={"equipment_image"}
               size={'medium'}
             />
           </div>

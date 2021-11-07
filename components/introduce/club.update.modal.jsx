@@ -119,6 +119,7 @@ const ClubUpdateModal = (props) => {
             <Image
               src={`${process.env.NEXT_PUBLIC_API}/introduce/club/image/${club.logoName}`
               ?? 'https://react.semantic-ui.com/images/wireframe/image.png'}
+              alt={"club_image"}
               size={'medium'}
             />
           </div>
