@@ -11,7 +11,7 @@ const userTypes = {
   'OTHERS': 'OTHERS',
 }
 
-const UserTable = ({ users }) => {
+const UserTable = ({ users, startIdx }) => {
   return (
     <Table
       celled selectable
@@ -22,7 +22,6 @@ const UserTable = ({ users }) => {
           <Table.HeaderCell>ID</Table.HeaderCell>
           <Table.HeaderCell>이름</Table.HeaderCell>
           <Table.HeaderCell>유저 타입</Table.HeaderCell>
-          <Table.HeaderCell>유저 상태</Table.HeaderCell>
           <Table.HeaderCell>가입일</Table.HeaderCell>
           <Table.HeaderCell>마지막 로그인</Table.HeaderCell>
         </Table.Row>
@@ -32,7 +31,7 @@ const UserTable = ({ users }) => {
           users.map((user, idx) => {
             return (
               <Table.Row key={user.uuid}>
-                <Table.Cell>{idx + 1}</Table.Cell>
+                <Table.Cell>{startIdx + idx + 1}</Table.Cell>
                 <Table.Cell>{user.id}</Table.Cell>
                 <Table.Cell>{user.name}</Table.Cell>
                 <Table.Cell>{userTypes[user.userType]}</Table.Cell>
