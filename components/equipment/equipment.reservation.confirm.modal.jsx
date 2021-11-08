@@ -14,7 +14,8 @@ const EquipmentReservationConfirmModal = (props) => {
     try {
       const patch_type = data.name // {accept, reject}
       await axios.patch(
-        `${process.env.NEXT_PUBLIC_API}/reservation-equip/${reservation.uuid}/status/${patch_type}?sendEmail=${this.state.sendEmail}`)
+        `${process.env.NEXT_PUBLIC_API}/reservation-equip/${reservation.uuid}/status/${patch_type}?sendEmail=${send_email}`,
+        {}, {withCredentials: true})
       setOpen(false)
       window.location.reload()
     } catch (e) {
@@ -118,7 +119,7 @@ const EquipmentReservationConfirmModal = (props) => {
             <Button.Group floated={'right'}>
               <DeleteConfirmModal
                 target={reservation.title}
-                deleteURI={`reservation-place/${reservation.uuid}`}
+                deleteURI={`reservation-equip/${reservation.uuid}`}
                 trigger={
                   <Button negative>
                     <Icon name={'trash'}/> 예약 삭제

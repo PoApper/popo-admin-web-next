@@ -14,7 +14,8 @@ const PlaceReservationConfirmModal = (props) => {
     try {
       const patch_type = data.name // {accept, reject}
       await axios.patch(
-        `${process.env.NEXT_PUBLIC_API}/reservation-place/${reservation.uuid}/status/${patch_type}?sendEmail=${this.state.sendEmail}`)
+        `${process.env.NEXT_PUBLIC_API}/reservation-place/${reservation.uuid}/status/${patch_type}?sendEmail=${send_email}`,
+        {}, {withCredentials: true})
       setOpen(false)
       window.location.reload()
     } catch (e) {
