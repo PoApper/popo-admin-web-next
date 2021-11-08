@@ -1,4 +1,4 @@
-import { Button, Form, Modal } from 'semantic-ui-react'
+import { Form, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
 import axios from 'axios'
 
@@ -12,7 +12,7 @@ export const userTypeOptions = [
   { key: 'OTHERS', text: 'OTHERS', value: 'OTHERS' },
 ]
 
-const UserCreateModal = () => {
+const UserCreateModal = ({ trigger }) => {
   const [open, setOpen] = useState(false)
   const [email, setEmail] = useState()
   const [id, setID] = useState()
@@ -28,7 +28,8 @@ const UserCreateModal = () => {
         'password': password,
         'name': name,
         'userType': userType,
-      })
+      }, {withCredentials: true})
+      window.location.reload();
     } catch (err) {
       alert('유저 생성에 실패했습니다.')
       console.log(err)
@@ -38,8 +39,8 @@ const UserCreateModal = () => {
   return (
     <Modal
       size="small"
-      trigger={<Button>유저 생성</Button>}
       open={open}
+      trigger={trigger}
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
     >
@@ -67,7 +68,7 @@ const UserCreateModal = () => {
             label={'유저 타입'} name="userType"
             placeholder="유저 타입을 선택하세요."
             options={userTypeOptions}
-            onChange={e => setUserType(e.target.value)}/>
+            onChange={(e, { value }) => setUserType(value)}/>
           <Modal.Actions>
             <Form.Button type="submit">
               생성

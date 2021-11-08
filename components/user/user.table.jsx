@@ -1,5 +1,6 @@
 import { Table } from 'semantic-ui-react'
 import moment from 'moment'
+import UserUpdateModal from './user.update.modal'
 
 const userTypes = {
   'STUDENT': '학생',
@@ -30,16 +31,22 @@ const UserTable = ({ users, startIdx }) => {
         {
           users.map((user, idx) => {
             return (
-              <Table.Row key={user.uuid}>
-                <Table.Cell>{startIdx + idx + 1}</Table.Cell>
-                <Table.Cell>{user.id}</Table.Cell>
-                <Table.Cell>{user.name}</Table.Cell>
-                <Table.Cell>{userTypes[user.userType]}</Table.Cell>
-                <Table.Cell>{moment(user.createdAt).
-                  format('YYYY-MM-DD HH:mm')}</Table.Cell>
-                <Table.Cell>{moment(user.lastLoginAt).
-                  format('YYYY-MM-DD HH:mm')}</Table.Cell>
-              </Table.Row>
+              <UserUpdateModal
+                key={user.uuid}
+                user={user}
+                trigger={
+                  <Table.Row key={user.uuid}>
+                    <Table.Cell>{startIdx + idx + 1}</Table.Cell>
+                    <Table.Cell>{user.id}</Table.Cell>
+                    <Table.Cell>{user.name}</Table.Cell>
+                    <Table.Cell>{userTypes[user.userType]}</Table.Cell>
+                    <Table.Cell>{moment(user.createdAt).
+                      format('YYYY-MM-DD HH:mm')}</Table.Cell>
+                    <Table.Cell>{moment(user.lastLoginAt).
+                      format('YYYY-MM-DD HH:mm')}</Table.Cell>
+                  </Table.Row>
+                }
+              />
             )
           })
         }
