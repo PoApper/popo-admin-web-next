@@ -67,7 +67,7 @@ const EquipmentCreateModal = (props) => {
               label={'장비 소속'}
               value={equip_owner}
               options={ownerOptions}
-              onChange={e => setEquipOwner(e.target.value)}
+              onChange={(e, { value }) => setEquipOwner(value)}
             />
           </Form.Group>
           <Form.Input

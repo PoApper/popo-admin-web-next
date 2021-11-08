@@ -64,7 +64,7 @@ const PlaceUpdateModal = (props) => {
               placeholder={'지역을 선택하세요.'}
               value={region}
               options={regionOptions}
-              onChange={e => setRegion(e.target.value)}
+              onChange={(e, { value }) => setRegion(value)}
             />
             <Form.Input
               required

@@ -75,7 +75,7 @@ const ClubCreateModal = (props) => {
             required
             label={'분과'}
             options={clubTypeOptions}
-            onChange={e => setClubType(e.target.value)}
+            onChange={(e, { value }) => setClubType(value)}
           />
           <Form.TextArea
             required
