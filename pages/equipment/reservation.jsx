@@ -32,7 +32,7 @@ const EquipmentReservationPage = () => {
   const handlePageChange = async (e, target) => {
     const activePage = target.activePage
     const ret = await axios.get(
-      `${process.env.NEXT_PUBLIC_API}/reservation-equip?take=10&skip=${page_size *
+      `${process.env.NEXT_PUBLIC_API}/reservation-equip?take=${page_size}&skip=${page_size *
       (activePage - 1)}`, { withCredentials: true })
     setReservations(ret.data)
     setPage(activePage)
@@ -45,18 +45,20 @@ const EquipmentReservationPage = () => {
         예약은 생성일 순서로 정렬되어 표시됩니다!<br/>
         예약 내용을 수정하는 건 <b>불가능</b>합니다. 예약 승인/거절/삭제만 가능합니다.
       </p>
-      <EquipmentReservationTable
-        reservations={reservations}
-        startIdx={(page - 1) * page_size}
-      />
-      <div style={{ display: 'flex' }}>
-        <Pagination
-          style={{ margin: '0 auto' }}
-          activePage={page}
-          totalPages={Math.ceil(total_count / page_size)}
-          prevItem={null} nextItem={null}
-          onPageChange={handlePageChange}
+      <div>
+        <EquipmentReservationTable
+          reservations={reservations}
+          startIdx={(page - 1) * page_size}
         />
+        <div style={{ display: 'flex' }}>
+          <Pagination
+            style={{ margin: '0 auto' }}
+            activePage={page}
+            totalPages={Math.ceil(total_count / page_size)}
+            prevItem={null} nextItem={null}
+            onPageChange={handlePageChange}
+          />
+        </div>
       </div>
     </ReservationLayout>
   )
