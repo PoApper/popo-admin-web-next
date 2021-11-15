@@ -32,7 +32,7 @@ const ReservationPage = () => {
             <PlaceReservationTable
               reservations={place_reservations}
               startIdx={0}
-            /> : null
+            /> : <p>대기 중인 장소 예약이 없습니다 🎈</p>
         }
       </div>
       <div style={{marginBottom: "1rem"}}>
@@ -42,7 +42,7 @@ const ReservationPage = () => {
             <EquipmentReservationTable
               reservations={equip_reservations}
               startIdx={0}
-            /> : null
+            /> : <p>대기 중인 장비 예약이 없습니다 🎈</p>
         }
       </div>
 
