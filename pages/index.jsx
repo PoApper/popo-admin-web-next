@@ -1,9 +1,9 @@
-import Layout from '../components/layout'
+import LayoutMain from '../components/layout.main'
 import { Divider, Grid, Image, List } from 'semantic-ui-react'
 
 const HomePage = () => {
   return (
-    <Layout>
+    <LayoutMain>
       <Grid columns="equal">
         <Grid.Column>
           <h2>POPO 관리자 페이지🎩</h2>
@@ -35,7 +35,7 @@ const HomePage = () => {
         </Grid.Column>
       </Grid>
 
-    </Layout>
+    </LayoutMain>
   )
 }
 

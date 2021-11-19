@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Button, Pagination } from 'semantic-ui-react'
-import Layout from '../components/layout'
+import LayoutMain from '../components/layout.main'
 import UserTable from '../components/user/user.table'
 import UserCreateModal from '../components/user/user.create.modal'
 
@@ -37,7 +37,7 @@ const UserPage = () => {
   }
 
   return (
-    <Layout>
+    <LayoutMain>
       <h2>유저 관리</h2>
       <div style={{ marginBottom: '1rem' }}>
         <UserCreateModal
@@ -62,7 +62,7 @@ const UserPage = () => {
           />
         </div>
       </div>
-    </Layout>
+    </LayoutMain>
   )
 }
 
