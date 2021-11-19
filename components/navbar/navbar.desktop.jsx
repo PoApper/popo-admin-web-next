@@ -1,0 +1,75 @@
+import styled from 'styled-components'
+import { Image, Menu } from 'semantic-ui-react'
+import Link from 'next/link'
+
+const NavbarDesktop = () => {
+  return (
+    <>
+      <NavbarWrapper>
+        <NavbarInner>
+          <NavbarMenu borderless>
+            <Link href={'/'}>
+              <Menu.Item position={'left'} style={{ paddingLeft: 0 }}>
+              <span style={{ textAlign: 'center' }}>
+                <Image
+                  centered
+                  src={'/popo.svg'} alt={'logo'}
+                  size={'small'}/>
+              </span>
+                관리자
+              </Menu.Item>
+            </Link>
+            <Link href={'/user'}>
+              <Menu.Item link>유저 관리</Menu.Item>
+            </Link>
+            <Link href={'/reservation'}>
+              <Menu.Item link>예약 관리</Menu.Item>
+            </Link>
+            <Link href={'/introduce'}>
+              <Menu.Item link>소개글 관리</Menu.Item>
+            </Link>
+            <Link href={'/board'}>
+              <Menu.Item link disabled>게시물 관리</Menu.Item>
+            </Link>
+            <Link href={'/statistics'}>
+              <Menu.Item link disabled>통계 보기</Menu.Item>
+            </Link>
+          </NavbarMenu>
+        </NavbarInner>
+      </NavbarWrapper>
+    </>
+  )
+}
+
+export default NavbarDesktop
+
+const NavbarWrapper = styled.nav`
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: white;
+
+  font-weight: bold;
+  width: 100%;
+
+  position: fixed;
+  top: 0;
+  z-index: 10;
+`
+
+const NavbarInner = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: auto;
+
+  max-width: ${({
+    theme,
+  }) => theme.contentWidth
+  };
+`
+
+const NavbarMenu = styled(Menu)`
+  box-shadow: none !important;
+  border: none !important;
+  width: 100%;
+`
+
