@@ -1,36 +1,36 @@
 import { Icon, Image, Menu } from 'semantic-ui-react'
 import styled from 'styled-components'
 import Link from 'next/link'
+import MenuItemUser from './menu.item.user'
 
-const NavbarMobile = ({ toggleSidebar }) => {
+const NavbarMobile = ({ openSidebar }) => {
   return (
     <NavbarWrapper>
-      <div style={{backgroundColor: "black", textAlign: "center", color: "white"}}>
+      <div style={{
+        backgroundColor: 'black',
+        textAlign: 'center',
+        color: 'white',
+      }}>
         관리자
       </div>
       <NavbarInner>
         <NavbarMenu borderless>
-          <Menu.Item
-            position={"left"}
-            onClick={toggleSidebar}>
-            <Icon name={'sidebar'}/>
+          <Menu.Item style={{ margin: 10 }} onClick={openSidebar} >
+            <Icon name={'sidebar'} style={{ margin: '0' }}/>
           </Menu.Item>
-          <Link href={'/'}>
-            <Menu.Item>
-              <div style={{ display: 'flex', alignItems: 'center', textAlign: "center" }}>
-                <Image
-                  src={'/popo.svg'} alt={'logo'}
-                  size={'tiny'}
-                  style={{margin: 'rgba(255, 255, 255, 0.7)'}}
-                />
-              </div>
-            </Menu.Item>
-          </Link>
-          <Menu.Item
-            position={"right"}
-          >
-            <Icon name={'user'}/>
+
+          <Menu.Item position={'left'}
+                     style={{ paddingLeft: 0 }}>
+            <Link href={'/'}>
+              <Image
+                src={'/popo.svg'} alt={'logo'}
+                size={'tiny'}
+                style={{ margin: 'rgba(255, 255, 255, 0.7)' }}
+              />
+            </Link>
           </Menu.Item>
+
+          <MenuItemUser/>
         </NavbarMenu>
       </NavbarInner>
     </NavbarWrapper>

@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { Image, Menu } from 'semantic-ui-react'
 import Link from 'next/link'
+import MenuItemUser from './menu.item.user'
 
 const NavbarDesktop = () => {
   return (
@@ -34,6 +35,8 @@ const NavbarDesktop = () => {
             <Link href={'/statistics'}>
               <Menu.Item link disabled>통계 보기</Menu.Item>
             </Link>
+
+            <MenuItemUser/>
           </NavbarMenu>
         </NavbarInner>
       </NavbarWrapper>
