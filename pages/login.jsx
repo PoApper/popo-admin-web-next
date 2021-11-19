@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { Form, Image } from 'semantic-ui-react'
 import styled from 'styled-components'
 import axios from 'axios'
-import LoginLayout from '../components/login_layout'
+import LoginLayout from '../components/layout.login'
 
 const LoginPage = () => {
   const router = useRouter()
