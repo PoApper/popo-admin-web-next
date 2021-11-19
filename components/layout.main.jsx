@@ -2,14 +2,13 @@ import React, { useState } from 'react'
 import Head from 'next/head'
 import styled, { ThemeProvider } from 'styled-components'
 import theme from '../styles/theme'
-import { useMediaQuery } from 'react-responsive'
+import MediaQuery from 'react-responsive'
 import NavbarDesktop from './navbar/navbar.desktop'
 import NavbarMobile from './navbar/navbar.mobile'
 import SideBar from './navbar/sidebar'
 
 const LayoutMain = ({ children }) => {
-  const isMobile = useMediaQuery({ maxWidth: 845 })
-  const [SidebarVisible, setSidebarVisible] = useState(false)
+  const [sidebarVisible, setSidebarVisible] = useState(false)
 
   return (
     <ThemeProvider theme={theme}>
@@ -20,34 +19,30 @@ const LayoutMain = ({ children }) => {
       </Head>
       <>
         <main>
-          {
-            isMobile ? (
-              <>
-                <NavbarMobile
-                  toggleSidebar={() => setSidebarVisible(!SidebarVisible)}
-                />
-                <SideBar
-                  visible={SidebarVisible}
-                  toggleSidebar={() => setSidebarVisible(!SidebarVisible)}
-                  pushContent={
-                    <Wrapper>
-                      <div style={{ width: '100%' }}>
-                        {children}
-                      </div>
-                    </Wrapper>
-                  }/>
-              </>
-            ) : (
-              <>
-                <NavbarDesktop/>
+          <MediaQuery maxWidth={768}>
+            <NavbarMobile
+              openSidebar={() => setSidebarVisible(true)}
+            />
+            <SideBar
+              visible={sidebarVisible}
+              toggleSidebar={() => setSidebarVisible(!sidebarVisible)}
+              pushContent={
                 <Wrapper>
                   <div style={{ width: '100%' }}>
                     {children}
                   </div>
                 </Wrapper>
-              </>
-            )
-          }
+              }/>
+          </MediaQuery>
+
+          <MediaQuery minWidth={768}>
+            <NavbarDesktop/>
+            <Wrapper>
+              <div style={{ width: '100%' }}>
+                {children}
+              </div>
+            </Wrapper>
+          </MediaQuery>
         </main>
       </>
     </ThemeProvider>
