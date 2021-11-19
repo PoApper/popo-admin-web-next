@@ -15,9 +15,9 @@ const LoginPage = () => {
     try {
       await axios.post(`${process.env.NEXT_PUBLIC_API}/auth/login/admin`, {
         id: id,
-        password: password
-      }, {withCredentials: true})
-      await router.push('/');
+        password: password,
+      }, { withCredentials: true })
+      await router.push('/')
     } catch (e) {
       alert('로그인에 실패했습니다.')
       console.log(e)
@@ -30,7 +30,7 @@ const LoginPage = () => {
         src={'/popo.svg'}
       />
       <SubTitle>관리자 페이지</SubTitle>
-      <div style={{width: "500px"}}>
+      <LoginFormDiv>
         <Form>
           <Form.Input
             required
@@ -47,7 +47,7 @@ const LoginPage = () => {
             로그인
           </Form.Button>
         </Form>
-      </div>
+      </LoginFormDiv>
 
     </LoginLayout>
   )
@@ -59,4 +59,12 @@ const SubTitle = styled.h2`
   margin-top: 0;
   font-size: 26px !important;
   font-weight: 500;
+`
+
+const LoginFormDiv = styled.div`
+  width: 500px;
+
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+  }
 `

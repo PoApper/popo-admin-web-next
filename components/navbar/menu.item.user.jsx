@@ -15,7 +15,7 @@ const MenuItemUser = () => {
         })
       setUser(res.data)
     } catch (err) {
-      await router.push('/login')
+      // await router.push('/login')
     }
   }, [])
 
