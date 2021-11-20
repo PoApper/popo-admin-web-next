@@ -38,7 +38,7 @@ const UserCreateModal = ({ trigger }) => {
 
   return (
     <Modal
-      size="small"
+      closeIcon size="small"
       open={open}
       trigger={trigger}
       onClose={() => setOpen(false)}

@@ -44,6 +44,7 @@ const AssociationUpdateModal = (props) => {
 
   return (
     <Modal
+      closeIcon
       open={open} trigger={props.trigger}
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
