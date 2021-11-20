@@ -1,34 +1,42 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# POPO Admin Web
 
-## Getting Started
+<br />
+<br />
 
-First, run the development server:
+<p align="center">
+<img src="https://img.shields.io/badge/node-%3E%3D14.16-brightgreen">
+<img src="https://img.shields.io/badge/npm-%3E%3D7.20-brightgreen">
+</p>
 
-```bash
-npm run dev
-# or
-yarn dev
+<p align="center">
+  <a href="http://popo.postech.ac.kr">
+    <img src="https://raw.githubusercontent.com/PoApper/POPO-nest-api/master/assets/popo.svg" alt="Logo" height="150">
+  </a>
+  <p align="center">
+    Public Web for POPO @ <a href="https://github.com/PoApper">PoApper</a>
+    <br />
+    POPO, POstechian's POrtal
+    <br />
+    👉 <a href="http://popo.postech.ac.kr">POPO</a>
+  </p>
+</p>
+
+## About
+
+POPO는 PoApper에서 개발하고, POSTECH 총학생회에서 운영하는 포털 사이트입니다. POPO를 통해 교내의 장소/장비를 예약하고, 자치단체 및 동아리 정보를 열람할 수 있습니다.
+
+
+## Setup
+
+``` bash
+$ npm install
+// fill correct envrionments variables to .env file
+$ npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Specification
 
-You can start editing the page by modifying `pages/index.jsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- ReactJS
+- NextJS
+- Semantic-ui-react
+- styled-component
