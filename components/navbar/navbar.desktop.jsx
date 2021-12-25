@@ -33,7 +33,7 @@ const NavbarDesktop = () => {
               <Menu.Item link disabled>게시물 관리</Menu.Item>
             </Link>
             <Link href={'/statistics'}>
-              <Menu.Item link disabled>통계 보기</Menu.Item>
+              <Menu.Item link>통계 보기</Menu.Item>
             </Link>
 
             <MenuItemUser/>
