@@ -35,9 +35,11 @@ const SideBar = ({ visible, toggleSidebar, pushContent }) => {
         <Menu.Item as="a" disabled>
           게시물 관리
         </Menu.Item>
-        <Menu.Item as="a">
-          통계 보기
-        </Menu.Item>
+        <Link href={'/statistics'}>
+          <Menu.Item as="a">
+            통계 보기
+          </Menu.Item>
+        </Link>
       </Sidebar>
 
       <Sidebar.Pusher dimmed={visible}>

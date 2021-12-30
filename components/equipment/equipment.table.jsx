@@ -16,13 +16,13 @@ const EquipmentTable = () => {
 
   // TODO: move out to caller component
   useEffect(async () => {
-    try {
-      const res = await axios.get(`${process.env.NEXT_PUBLIC_API}/equip`)
-      setEquipments(res.data)
-    } catch (err) {
-      alert('장비 목록을 불러오는데 실패했습니다.')
-      console.log(err)
-    }
+    axios
+      .get(`${process.env.NEXT_PUBLIC_API}/equip`)
+      .then((res) => setEquipments(res.data))
+      .catch((err) => {
+        alert('장비 목록을 불러오는데 실패했습니다.')
+        console.log(err)
+      })
   }, [])
 
   return (

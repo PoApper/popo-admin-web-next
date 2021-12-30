@@ -8,15 +8,14 @@ import ClubCreateModal from '../../components/introduce/club.create.modal'
 const ClubIntroducePage = () => {
   const [clubs, setClubs] = useState([])
 
-  useEffect(async () => {
-    try {
-      const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_API}/introduce/club`)
-      setClubs(res.data)
-    } catch (e) {
-      alert('동아리 목록을 불러오는데 실패했습니다.')
-      console.log(e)
-    }
+  useEffect(() => {
+    axios
+      .get(`${process.env.NEXT_PUBLIC_API}/introduce/club`)
+      .then((res) => setClubs(res.data))
+      .catch((err) => {
+        alert('동아리 목록을 불러오는데 실패했습니다.')
+        console.log(err)
+      })
   }, [])
 
   return (
