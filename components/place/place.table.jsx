@@ -12,14 +12,14 @@ const regionNames = {
 const PlaceTable = () => {
   const [places, setPlaces] = useState([])
 
-  useEffect(async () => {
-    try {
-      const res = await axios.get(`${process.env.NEXT_PUBLIC_API}/place`)
-      setPlaces(res.data)
-    } catch (err) {
-      alert('장소 목록을 불러오는데 실패했습니다.')
-      console.log(err)
-    }
+  useEffect(() => {
+    axios
+      .get(`${process.env.NEXT_PUBLIC_API}/place`)
+      .then((res) => setPlaces(res.data))
+      .catch((err) => {
+        alert('장소 목록을 불러오는데 실패했습니다.')
+        console.log(err)
+      })
   }, [])
 
   return (
