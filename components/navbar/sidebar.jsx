@@ -15,19 +15,19 @@ const SideBar = ({ visible, toggleSidebar, pushContent }) => {
         style={{ height: '100%' }}
         onHide={toggleSidebar}
       >
-        <Link href={'/user'}>
+        <Link href={'/user'} passHref>
           <Menu.Item
             style={{ zIndex: 5, marginTop: '5rem' }}
           >
             유저 관리
           </Menu.Item>
         </Link>
-        <Link href={'/reservation'}>
+        <Link href={'/reservation'} passHref>
           <Menu.Item as="a">
             예약 관리
           </Menu.Item>
         </Link>
-        <Link href={'/introduce'}>
+        <Link href={'/introduce'} passHref>
           <Menu.Item as="a">
             소개글 관리
           </Menu.Item>
@@ -35,7 +35,7 @@ const SideBar = ({ visible, toggleSidebar, pushContent }) => {
         <Menu.Item as="a" disabled>
           게시물 관리
         </Menu.Item>
-        <Link href={'/statistics'}>
+        <Link href={'/statistics'} passHref>
           <Menu.Item as="a">
             통계 보기
           </Menu.Item>

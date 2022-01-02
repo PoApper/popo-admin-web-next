@@ -21,7 +21,7 @@ const NavbarMobile = ({ openSidebar }) => {
 
           <Menu.Item position={'left'}
                      style={{ paddingLeft: 0 }}>
-            <Link href={'/'}>
+            <Link href={'/'} passHref>
               <Image
                 src={'/popo.svg'} alt={'logo'}
                 size={'tiny'}

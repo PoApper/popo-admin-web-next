@@ -9,7 +9,7 @@ const NavbarDesktop = () => {
       <NavbarWrapper>
         <NavbarInner>
           <NavbarMenu borderless>
-            <Link href={'/'}>
+            <Link href={'/'} passHref>
               <Menu.Item position={'left'} style={{ paddingLeft: 0 }}>
               <span style={{ textAlign: 'center' }}>
                 <Image
@@ -20,19 +20,19 @@ const NavbarDesktop = () => {
                 관리자
               </Menu.Item>
             </Link>
-            <Link href={'/user'}>
+            <Link href={'/user'} passHref>
               <Menu.Item link>유저 관리</Menu.Item>
             </Link>
-            <Link href={'/reservation'}>
+            <Link href={'/reservation'} passHref>
               <Menu.Item link>예약 관리</Menu.Item>
             </Link>
-            <Link href={'/introduce'}>
+            <Link href={'/introduce'} passHref>
               <Menu.Item link>소개글 관리</Menu.Item>
             </Link>
-            <Link href={'/board'}>
+            <Link href={'/board'} passHref>
               <Menu.Item link disabled>게시물 관리</Menu.Item>
             </Link>
-            <Link href={'/statistics'}>
+            <Link href={'/statistics'} passHref>
               <Menu.Item link>통계 보기</Menu.Item>
             </Link>
 
