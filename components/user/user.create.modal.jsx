@@ -14,6 +14,7 @@ export const userTypeOptions = [
 
 const UserCreateModal = ({ trigger }) => {
   const [open, setOpen] = useState(false)
+
   const [email, setEmail] = useState()
   const [id, setID] = useState()
   const [password, setPW] = useState()

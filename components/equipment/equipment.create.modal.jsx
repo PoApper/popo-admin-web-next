@@ -4,6 +4,7 @@ import axios from 'axios'
 
 const EquipmentCreateModal = (props) => {
   const [open, setOpen] = useState(false)
+
   const [name, setName] = useState('')
   const [equip_owner, setEquipOwner] = useState('')
   const [fee, setFee] = useState('')

@@ -4,6 +4,7 @@ import axios from 'axios'
 
 const PlaceCreateModal = (props) => {
   const [open, setOpen] = useState(false)
+
   const [name, setName] = useState('')
   const [region, setRegion] = useState('')
   const [location, setLocation] = useState('')

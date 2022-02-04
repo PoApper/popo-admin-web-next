@@ -8,6 +8,7 @@ const AssociationUpdateModal = (props) => {
 
   const [open, setOpen] = useState(false)
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
+
   const [name, setName] = useState(association.name)
   const [content, setContent] = useState(association.content)
   const [location, setLocation] = useState(association.location)

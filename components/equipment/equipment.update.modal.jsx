@@ -8,6 +8,7 @@ const EquipmentUpdateModal = (props) => {
 
   const [open, setOpen] = useState(false)
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
+
   const [name, setName] = useState(equipmentInfo.name)
   const [equip_owner, setEquipOwner] = useState(equipmentInfo.equip_owner)
   const [fee, setFee] = useState(equipmentInfo.fee)
@@ -103,7 +104,7 @@ const EquipmentUpdateModal = (props) => {
             <Image
               src={`${process.env.NEXT_PUBLIC_API}/equip/image/${equipmentInfo.imageName}`
               ?? 'https://react.semantic-ui.com/images/wireframe/image.png'}
-              atl={"equipment_image"}
+              alt={"equipment_image"}
               size={'medium'}
             />
           </div>

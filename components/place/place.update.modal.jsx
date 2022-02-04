@@ -8,6 +8,7 @@ const PlaceUpdateModal = (props) => {
 
   const [open, setOpen] = useState(false)
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
+
   const [name, setName] = useState(placeInfo.name)
   const [region, setRegion] = useState(placeInfo.region)
   const [location, setLocation] = useState(placeInfo.location)
@@ -103,7 +104,7 @@ const PlaceUpdateModal = (props) => {
             <Image
               src={`${process.env.NEXT_PUBLIC_API}/place/image/${placeInfo.imageName}`
               ?? 'https://react.semantic-ui.com/images/wireframe/image.png'}
-              atl={"place_image"}
+              alt={"place_image"}
               size={'medium'}
             />
           </div>

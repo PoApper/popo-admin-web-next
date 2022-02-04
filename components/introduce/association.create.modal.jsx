@@ -4,6 +4,7 @@ import axios from 'axios'
 
 const AssociationCreateModal = (props) => {
   const [open, setOpen] = useState(false)
+
   const [name, setName] = useState('')
   const [content, setContent] = useState('')
   const [location, setLocation] = useState('')
