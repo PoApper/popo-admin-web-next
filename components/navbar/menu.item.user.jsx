@@ -7,17 +7,17 @@ const MenuItemUser = () => {
   const router = useRouter()
   const [user, setUser] = useState({})
 
-  useEffect(async () => {
-    try {
-      const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_API}/auth/verifyToken`, {
-          withCredentials: true,
-        })
-      setUser(res.data)
-    } catch (err) {
-      await router.push('/login')
-    }
-  }, [])
+  useEffect(() => {
+    axios.get(
+      `${process.env.NEXT_PUBLIC_API}/auth/verifyToken`, {
+        withCredentials: true,
+      }).then(res => setUser(res.data)).catch(() => {
+      // Fail to login
+      if (process.env.NODE_ENV !== 'development') {
+        router.push('/login')
+      }
+    })
+  }, [router])
 
   const handleLogout = async () => {
     try {
