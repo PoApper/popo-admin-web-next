@@ -30,7 +30,7 @@ const NavbarDesktop = () => {
               <Menu.Item link>소개글 관리</Menu.Item>
             </Link>
             <Link href={'/board'} passHref>
-              <Menu.Item link disabled>게시물 관리</Menu.Item>
+              <Menu.Item link>게시물 관리</Menu.Item>
             </Link>
             <Link href={'/statistics'} passHref>
               <Menu.Item link>통계 보기</Menu.Item>
