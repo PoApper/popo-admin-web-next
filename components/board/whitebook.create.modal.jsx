@@ -12,7 +12,7 @@ const WhitebookCreateModal = (props) => {
     try {
       await axios.post(
         `${process.env.NEXT_PUBLIC_API}/whitebook`, {
-          name: title,
+          title: title,
           link: link,
           content: content,
         }, { withCredentials: true },

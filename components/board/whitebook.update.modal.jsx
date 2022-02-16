@@ -13,9 +13,9 @@ const WhitebookUpdateModal = ({ trigger, whitebook }) => {
 
   const handleSubmit = async () => {
     try {
-      await axios.post(
-        `${process.env.NEXT_PUBLIC_API}/whitebook`, {
-          name: title,
+      await axios.put(
+        `${process.env.NEXT_PUBLIC_API}/whitebook/${whitebook.uuid}`, {
+          title: title,
           link: link,
           content: content,
         }, { withCredentials: true },
@@ -23,7 +23,7 @@ const WhitebookUpdateModal = ({ trigger, whitebook }) => {
       setOpen(false)
       window.location.reload()
     } catch (e) {
-      alert('생활백서 생성에 실패했습니다.')
+      alert('생활백서 수정에 실패했습니다.')
       console.log(e)
     }
   }

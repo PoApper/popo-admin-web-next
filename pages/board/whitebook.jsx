@@ -25,7 +25,7 @@ const WhitebookPage = () => {
           trigger={<Button>생활백서 생성</Button>}
         />
       </div>
-      <p>생활백서는 업데이트 순서로 정렬되어 표시됩니다!</p>
+      <p>생활백서는 조회순으로 정렬되어 표시됩니다!</p>
       <div>
         <WhitebookTable
           whitebooks={whitebooks}
