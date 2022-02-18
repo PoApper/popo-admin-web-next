@@ -20,7 +20,6 @@ const HomePage = () => {
           <List as="ul">
             <List.Item as="li">게시판 기능</List.Item>
             <List.Item as="li">PoApper SSO 유저 정보 이전</List.Item>
-            <List.Item as="li">생활백서 데이터베이스화</List.Item>
             <List.Item as="li">Full Responsive Web</List.Item>
           </List>
         </Grid.Column>

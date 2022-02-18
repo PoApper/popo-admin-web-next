@@ -8,20 +8,22 @@ const NewUserBar = () => {
   const [rawData, setRawData] = useState([])
   const [barData, setBarData] = useState([])
 
-  useEffect(async () => {
+  useEffect(() => {
     const nextMonth = moment().add(1, 'M');
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_API}/statistics/user?start=202101&end=${nextMonth}`)
-    setRawData(res.data.data)
+    axios.get(`${process.env.NEXT_PUBLIC_API}/statistics/user?start=202101&end=${nextMonth}`).
+      then((res) => {
+        setRawData(res.data.data)
 
-    // process data format
-    const barData = []
-    for (const [key, value] of Object.entries(res.data.data)) {
-      barData.push({
-        'month': key,
-        'new-user': value
+        // process data format
+        const barData = []
+        for (const [key, value] of Object.entries(res.data.data)) {
+          barData.push({
+            'month': key,
+            'new-user': value
+          })
+        }
+        setBarData(barData)
       })
-    }
-    setBarData(barData)
   }, [])
 
   return (

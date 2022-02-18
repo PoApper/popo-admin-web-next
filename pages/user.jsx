@@ -11,16 +11,18 @@ const UserPage = () => {
   const [total_count, setTotalCount] = useState(0)
   const page_size = 10
 
-  useEffect(async () => {
+  useEffect(() => {
     try {
-      const res = await axios.get(
+      axios.get(
         `${process.env.NEXT_PUBLIC_API}/user?take=${page_size}`,
-        { withCredentials: true })
-      setUsers(res.data)
-      const res2 = await axios.get(
+        { withCredentials: true }).then((res) => {
+        setUsers(res.data)
+      })
+      axios.get(
         `${process.env.NEXT_PUBLIC_API}/user/count`,
-      )
-      setTotalCount(res2.data)
+      ).then((res) => {
+        setTotalCount(res.data)
+      })
     } catch (err) {
       alert('유저 목록을 불러오는데 실패했습니다.')
       console.log(err)
