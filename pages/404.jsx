@@ -7,7 +7,7 @@ const ErrorPage = () => {
     <LoginLayout>
       <Image
         src={'/popo.svg'}
-      />
+        alt={'popo_logo'}/>
       <h2>
         잘못된 주소이거나 현재 개발중인 페이지 입니다 🙏
       </h2>

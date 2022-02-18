@@ -28,7 +28,7 @@ const LoginPage = () => {
     <LoginLayout>
       <Image
         src={'/popo.svg'}
-      />
+        alt={'popo-logo'}/>
       <SubTitle>관리자 페이지</SubTitle>
       <LoginFormDiv>
         <Form>
