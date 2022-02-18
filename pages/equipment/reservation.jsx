@@ -12,17 +12,19 @@ const EquipmentReservationPage = () => {
   const [total_count, setTotalCount] = useState(0)
   const page_size = 10
 
-  useEffect(async () => {
+  useEffect(() => {
     try {
-      const res = await axios.get(
+      axios.get(
         `${process.env.NEXT_PUBLIC_API}/reservation-equip?take=${page_size}`, {
           withCredentials: true,
-        })
-      setReservations(res.data)
-      const res2 = await axios.get(
+        }).then((res) => {
+        setReservations(res.data)
+      })
+      axios.get(
         `${process.env.NEXT_PUBLIC_API}/reservation-equip/count`,
-      )
-      setTotalCount(res2.data)
+      ).then((res) => {
+        setTotalCount(res.data)
+      })
     } catch (err) {
       alert('장비 예약 목록을 불러오는데 실패했습니다.')
       console.log(err)

@@ -12,17 +12,19 @@ const PlaceReservationPage = () => {
   const [total_count, setTotalCount] = useState(0)
   const page_size = 10
 
-  useEffect(async () => {
+  useEffect(() => {
     try {
-      const res = await axios.get(
+      axios.get(
         `${process.env.NEXT_PUBLIC_API}/reservation-place?take=${page_size}`, {
           withCredentials: true,
-        })
-      setReservations(res.data)
-      const res2 = await axios.get(
+        }).then((res) => {
+        setReservations(res.data)
+      })
+      axios.get(
         `${process.env.NEXT_PUBLIC_API}/reservation-place/count`,
-      )
-      setTotalCount(res2.data)
+      ).then((res) => {
+        setTotalCount(res.data)
+      })
     } catch (err) {
       alert('장소 예약 목록을 불러오는데 실패했습니다.')
       console.log(err)
