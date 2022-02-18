@@ -9,7 +9,7 @@ const WhitebookPage = () => {
   const [whitebooks, setWhitebooks] = useState([])
 
   useEffect(() => {
-    axios.get(`${process.env.NEXT_PUBLIC_API}/whitebook`).
+    axios.get(`${process.env.NEXT_PUBLIC_API}/whitebook?orderBy=click_count`).
       then((res) => setWhitebooks(res.data)).
       catch((err) => {
         alert('생활백서 목록을 불러오는데 실패했습니다.')
