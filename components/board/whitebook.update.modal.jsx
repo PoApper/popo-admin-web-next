@@ -10,6 +10,7 @@ const WhitebookUpdateModal = ({ trigger, whitebook }) => {
   const [title, setTitle] = useState(whitebook.title)
   const [link, setLink] = useState(whitebook.link)
   const [content, setContent] = useState(whitebook.content)
+  const [showOnlyLogin, setShowOnlyLogin] = useState(whitebook.show_only_login)
 
   const handleSubmit = async () => {
     try {
@@ -18,6 +19,7 @@ const WhitebookUpdateModal = ({ trigger, whitebook }) => {
           title: title,
           link: link,
           content: content,
+          show_only_login: showOnlyLogin
         }, { withCredentials: true },
       )
       setOpen(false)
@@ -57,6 +59,13 @@ const WhitebookUpdateModal = ({ trigger, whitebook }) => {
             value={content}
             onChange={e => setContent(e.target.value)}
           />
+          <Form.Checkbox
+            required
+            label={'로그인 유저에게만 보이기'}
+            value={showOnlyLogin}
+            onChange={() => setShowOnlyLogin(!showOnlyLogin)}
+          />
+
           <Modal.Actions>
             <Form.Group>
               <Form.Button
