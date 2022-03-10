@@ -8,6 +8,7 @@ const LoginLayout = ({ children }) => {
       <Head>
         <title>POPO 관리자페이지</title>
         <meta name="description" content="POPO 관리자 페이지"/>
+        <meta name="robots" content="noindex,nofollow" />
         <link rel="icon" href={'/favicon.ico'}/>
       </Head>
       <main>
