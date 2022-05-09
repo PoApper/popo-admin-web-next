@@ -17,6 +17,7 @@ const ClubTable = (props) => {
           <Table.HeaderCell>위치</Table.HeaderCell>
           <Table.HeaderCell>단체장</Table.HeaderCell>
           <Table.HeaderCell>연락처</Table.HeaderCell>
+          <Table.HeaderCell>조회수</Table.HeaderCell>
           <Table.HeaderCell>마지막 수정일</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
@@ -33,6 +34,7 @@ const ClubTable = (props) => {
                     <Table.Cell>{club.location}</Table.Cell>
                     <Table.Cell>{club.representative}</Table.Cell>
                     <Table.Cell>{club.contact}</Table.Cell>
+                    <Table.Cell>{club.views}</Table.Cell>
                     <Table.Cell>
                       {moment(club.updateAt).
                         format('YYYY-MM-DD HH:mm')}
