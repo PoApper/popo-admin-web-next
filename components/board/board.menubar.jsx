@@ -6,6 +6,11 @@ export default class BoardMenubar extends Component {
   render () {
     return (
       <Menu>
+        <Link href={'/board/setting'} passHref>
+          <Menu.Item>
+            POPO 설정값
+          </Menu.Item>
+        </Link>
         <Link href={'/board/whitebook'} passHref>
           <Menu.Item>
             생활백서

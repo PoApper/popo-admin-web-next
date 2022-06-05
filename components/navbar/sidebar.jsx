@@ -32,9 +32,11 @@ const SideBar = ({ visible, toggleSidebar, pushContent }) => {
             소개글 관리
           </Menu.Item>
         </Link>
-        <Menu.Item as="a" disabled>
-          게시물 관리
-        </Menu.Item>
+        <Link href={'/board'} passHref>
+          <Menu.Item as="a">
+            게시물 관리
+          </Menu.Item>
+        </Link>
         <Link href={'/statistics'} passHref>
           <Menu.Item as="a">
             통계 보기
