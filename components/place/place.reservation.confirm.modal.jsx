@@ -4,9 +4,7 @@ import axios from 'axios'
 import moment from 'moment'
 import DeleteConfirmModal from '../common/delete.confirm.modal'
 
-const PlaceReservationConfirmModal = (props) => {
-  const reservation = props.reservation
-
+const PlaceReservationConfirmModal = ({trigger, reservation}) => {
   const [open, setOpen] = useState(false)
   const [send_email, setSendEmail] = useState(true)
 
@@ -27,7 +25,7 @@ const PlaceReservationConfirmModal = (props) => {
   return (
     <Modal
       closeIcon
-      open={open} trigger={props.trigger}
+      open={open} trigger={trigger}
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
     >
