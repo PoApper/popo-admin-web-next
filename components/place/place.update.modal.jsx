@@ -3,9 +3,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import DeleteConfirmModal from '../common/delete.confirm.modal'
 
-const PlaceUpdateModal = (props) => {
-  const placeInfo = props.equipmentInfo
-
+const PlaceUpdateModal = ({ placeInfo, trigger}) => {
   const [open, setOpen] = useState(false)
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
 
@@ -52,7 +50,7 @@ const PlaceUpdateModal = (props) => {
 
   return (
     <Modal
-      open={open} trigger={props.trigger}
+      open={open} trigger={trigger}
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
     >
