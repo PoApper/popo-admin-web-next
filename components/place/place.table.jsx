@@ -41,7 +41,7 @@ const PlaceTable = () => {
           places.map((place, idx) =>
             <PlaceUpdateModal
               key={place.uuid}
-              equipmentInfo={place}
+              placeInfo={place}
               trigger={<Table.Row key={place.uuid}>
                 <Table.Cell>{idx + 1}</Table.Cell>
                 <Table.Cell>{place.name}</Table.Cell>

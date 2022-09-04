@@ -2,7 +2,7 @@ import { Form, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
 import axios from 'axios'
 
-const PlaceCreateModal = (props) => {
+const PlaceCreateModal = ({ trigger }) => {
   const [open, setOpen] = useState(false)
 
   const [name, setName] = useState('')
@@ -47,7 +47,7 @@ const PlaceCreateModal = (props) => {
 
   return (
     <Modal
-      open={open} trigger={props.trigger}
+      open={open} trigger={trigger}
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
     >
