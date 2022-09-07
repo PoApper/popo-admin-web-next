@@ -14,6 +14,7 @@ const PlaceUpdateModal = (props) => {
   const [location, setLocation] = useState(placeInfo.location)
   const [description, setDescription] = useState(placeInfo.description)
   const [staff_email, setStaffEmail] = useState(placeInfo.staff_email)
+  const [max_minutes, setMaxMinutes] = useState()
   const [image, setImage] = useState()
 
   const handleSubmit = async () => {
@@ -24,6 +25,9 @@ const PlaceUpdateModal = (props) => {
       formData.append('location', location)
       formData.append('description', description)
       formData.append('staff_email', staff_email)
+      if (max_minutes) {
+        formData.append('max_minutes', max_minutes)
+      }
       if (image) {
         formData.append('image', image)
       }
@@ -82,6 +86,12 @@ const PlaceUpdateModal = (props) => {
             value={location}
             onChange={e => setLocation(e.target.value)}
           />
+          <Form.Input
+              label={'최대 예약가능 시간'}
+              placeholder={'해당 장소를 예약가능한 최대 시간을 분단위로 입력해주세요 (ex. 60)'}
+              onChange={e => setMaxMinutes(e.target.value)}
+          />
+          <p>최대 예약가능 시간이 넘는 예약이 생성되지 않도록 합니다.</p>
           <Form.TextArea
             required
             label={'설명'}
