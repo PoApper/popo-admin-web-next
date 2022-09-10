@@ -3,9 +3,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import DeleteConfirmModal from '../common/delete.confirm.modal'
 
-const EquipmentUpdateModal = (props) => {
-  const equipmentInfo = props.equipmentInfo
-
+const EquipmentUpdateModal = ({ equipmentInfo, trigger }) => {
   const [open, setOpen] = useState(false)
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
 
@@ -14,7 +12,7 @@ const EquipmentUpdateModal = (props) => {
   const [fee, setFee] = useState(equipmentInfo.fee)
   const [description, setDescription] = useState(equipmentInfo.description)
   const [staff_email, setStaffEmail] = useState(equipmentInfo.staff_email)
-  const [max_minutes, setMaxMinutes] = useState()
+  const [max_minutes, setMaxMinutes] = useState(equipmentInfo.max_minutes)
   const [image, setImage] = useState()
 
   const handleSubmit = async () => {
@@ -57,7 +55,7 @@ const EquipmentUpdateModal = (props) => {
 
   return (
     <Modal
-      open={open} trigger={props.trigger}
+      open={open} trigger={trigger}
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
     >
@@ -86,8 +84,9 @@ const EquipmentUpdateModal = (props) => {
             onChange={e => setFee(e.target.value)}
           />
           <Form.Input
-              label={'최대 예약가능 시간'}
+              label={'최대 예약가능 기간(단위: 분)'}
               placeholder={'해당 장비를 예약가능한 최대 시간을 분단위로 입력해주세요 (ex. 60)'}
+              value={max_minutes}
               onChange={e => setMaxMinutes(e.target.value)}
           />
           <p>최대 예약가능 시간이 넘는 예약이 생성되지 않도록 합니다.</p>
