@@ -1,6 +1,7 @@
 import { Form, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
 import axios from 'axios'
+import { OwnerOptions } from '../../assets/owner.options'
 
 const EquipmentCreateModal = (props) => {
   const [open, setOpen] = useState(false)
@@ -43,14 +44,6 @@ const EquipmentCreateModal = (props) => {
     }
   }
 
-  const ownerOptions = [
-    { key: 'chonghak', text: '총학생회', value: 'chonghak' },
-    { key: 'dongyeon', text: '동아리연합회', value: 'dongyeon' },
-    { key: 'dormUnion', text: '생활관자치회', value: 'dormUnion' },
-    { key: 'saengna', text: '생각나눔', value: 'saengna' },
-    { key: 'others', text: '그 외', value: 'others' },
-  ]
-
   return (
     <Modal
       open={open} trigger={props.trigger}
@@ -71,7 +64,7 @@ const EquipmentCreateModal = (props) => {
               required
               label={'장비 소속'}
               value={equip_owner}
-              options={ownerOptions}
+              options={OwnerOptions}
               onChange={(e, { value }) => setEquipOwner(value)}
             />
           </Form.Group>

@@ -1,6 +1,7 @@
 import { Form, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
 import axios from 'axios'
+import { RegionOptions } from '../../assets/region.options'
 
 const PlaceCreateModal = ({ trigger }) => {
   const [open, setOpen] = useState(false)
@@ -42,13 +43,6 @@ const PlaceCreateModal = ({ trigger }) => {
     }
   }
 
-  const regionOptions = [
-    { key: 'STUDENT_HALL', text: '학생 회관', value: 'STUDENT_HALL' },
-    { key: 'JIGOK_CENTER', text: '지곡 회관', value: 'JIGOK_CENTER' },
-    { key: 'COMMUNITY_CENTER', text: '커뮤니티 센터', value: 'COMMUNITY_CENTER' },
-    { key: 'OTHERS', text: '생활관 외', value: 'OTHERS' },
-  ]
-
   return (
     <Modal
       open={open} trigger={trigger}
@@ -63,7 +57,7 @@ const PlaceCreateModal = ({ trigger }) => {
               required
               label={'지역'}
               placeholder={'지역을 선택하세요.'}
-              options={regionOptions}
+              options={RegionOptions}
               onChange={(e, { value }) => setRegion(value)}
             />
             <Form.Input
