@@ -2,6 +2,7 @@ import { Form, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
 import axios from 'axios'
 import { RegionOptions } from '../../assets/region.options'
+import OpeningHoursEditor from '../common/opening_hours.editor'
 
 const PlaceCreateModal = ({ trigger }) => {
   const [open, setOpen] = useState(false)
@@ -12,6 +13,7 @@ const PlaceCreateModal = ({ trigger }) => {
   const [description, setDescription] = useState('')
   const [staff_email, setStaffEmail] = useState('')
   const [max_minutes, setMaxMinutes] = useState()
+  const [opening_hours, setOpeningHours] = useState("24/7")
   const [image, setImage] = useState()
 
   const handleSubmit = async () => {
@@ -22,6 +24,7 @@ const PlaceCreateModal = ({ trigger }) => {
       formData.append('location', location)
       formData.append('description', description)
       formData.append('staff_email', staff_email)
+      formData.append('opening_hours', opening_hours)
       if (max_minutes) {
         formData.append('max_minutes', max_minutes)
       }
@@ -72,17 +75,25 @@ const PlaceCreateModal = ({ trigger }) => {
             placeholder={'예: 학생회관 304호'}
             onChange={e => setLocation(e.target.value)}
           />
+
           <Form.Input
               label={'최대 예약가능 시간'}
               placeholder={'해당 장소를 예약가능한 최대 시간을 분단위로 입력해주세요 (ex. 60)'}
               onChange={e => setMaxMinutes(e.target.value)}
           />
-          <p>최대 예약가능 시간이 넘는 예약이 생성되지 않도록 합니다.</p>
+          <p>최대 예약가능 시간이 넘는 예약이 생성되지 않도록 합니다. (단위: minutes)</p>
+
+          <OpeningHoursEditor
+            openingHour={opening_hours}
+            setOpeningHours={setOpeningHours}
+          />
+
           <Form.TextArea
             required
             label={'설명'}
             onChange={e => setDescription(e.target.value)}
           />
+
           <Form.Input
             label={'담당자 이메일'}
             placeholder="장소 예약을 처리할 담당자의 이메일을 작성해주세요"

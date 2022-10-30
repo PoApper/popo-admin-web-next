@@ -3,6 +3,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import DeleteConfirmModal from '../common/delete.confirm.modal'
 import { RegionOptions } from '../../assets/region.options'
+import OpeningHoursEditor from '../common/opening_hours.editor'
 
 const PlaceUpdateModal = ({ placeInfo, trigger}) => {
   const [open, setOpen] = useState(false)
@@ -14,6 +15,7 @@ const PlaceUpdateModal = ({ placeInfo, trigger}) => {
   const [description, setDescription] = useState(placeInfo.description)
   const [staff_email, setStaffEmail] = useState(placeInfo.staff_email)
   const [max_minutes, setMaxMinutes] = useState(placeInfo.max_minutes)
+  const [opening_hours, setOpeningHours] = useState(placeInfo.opening_hours)
   const [image, setImage] = useState()
 
   const handleSubmit = async () => {
@@ -24,6 +26,7 @@ const PlaceUpdateModal = ({ placeInfo, trigger}) => {
       formData.append('location', location)
       formData.append('description', description)
       formData.append('staff_email', staff_email)
+      formData.append('opening_hours', opening_hours)
       if (max_minutes) {
         formData.append('max_minutes', max_minutes)
       }
@@ -78,13 +81,20 @@ const PlaceUpdateModal = ({ placeInfo, trigger}) => {
             value={location}
             onChange={e => setLocation(e.target.value)}
           />
+
           <Form.Input
               label={'최대 예약가능 기간(단위: 분)'}
               placeholder={'해당 장소를 예약가능한 최대 시간을 분단위로 입력해주세요 (ex. 60)'}
               value={max_minutes}
               onChange={e => setMaxMinutes(e.target.value)}
           />
-          <p>최대 예약가능 시간이 넘는 예약이 생성되지 않도록 합니다.</p>
+          <p>최대 예약가능 시간이 넘는 예약이 생성되지 않도록 합니다. (단위: minutes)</p>
+
+          <OpeningHoursEditor
+            openingHour={opening_hours}
+            setOpeningHours={setOpeningHours}
+          />
+
           <Form.TextArea
             required
             label={'설명'}
@@ -137,4 +147,4 @@ const PlaceUpdateModal = ({ placeInfo, trigger}) => {
   )
 }
 
-export default PlaceUpdateModal
+export default PlaceUpdateModal;
