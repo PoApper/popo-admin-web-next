@@ -17,3 +17,11 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.green > input {
+  color: green !important;
+}
+
+.red > input {
+  color: red !important;
+}

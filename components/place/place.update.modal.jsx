@@ -3,7 +3,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import DeleteConfirmModal from '../common/delete.confirm.modal'
 import { RegionOptions } from '../../assets/region.options'
-import OpeningHoursEditor from '../common/opening_hours.editor'
+import OpeningHoursEditor, { checkValid } from '../common/opening_hours.editor'
 
 const PlaceUpdateModal = ({ placeInfo, trigger}) => {
   const [open, setOpen] = useState(false)
@@ -15,10 +15,16 @@ const PlaceUpdateModal = ({ placeInfo, trigger}) => {
   const [description, setDescription] = useState(placeInfo.description)
   const [staff_email, setStaffEmail] = useState(placeInfo.staff_email)
   const [max_minutes, setMaxMinutes] = useState(placeInfo.max_minutes)
-  const [opening_hours, setOpeningHours] = useState(placeInfo.opening_hours)
+  const [opening_hours, setOpeningHours] = useState(JSON.parse(placeInfo.opening_hours))
   const [image, setImage] = useState()
 
   const handleSubmit = async () => {
+    for(const day of Object.keys(opening_hours)) {
+      if (!checkValid(opening_hours[day])) {
+        alert(`예약 가능 시간이 올바르지 않습니다: ${day}`)
+        return;
+      }
+    }
     try {
       let formData = new FormData()
       formData.append('name', name)
@@ -26,7 +32,7 @@ const PlaceUpdateModal = ({ placeInfo, trigger}) => {
       formData.append('location', location)
       formData.append('description', description)
       formData.append('staff_email', staff_email)
-      formData.append('opening_hours', opening_hours)
+      formData.append('opening_hours', JSON.stringify(opening_hours))
       if (max_minutes) {
         formData.append('max_minutes', max_minutes)
       }
@@ -91,6 +97,7 @@ const PlaceUpdateModal = ({ placeInfo, trigger}) => {
           <p>최대 예약가능 시간이 넘는 예약이 생성되지 않도록 합니다. (단위: minutes)</p>
 
           <OpeningHoursEditor
+            currentOpeningHour={JSON.parse(placeInfo.opening_hours)}
             openingHour={opening_hours}
             setOpeningHours={setOpeningHours}
           />

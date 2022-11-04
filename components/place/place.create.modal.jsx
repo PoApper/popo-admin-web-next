@@ -2,7 +2,7 @@ import { Form, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
 import axios from 'axios'
 import { RegionOptions } from '../../assets/region.options'
-import OpeningHoursEditor from '../common/opening_hours.editor'
+import OpeningHoursEditor, { checkValid } from '../common/opening_hours.editor'
 
 const PlaceCreateModal = ({ trigger }) => {
   const [open, setOpen] = useState(false)
@@ -13,10 +13,17 @@ const PlaceCreateModal = ({ trigger }) => {
   const [description, setDescription] = useState('')
   const [staff_email, setStaffEmail] = useState('')
   const [max_minutes, setMaxMinutes] = useState()
-  const [opening_hours, setOpeningHours] = useState("24/7")
+  const [opening_hours, setOpeningHours] = useState({ Everyday: '00:00-24:00' })
   const [image, setImage] = useState()
 
   const handleSubmit = async () => {
+    for(const day of Object.keys(opening_hours)) {
+      if (!checkValid(opening_hours[day])) {
+        alert(`예약 가능 시간이 올바르지 않습니다: ${day}`)
+        return;
+      }
+    }
+
     try {
       let formData = new FormData()
       formData.append('name', name)
@@ -84,6 +91,7 @@ const PlaceCreateModal = ({ trigger }) => {
           <p>최대 예약가능 시간이 넘는 예약이 생성되지 않도록 합니다. (단위: minutes)</p>
 
           <OpeningHoursEditor
+            currentOpeningHour={{ Everyday: '00:00-24:00' }}
             openingHour={opening_hours}
             setOpeningHours={setOpeningHours}
           />
