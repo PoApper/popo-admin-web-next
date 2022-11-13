@@ -11,6 +11,17 @@ const Weekdays = [
   { key: 'Sunday', label: '일' }
 ]
 
+const EverydayDefault = { 'Everyday': '00:00-24:00' };
+const WeekdayDefault = {
+  'Monday': '00:00-24:00',
+  'Tuesday': '00:00-24:00',
+  'Wednesday': '00:00-24:00',
+  'Thursday': '00:00-24:00',
+  'Friday': '00:00-24:00',
+  'Saturday': '00:00-24:00',
+  'Sunday': '00:00-24:00',
+};
+
 export function checkValid (hour_ranges) {
   if (!hour_ranges) return true;
   const pattern1 = RegExp(/^[0-9 ,:\-]+/);
@@ -30,7 +41,6 @@ export function checkValid (hour_ranges) {
 
 const OpeningHoursEditor = ({currentOpeningHour, openingHour, setOpeningHours}) => {
   const [type, setType] = useState(currentOpeningHour['Everyday'] ? 'Everyday' : 'Weekdays');
-  console.log(openingHour)
 
   function updateOpeningHour (key, value) {
     openingHour[key] = value;
@@ -50,11 +60,17 @@ const OpeningHoursEditor = ({currentOpeningHour, openingHour, setOpeningHours}) 
       </label>
       <Button.Group size={'mini'} style={{margin: "8px 0"}}>
         <Button onClick={
-          () => {setType('Everyday'); setOpeningHours(currentOpeningHour)}
+          () => {
+            setType('Everyday');
+            currentOpeningHour['Everyday'] ? setOpeningHours(currentOpeningHour) : setOpeningHours(EverydayDefault);
+          }
         }>
           매일
         </Button>
-        <Button onClick={() => {setType('Weekdays'); setOpeningHours(currentOpeningHour)}}>
+        <Button onClick={() => {
+          setType('Weekdays');
+          currentOpeningHour['Everyday'] ? setOpeningHours(WeekdayDefault) : setOpeningHours(currentOpeningHour);
+        }}>
           요일별
         </Button>
       </Button.Group>
