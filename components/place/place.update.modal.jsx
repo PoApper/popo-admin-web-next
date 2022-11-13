@@ -2,6 +2,8 @@ import { Button, Form, Icon, Image, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
 import axios from 'axios'
 import DeleteConfirmModal from '../common/delete.confirm.modal'
+import { RegionOptions } from '../../assets/region.options'
+import OpeningHoursEditor, { checkValid } from '../common/opening_hours.editor'
 
 const PlaceUpdateModal = ({ placeInfo, trigger}) => {
   const [open, setOpen] = useState(false)
@@ -13,9 +15,16 @@ const PlaceUpdateModal = ({ placeInfo, trigger}) => {
   const [description, setDescription] = useState(placeInfo.description)
   const [staff_email, setStaffEmail] = useState(placeInfo.staff_email)
   const [max_minutes, setMaxMinutes] = useState(placeInfo.max_minutes)
+  const [opening_hours, setOpeningHours] = useState(JSON.parse(placeInfo.opening_hours))
   const [image, setImage] = useState()
 
   const handleSubmit = async () => {
+    for(const day of Object.keys(opening_hours)) {
+      if (!checkValid(opening_hours[day])) {
+        alert(`예약 가능 시간이 올바르지 않습니다: ${day}`)
+        return;
+      }
+    }
     try {
       let formData = new FormData()
       formData.append('name', name)
@@ -23,6 +32,7 @@ const PlaceUpdateModal = ({ placeInfo, trigger}) => {
       formData.append('location', location)
       formData.append('description', description)
       formData.append('staff_email', staff_email)
+      formData.append('opening_hours', JSON.stringify(opening_hours))
       if (max_minutes) {
         formData.append('max_minutes', max_minutes)
       }
@@ -45,13 +55,6 @@ const PlaceUpdateModal = ({ placeInfo, trigger}) => {
     }
   }
 
-  const regionOptions = [
-    { key: 'STUDENT_HALL', text: '학생 회관', value: 'STUDENT_HALL' },
-    { key: 'JIGOK_CENTER', text: '지곡 회관', value: 'JIGOK_CENTER' },
-    { key: 'COMMUNITY_CENTER', text: '커뮤니티 센터', value: 'COMMUNITY_CENTER' },
-    { key: 'OTHERS', text: '생활관 외', value: 'OTHERS' },
-  ]
-
   return (
     <Modal
       open={open} trigger={trigger}
@@ -67,7 +70,7 @@ const PlaceUpdateModal = ({ placeInfo, trigger}) => {
               label={'지역'}
               placeholder={'지역을 선택하세요.'}
               value={region}
-              options={regionOptions}
+              options={RegionOptions}
               onChange={(e, { value }) => setRegion(value)}
             />
             <Form.Input
@@ -84,13 +87,21 @@ const PlaceUpdateModal = ({ placeInfo, trigger}) => {
             value={location}
             onChange={e => setLocation(e.target.value)}
           />
+
           <Form.Input
               label={'최대 예약가능 기간(단위: 분)'}
               placeholder={'해당 장소를 예약가능한 최대 시간을 분단위로 입력해주세요 (ex. 60)'}
               value={max_minutes}
               onChange={e => setMaxMinutes(e.target.value)}
           />
-          <p>최대 예약가능 시간이 넘는 예약이 생성되지 않도록 합니다.</p>
+          <p>최대 예약가능 시간이 넘는 예약이 생성되지 않도록 합니다. (단위: minutes)</p>
+
+          <OpeningHoursEditor
+            currentOpeningHour={JSON.parse(placeInfo.opening_hours)}
+            openingHour={opening_hours}
+            setOpeningHours={setOpeningHours}
+          />
+
           <Form.TextArea
             required
             label={'설명'}
@@ -143,4 +154,4 @@ const PlaceUpdateModal = ({ placeInfo, trigger}) => {
   )
 }
 
-export default PlaceUpdateModal
+export default PlaceUpdateModal;
