@@ -50,7 +50,7 @@ const OpeningHoursEditor = ({currentOpeningHour, openingHour, setOpeningHours}) 
   return (
     <div style={{marginBottom: 8}} className={'required field'}>
       <label>
-        예약 가능 시간 &nbsp;
+        사용 가능 시간 &nbsp;
         <Popup trigger={<Icon name={'question circle'}/>}>
           값을 넣을 떄, 형식을 준수해주세요.
           시작과 끝 시간은 `HH:MM-HH:MM`으로 표현하고,

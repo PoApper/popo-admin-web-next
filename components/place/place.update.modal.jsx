@@ -21,7 +21,7 @@ const PlaceUpdateModal = ({ placeInfo, trigger}) => {
   const handleSubmit = async () => {
     for(const day of Object.keys(opening_hours)) {
       if (!checkValid(opening_hours[day])) {
-        alert(`예약 가능 시간이 올바르지 않습니다: ${day}`)
+        alert(`사용 가능 시간이 올바르지 않습니다: ${day}`)
         return;
       }
     }
