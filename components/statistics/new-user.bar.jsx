@@ -4,16 +4,12 @@ import axios from 'axios'
 import moment from 'moment'
 
 const NewUserBar = () => {
-
-  const [rawData, setRawData] = useState([])
   const [barData, setBarData] = useState([])
 
   useEffect(() => {
-    const nextMonth = moment().add(1, 'M');
-    axios.get(`${process.env.NEXT_PUBLIC_API}/statistics/user?start=202101&end=${nextMonth}`).
+    const thisMonth = moment().format('YYYYMM')
+    axios.get(`${process.env.NEXT_PUBLIC_API}/statistics/user?start=202101&end=${thisMonth}`).
       then((res) => {
-        setRawData(res.data.data)
-
         // process data format
         const barData = []
         for (const [key, value] of Object.entries(res.data.data)) {
