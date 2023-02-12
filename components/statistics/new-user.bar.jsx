@@ -8,7 +8,7 @@ const NewUserBar = () => {
 
   useEffect(() => {
     const thisMonth = moment().format('YYYYMM')
-    axios.get(`${process.env.NEXT_PUBLIC_API}/statistics/user?start=202101&end=${thisMonth}`).
+    axios.get(`${process.env.NEXT_PUBLIC_API}/statistics/user?start=202102&end=${thisMonth}`).
       then((res) => {
         // process data format
         const barData = []
