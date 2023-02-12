@@ -3,9 +3,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import DeleteConfirmModal from '../common/delete.confirm.modal'
 
-const ClubUpdateModal = (props) => {
-  const club = props.club
-
+const ClubUpdateModal = ({ club, trigger}) => {
   const [open, setOpen] = useState(false)
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
   const [name, setName] = useState(club.name)
@@ -16,6 +14,9 @@ const ClubUpdateModal = (props) => {
   const [representative, setRepresentative] = useState(club.representative)
   const [contact, setContact] = useState(club.contact)
   const [logo, setLogo] = useState()
+  const [homepageUrl, setHomepageUrl] = useState(club.homepage_url)
+  const [facebookUrl, setFacebookUrl] = useState(club.facebook_url)
+  const [instagramUrl, setInstagramUrl] = useState(club.instagram_url)
 
   const handleSubmit = async () => {
     try {
@@ -27,6 +28,9 @@ const ClubUpdateModal = (props) => {
       formData.append('location', location)
       formData.append('representative', representative)
       formData.append('contact', contact)
+      formData.append('homepage_url', homepageUrl)
+      formData.append('facebook_url', facebookUrl)
+      formData.append('instagram_url', instagramUrl)
       if (logo) {
         formData.append('logo', logo)
       }
@@ -58,7 +62,7 @@ const ClubUpdateModal = (props) => {
   return (
     <Modal
       closeIcon
-      open={open} trigger={props.trigger}
+      open={open} trigger={trigger}
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
     >
@@ -99,16 +103,36 @@ const ClubUpdateModal = (props) => {
             onChange={e => setLocation(e.target.value)}
           />
           <Form.Input
+            required
             label={'대표자'}
             placeholder={'홍길동'}
             value={representative}
             onChange={e => setRepresentative(e.target.value)}
           />
           <Form.Input
+            required
             label={'연락처'}
             placeholder={'OOOOO@postech.ac.kr'}
             value={contact}
             onChange={e => setContact(e.target.value)}
+          />
+          <Form.Input
+            label={'홈페이지 링크'}
+            placeholder={"https://OOOOOOO"}
+            value={homepageUrl}
+            onChange={e => setHomepageUrl(e.target.value)}
+          />
+          <Form.Input
+            label={'페이스북'}
+            placeholder={"https://www.facebook.com/profile.php?id=OOOOOOOO"}
+            value={facebookUrl}
+            onChange={e => setFacebookUrl(e.target.value)}
+          />
+          <Form.Input
+            label={'인스타그램'}
+            placeholder={"https://www.instagram.com/OOOOOO"}
+            value={instagramUrl}
+            onChange={e => setInstagramUrl(e.target.value)}
           />
           <Form.Input
             label={'동아리 로고'}

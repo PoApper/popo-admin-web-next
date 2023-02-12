@@ -2,7 +2,7 @@ import { Form, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
 import axios from 'axios'
 
-const AssociationCreateModal = (props) => {
+const AssociationCreateModal = ({ trigger }) => {
   const [open, setOpen] = useState(false)
 
   const [name, setName] = useState('')
@@ -42,7 +42,7 @@ const AssociationCreateModal = (props) => {
   return (
     <Modal
       closeIcon
-      open={open} trigger={props.trigger}
+      open={open} trigger={trigger}
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
     >
@@ -66,11 +66,13 @@ const AssociationCreateModal = (props) => {
             onChange={e => setLocation(e.target.value)}
           />
           <Form.Input
+            required
             label={'대표자'}
             placeholder={'홍길동'}
             onChange={e => setRepresentative(e.target.value)}
           />
           <Form.Input
+            required
             label={'연락처'}
             placeholder={'OOOOO@postech.ac.kr'}
             onChange={e => setContact(e.target.value)}

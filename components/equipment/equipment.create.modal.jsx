@@ -1,6 +1,7 @@
 import { Form, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
 import axios from 'axios'
+import { OwnerOptions } from '../../assets/owner.options'
 
 const EquipmentCreateModal = (props) => {
   const [open, setOpen] = useState(false)
@@ -10,6 +11,7 @@ const EquipmentCreateModal = (props) => {
   const [fee, setFee] = useState('')
   const [description, setDescription] = useState('')
   const [staff_email, setStaffEmail] = useState('')
+  const [max_minutes, setMaxMinutes] = useState()
   const [image, setImage] = useState()
 
   const handleSubmit = async () => {
@@ -20,6 +22,9 @@ const EquipmentCreateModal = (props) => {
       formData.append('fee', fee)
       formData.append('description', description)
       formData.append('staff_email', staff_email)
+      if (max_minutes) {
+        formData.append('max_minutes', max_minutes)
+      }
       if (image) {
         formData.append('image', image)
       }
@@ -38,14 +43,6 @@ const EquipmentCreateModal = (props) => {
       console.log(e)
     }
   }
-
-  const ownerOptions = [
-    { key: 'chonghak', text: '총학생회', value: 'chonghak' },
-    { key: 'dongyeon', text: '동아리연합회', value: 'dongyeon' },
-    { key: 'dormUnion', text: '생활관자치회', value: 'dormUnion' },
-    { key: 'saengna', text: '생각나눔', value: 'saengna' },
-    { key: 'others', text: '그 외', value: 'others' },
-  ]
 
   return (
     <Modal
@@ -67,7 +64,7 @@ const EquipmentCreateModal = (props) => {
               required
               label={'장비 소속'}
               value={equip_owner}
-              options={ownerOptions}
+              options={OwnerOptions}
               onChange={(e, { value }) => setEquipOwner(value)}
             />
           </Form.Group>
@@ -77,6 +74,12 @@ const EquipmentCreateModal = (props) => {
             value={fee}
             onChange={e => setFee(e.target.value)}
           />
+          <Form.Input
+              label={'최대 예약가능 시간'}
+              placeholder={'해당 장비를 예약가능한 최대 시간을 분단위로 입력해주세요 (ex. 60)'}
+              onChange={e => setMaxMinutes(e.target.value)}
+          />
+          <p>최대 예약가능 시간이 넘는 예약이 생성되지 않도록 합니다.</p>
           <Form.TextArea
             required
             label={'설명'}

@@ -17,6 +17,7 @@ const AssociationTable = (props) => {
           <Table.HeaderCell>위치</Table.HeaderCell>
           <Table.HeaderCell>단체장</Table.HeaderCell>
           <Table.HeaderCell>연락처</Table.HeaderCell>
+          <Table.HeaderCell>조회수</Table.HeaderCell>
           <Table.HeaderCell>마지막 수정일</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
@@ -33,6 +34,7 @@ const AssociationTable = (props) => {
                     <Table.Cell>{association.location}</Table.Cell>
                     <Table.Cell>{association.representative}</Table.Cell>
                     <Table.Cell>{association.contact}</Table.Cell>
+                    <Table.Cell>{association.views}</Table.Cell>
                     <Table.Cell>
                       {moment(association.updateAt).
                         format('YYYY-MM-DD HH:mm')}

@@ -2,10 +2,9 @@ import { Button, Form, Icon, Image, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
 import axios from 'axios'
 import DeleteConfirmModal from '../common/delete.confirm.modal'
+import { OwnerOptions } from '../../assets/owner.options'
 
-const EquipmentUpdateModal = (props) => {
-  const equipmentInfo = props.equipmentInfo
-
+const EquipmentUpdateModal = ({ equipmentInfo, trigger }) => {
   const [open, setOpen] = useState(false)
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
 
@@ -14,6 +13,7 @@ const EquipmentUpdateModal = (props) => {
   const [fee, setFee] = useState(equipmentInfo.fee)
   const [description, setDescription] = useState(equipmentInfo.description)
   const [staff_email, setStaffEmail] = useState(equipmentInfo.staff_email)
+  const [max_minutes, setMaxMinutes] = useState(equipmentInfo.max_minutes)
   const [image, setImage] = useState()
 
   const handleSubmit = async () => {
@@ -24,6 +24,9 @@ const EquipmentUpdateModal = (props) => {
       formData.append('fee', fee)
       formData.append('description', description)
       formData.append('staff_email', staff_email)
+      if (max_minutes) {
+        formData.append('max_minutes', max_minutes)
+      }
       if (image) {
         formData.append('image', image)
       }
@@ -43,17 +46,9 @@ const EquipmentUpdateModal = (props) => {
     }
   }
 
-  const ownerOptions = [
-    { key: 'chonghak', text: '총학생회', value: 'chonghak' },
-    { key: 'dongyeon', text: '동아리연합회', value: 'dongyeon' },
-    { key: 'dormUnion', text: '생활관자치회', value: 'dormUnion' },
-    { key: 'saengna', text: '생각나눔', value: 'saengna' },
-    { key: 'others', text: '그 외', value: 'others' },
-  ]
-
   return (
     <Modal
-      open={open} trigger={props.trigger}
+      open={open} trigger={trigger}
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
     >
@@ -71,7 +66,7 @@ const EquipmentUpdateModal = (props) => {
               required
               label={'장비 소속'}
               value={equip_owner}
-              options={ownerOptions}
+              options={OwnerOptions}
               onChange={(e, { value }) => setEquipOwner(value)}
             />
           </Form.Group>
@@ -81,6 +76,13 @@ const EquipmentUpdateModal = (props) => {
             value={fee}
             onChange={e => setFee(e.target.value)}
           />
+          <Form.Input
+              label={'최대 예약가능 기간(단위: 분)'}
+              placeholder={'해당 장비를 예약가능한 최대 시간을 분단위로 입력해주세요 (ex. 60)'}
+              value={max_minutes}
+              onChange={e => setMaxMinutes(e.target.value)}
+          />
+          <p>최대 예약가능 시간이 넘는 예약이 생성되지 않도록 합니다.</p>
           <Form.TextArea
             required
             label={'설명'}

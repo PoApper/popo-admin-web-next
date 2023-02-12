@@ -2,7 +2,7 @@ import { Form, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
 import axios from 'axios'
 
-const ClubCreateModal = (props) => {
+const ClubCreateModal = ({ trigger }) => {
   const [open, setOpen] = useState(false)
   const [name, setName] = useState('')
   const [short_desc, setShortDesc] = useState('')
@@ -54,7 +54,7 @@ const ClubCreateModal = (props) => {
   return (
     <Modal
       closeIcon
-      open={open} trigger={props.trigger}
+      open={open} trigger={trigger}
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
     >

@@ -7,6 +7,7 @@ const WhitebookCreateModal = (props) => {
   const [title, setTitle] = useState('')
   const [link, setLink] = useState('')
   const [content, setContent] = useState('')
+  const [showOnlyLogin, setShowOnlyLogin] = useState(false)
 
   const handleSubmit = async () => {
     try {
@@ -15,6 +16,7 @@ const WhitebookCreateModal = (props) => {
           title: title,
           link: link,
           content: content,
+          show_only_login: showOnlyLogin
         }, { withCredentials: true },
       )
       setOpen(false)
@@ -51,6 +53,13 @@ const WhitebookCreateModal = (props) => {
             label={'생활백서 설명글'}
             onChange={e => setContent(e.target.value)}
           />
+          <Form.Checkbox
+            required
+            label={'로그인 유저에게만 보이기'}
+            value={showOnlyLogin}
+            onChange={() => setShowOnlyLogin(!showOnlyLogin)}
+          />
+
           <Modal.Actions>
             <Form.Button
               type={'submit'}

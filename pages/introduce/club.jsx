@@ -26,7 +26,6 @@ const ClubIntroducePage = () => {
           trigger={<Button>동아리 생성</Button>}
         />
       </div>
-      <p>소개글은 업데이트 순서로 정렬되어 표시됩니다!</p>
       <div>
         <ClubTable
           clubs={clubs}

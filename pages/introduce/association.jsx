@@ -27,7 +27,6 @@ const AssociationIntroducePage = () => {
           trigger={<Button>자치단체 생성</Button>}
         />
       </div>
-      <p>소개글은 업데이트 순서로 정렬되어 표시됩니다!</p>
       <div>
         <AssociationTable
           associations={associations}
