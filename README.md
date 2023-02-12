@@ -28,7 +28,7 @@ POPO는 PoApper에서 개발하고, POSTECH 총학생회에서 운영하는 포�
 
 ## Commands
 
-``` bash
+```bash
 $ npm install
 // fill correct envrionments variables to .env file
 $ npm run dev
@@ -53,9 +53,11 @@ $ docker-compose up -d
 On your local computer
 
 ```bash
+# AWS ECR login
 $ aws ecr get-login-password --region ap-northeast-2 | \
   docker login --username AWS --password-stdin 151345152001.dkr.ecr.ap-northeast-2.amazonaws.com
-$ docker build . -t 151345152001.dkr.ecr.ap-northeast-2.amazonaws.com/popo-admin-web:latest
+$ docker build . -t popo-admin-web
+$ docker image tag popo-admin-web:latest 151345152001.dkr.ecr.ap-northeast-2.amazonaws.com/popo-admin-web:latest
 $ docker push 151345152001.dkr.ecr.ap-northeast-2.amazonaws.com/popo-admin-web:latest
 ```
 
