@@ -34,6 +34,15 @@ $ npm install
 $ npm run dev
 ```
 
+```bash
+$ docker build . -t popo-admin-web
+$ docker run -d -p 3001:3001 popo-admin-web
+```
+
+```bash
+$ docker-compose up -d
+```
+
 ## Specification
 
 - ReactJS
