@@ -64,6 +64,8 @@ $ docker push 151345152001.dkr.ecr.ap-northeast-2.amazonaws.com/popo-admin-web:l
 On AWS EC2 instance,
 
 ```bash
+$ aws ecr get-login-password --region ap-northeast-2 | \
+  docker login --username AWS --password-stdin 151345152001.dkr.ecr.ap-northeast-2.amazonaws.com  
 $ docker pull 151345152001.dkr.ecr.ap-northeast-2.amazonaws.com/popo-admin-web:latest
 $ docker stop popo-admin-web
 $ docker rm popo-admin-web
