@@ -5,7 +5,7 @@ name: Github Action
 
 env:
   ECR_REGISTRY: 151345152001.dkr.ecr.ap-northeast-2.amazonaws.com
-  ECR_REPOSITORY: popo-public-web
+  ECR_REPOSITORY: popo-admin-web
 
 jobs:
   docker-build-and-push:
