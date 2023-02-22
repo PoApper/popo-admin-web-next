@@ -64,10 +64,12 @@ $ docker push 151345152001.dkr.ecr.ap-northeast-2.amazonaws.com/popo-admin-web:l
 On AWS EC2 instance,
 
 ```bash
+$ aws ecr get-login-password --region ap-northeast-2 | \
+  docker login --username AWS --password-stdin 151345152001.dkr.ecr.ap-northeast-2.amazonaws.com  
 $ docker pull 151345152001.dkr.ecr.ap-northeast-2.amazonaws.com/popo-admin-web:latest
 $ docker stop popo-admin-web
 $ docker rm popo-admin-web
-$ docker run -d -p 3001:3001 --name popo-admin-web 151345152001.dkr.ecr.ap-northeast-2.amazonaws.com/popo-admin-web:latest
+$ docker-compose -f ./docker-compose.prod.yaml up -d
 
 # 옛날 이미지를 주기적으로 삭제해줘야 한다.
 $ docker container prune # 중지된 모든 컨테이너 삭제
