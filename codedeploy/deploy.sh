@@ -3,7 +3,7 @@
 WORKDIR=/home/ec2-user/popo-admin-web
 cd $WORKDIR
 
-ECR_REGISTRY=873251151111.dkr.ecr.ap-northeast-2.amazonaws.com
+ECR_REGISTRY=151345152001.dkr.ecr.ap-northeast-2.amazonaws.com
 ECR_REPOSITORY=popo-admin-web
 
 echo "> Do AWS Codedeploy!"
