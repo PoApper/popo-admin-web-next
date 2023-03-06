@@ -1,5 +1,5 @@
 on:
-  push:
+  # Github Action manual trigger
   workflow_dispatch:
 
 name: Deploy
