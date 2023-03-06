@@ -1,7 +1,7 @@
 on:
-  push:
+  workflow_dispatch:
 
-name: Github Action for ECR image push
+name: Deploy
 
 env:
   ECR_REGISTRY: 151345152001.dkr.ecr.ap-northeast-2.amazonaws.com
