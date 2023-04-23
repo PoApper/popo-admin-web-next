@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Table } from 'semantic-ui-react'
-import moment from 'moment'
 import axios from 'axios'
 import PlaceUpdateModal from './place.update.modal'
 
@@ -33,7 +32,7 @@ const PlaceTable = () => {
           <Table.HeaderCell>장소명</Table.HeaderCell>
           <Table.HeaderCell>위치</Table.HeaderCell>
           <Table.HeaderCell>지역</Table.HeaderCell>
-          <Table.HeaderCell>생성일</Table.HeaderCell>
+          <Table.HeaderCell>총 예약 갯수</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
@@ -47,9 +46,7 @@ const PlaceTable = () => {
                 <Table.Cell>{place.name}</Table.Cell>
                 <Table.Cell>{place.location}</Table.Cell>
                 <Table.Cell>{regionNames[place.region]}</Table.Cell>
-                <Table.Cell>
-                  {moment(place.createdAt).format('YYYY년 MM월 DD일 HH:mm')}
-                </Table.Cell>
+                <Table.Cell>{place.total_reservation_count}</Table.Cell>
               </Table.Row>}
             />,
           )
