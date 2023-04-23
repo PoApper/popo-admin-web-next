@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Table } from 'semantic-ui-react'
-import moment from 'moment'
 import axios from 'axios'
 import EquipmentUpdateModal from './equipment.update.modal'
 
@@ -35,7 +34,7 @@ const EquipmentTable = () => {
           <Table.HeaderCell>장비명</Table.HeaderCell>
           <Table.HeaderCell>장비 소속</Table.HeaderCell>
           <Table.HeaderCell>대여비</Table.HeaderCell>
-          <Table.HeaderCell>생성일</Table.HeaderCell>
+          <Table.HeaderCell>총 예약 갯수</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
@@ -49,9 +48,7 @@ const EquipmentTable = () => {
                 <Table.Cell>{equipment.name}</Table.Cell>
                 <Table.Cell>{ownerNames[equipment.equip_owner]}</Table.Cell>
                 <Table.Cell>{equipment.fee.toLocaleString()}</Table.Cell>
-                <Table.Cell>
-                  {moment(equipment.createdAt).format('YYYY년 MM월 DD일 HH:mm')}
-                </Table.Cell>
+                <Table.Cell>{equipment.max_reservation_count.toLocaleString()}</Table.Cell>
               </Table.Row>}
             />,
           )
