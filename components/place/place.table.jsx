@@ -46,7 +46,7 @@ const PlaceTable = () => {
                 <Table.Cell>{place.name}</Table.Cell>
                 <Table.Cell>{place.location}</Table.Cell>
                 <Table.Cell>{regionNames[place.region]}</Table.Cell>
-                <Table.Cell>{place.total_reservation_count}</Table.Cell>
+                <Table.Cell>{place.total_reservation_count.toLocaleString()}</Table.Cell>
               </Table.Row>}
             />,
           )
