@@ -48,7 +48,7 @@ const EquipmentTable = () => {
                 <Table.Cell>{equipment.name}</Table.Cell>
                 <Table.Cell>{ownerNames[equipment.equip_owner]}</Table.Cell>
                 <Table.Cell>{equipment.fee.toLocaleString()}</Table.Cell>
-                <Table.Cell>{equipment.max_reservation_count.toLocaleString()}</Table.Cell>
+                <Table.Cell>{equipment.total_reservation_count.toLocaleString()}</Table.Cell>
               </Table.Row>}
             />,
           )
