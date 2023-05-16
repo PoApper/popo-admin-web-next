@@ -32,6 +32,7 @@ const PlaceTable = () => {
           <Table.HeaderCell>장소명</Table.HeaderCell>
           <Table.HeaderCell>위치</Table.HeaderCell>
           <Table.HeaderCell>지역</Table.HeaderCell>
+          <Table.HeaderCell>일일 한도 (분)</Table.HeaderCell>
           <Table.HeaderCell>총 예약 갯수</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
@@ -46,6 +47,13 @@ const PlaceTable = () => {
                 <Table.Cell>{place.name}</Table.Cell>
                 <Table.Cell>{place.location}</Table.Cell>
                 <Table.Cell>{regionNames[place.region]}</Table.Cell>
+                <Table.Cell>
+                  {
+                    place.max_minutes === 1440 ?
+                      '제한 없음' :
+                      place.max_minutes.toLocaleString()
+                  }
+                </Table.Cell>
                 <Table.Cell>{place.total_reservation_count.toLocaleString()}</Table.Cell>
               </Table.Row>}
             />,

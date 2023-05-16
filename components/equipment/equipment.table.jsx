@@ -34,6 +34,7 @@ const EquipmentTable = () => {
           <Table.HeaderCell>장비명</Table.HeaderCell>
           <Table.HeaderCell>장비 소속</Table.HeaderCell>
           <Table.HeaderCell>대여비</Table.HeaderCell>
+          <Table.HeaderCell>일일 한도 (분)</Table.HeaderCell>
           <Table.HeaderCell>총 예약 갯수</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
@@ -48,6 +49,13 @@ const EquipmentTable = () => {
                 <Table.Cell>{equipment.name}</Table.Cell>
                 <Table.Cell>{ownerNames[equipment.equip_owner]}</Table.Cell>
                 <Table.Cell>{equipment.fee.toLocaleString()}</Table.Cell>
+                <Table.Cell>
+                  {
+                    equipment.max_minutes === 1440 ?
+                      '제한 없음' :
+                      equipment.max_minutes.toLocaleString()
+                  }
+                </Table.Cell>
                 <Table.Cell>{equipment.total_reservation_count.toLocaleString()}</Table.Cell>
               </Table.Row>}
             />,
