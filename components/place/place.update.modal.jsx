@@ -16,6 +16,7 @@ const PlaceUpdateModal = ({ placeInfo, trigger}) => {
   const [staff_email, setStaffEmail] = useState(placeInfo.staff_email)
   const [max_minutes, setMaxMinutes] = useState(placeInfo.max_minutes)
   const [opening_hours, setOpeningHours] = useState(JSON.parse(placeInfo.opening_hours))
+  const [enable_auto_accept, setEnableAutoAccept] = useState(placeInfo.enable_auto_accept)
   const [image, setImage] = useState()
 
   const handleSubmit = async () => {
@@ -33,6 +34,7 @@ const PlaceUpdateModal = ({ placeInfo, trigger}) => {
       formData.append('description', description)
       formData.append('staff_email', staff_email)
       formData.append('opening_hours', JSON.stringify(opening_hours))
+      formData.append('enable_auto_accept', enable_auto_accept)
       if (max_minutes) {
         formData.append('max_minutes', max_minutes)
       }
@@ -100,6 +102,18 @@ const PlaceUpdateModal = ({ placeInfo, trigger}) => {
             currentOpeningHour={JSON.parse(placeInfo.opening_hours)}
             openingHour={opening_hours}
             setOpeningHours={setOpeningHours}
+          />
+
+          <Form.Select
+            required
+            toggle
+            label={'자동 승인 기능 활성화'}
+            value={enable_auto_accept}
+            options={[
+              {key: 'active', text: '활성', value: 'Active'},
+              {key: 'inactive', text: '비활성', value: 'Inactive'},
+            ]}
+            onChange={(e, { value }) => setEnableAutoAccept(value)}
           />
 
           <Form.TextArea
