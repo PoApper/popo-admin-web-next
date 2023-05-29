@@ -32,7 +32,7 @@ POPO는 PoApper에서 개발하고, POSTECH 총학생회에서 운영하는 포�
 
 ```bash
 $ npm install
-// fill correct envrionments variables to .env file
+# fill correct envrionments variables to .env file
 $ npm run dev
 ```
 
@@ -50,33 +50,21 @@ $ docker build . -t popo-admin-web
 $ docker-compose up -d
 ```
 
-#### With AWS ECR
+#### Prod/Dev Release
 
-On your local computer
+git tag를 추가/수정하면 Github Action이 트리거 된다. Github Action에서 도커 이미지를 빌드하고 AWS ECR에 push 한다. 그러면, Docker Swarm 클러스터의 마스터 노드가 새로운 이미지가 push 된 걸 확인하고 새로운 이미지로 디플로이 한다.
 
-```bash
-# AWS ECR login
-$ aws ecr get-login-password --region ap-northeast-2 | \
-  docker login --username AWS --password-stdin 151345152001.dkr.ecr.ap-northeast-2.amazonaws.com
-$ docker build . -t popo-admin-web
-$ docker image tag popo-admin-web:latest 151345152001.dkr.ecr.ap-northeast-2.amazonaws.com/popo-admin-web:latest
-$ docker push 151345152001.dkr.ecr.ap-northeast-2.amazonaws.com/popo-admin-web:latest
-```
-
-On AWS EC2 instance,
+이때, Prod 배포 할지, Dev 배포 할지는 git tag에 따라 결정된다.
 
 ```bash
-$ aws ecr get-login-password --region ap-northeast-2 | \
-  docker login --username AWS --password-stdin 151345152001.dkr.ecr.ap-northeast-2.amazonaws.com  
-$ docker pull 151345152001.dkr.ecr.ap-northeast-2.amazonaws.com/popo-admin-web:latest
-$ docker stop popo-admin-web
-$ docker rm popo-admin-web
-$ docker-compose -f ./docker-compose.prod.yaml up -d
+# Prod 배포
+$ git tag release-1.2.3
 
-# 옛날 이미지를 주기적으로 삭제해줘야 한다.
-$ docker container prune # 중지된 모든 컨테이너 삭제
-$ docker image prune # 사용하지 않는 이미지 삭제
+# Dev 배포
+$ git tag any-other-tags
 ```
+
+git tag에 `release-`라는 접두사를 붙이면 Prod 배포된다. 그외의 경우엔 Dev에 배포된다.
 
 ## Specification
 
@@ -84,3 +72,5 @@ $ docker image prune # 사용하지 않는 이미지 삭제
 - NextJS
 - Semantic-ui-react
 - styled-component
+- docker swarm
+- [Swarmpit](https://swarmpit.io)

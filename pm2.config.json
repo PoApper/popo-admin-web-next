@@ -1,9 +1,0 @@
-{
-  "apps": [
-    {
-      "name": "popo-admin-web",
-      "script": "npm",
-      "args": "run start"
-    }
-  ]
-}
