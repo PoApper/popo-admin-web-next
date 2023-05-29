@@ -31,9 +31,11 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
       - name: Determine Prod/Dev Stage
         run: |
-          if startsWith(github.ref, 'refs/tags/release'); then
+          if [[ ${{ github.ref }} == 'refs/tags/release' ]]; then
+            echo "PROD"
             echo "IMAGE_TAG=prod" >> $GITHUB_ENV
           else
+            echo "DEV"
             echo "IMAGE_TAG=dev" >> $GITHUB_ENV
           fi
       - name: Build and Push
