@@ -1,15 +1,28 @@
 version: '3.8'
 services:
-  web:
-    image: 151345152001.dkr.ecr.ap-northeast-2.amazonaws.com/popo-admin-web:latest
+  dev_web:
+    image: 151345152001.dkr.ecr.ap-northeast-2.amazonaws.com/popo-admin-web:dev
     ports:
-     - 3001:3001
+     - 5001:3001
     logging:
-      driver: json-file
+      driver: none
     deploy:
       labels:
         swarmpit.service.deployment.autoredeploy: 'true'
       placement:
         constraints:
          - node.role != manager
-         - node.id == ttkses4bi9ac4dsafowxokmht
+         - node.labels.application == popo
+  prod_web:
+    image: 151345152001.dkr.ecr.ap-northeast-2.amazonaws.com/popo-admin-web:prod
+    ports:
+     - 3001:3001
+    logging:
+      driver: none
+    deploy:
+      labels:
+        swarmpit.service.deployment.autoredeploy: 'true'
+      placement:
+        constraints:
+         - node.role != manager
+         - node.labels.application == popo
