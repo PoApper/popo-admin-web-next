@@ -2,12 +2,11 @@ on:
   push:
     tags: ["*"]
 
-name: Deploy
+name: Docker Build and Push
 
 env:
   ECR_REGISTRY: 151345152001.dkr.ecr.ap-northeast-2.amazonaws.com
   ECR_REPOSITORY: popo-admin-web
-  CODEDEPLOY_APP_NAME: $ECR_REPOSITORY
 
 jobs:
   docker-build-and-push:
@@ -39,11 +38,3 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           push: true
-      - name: AWS Codedeploy
-        run: |
-          aws deploy create-deployment \
-            --application-name popo-admin-web \
-            --file-exists-behavior OVERWRITE \
-            --deployment-config-name CodeDeployDefault.OneAtATime \
-            --deployment-group-name popo-admin-web-codedeploy-group \
-            --github-location repository=$GITHUB_REPOSITORY,commitId=$GITHUB_SHA

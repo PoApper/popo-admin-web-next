@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  web:
+    image: 151345152001.dkr.ecr.ap-northeast-2.amazonaws.com/popo-admin-web:latest
+    ports:
+     - 3001:3001
+    logging:
+      driver: json-file
+    deploy:
+      labels:
+        swarmpit.service.deployment.autoredeploy: 'true'
+      placement:
+        constraints:
+         - node.role != manager
+         - node.id == ttkses4bi9ac4dsafowxokmht
