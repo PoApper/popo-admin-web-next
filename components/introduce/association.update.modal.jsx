@@ -1,7 +1,7 @@
 import { Button, Form, Icon, Image, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
-import axios from 'axios'
 import DeleteConfirmModal from '../common/delete.confirm.modal'
+import { PoPoAxios } from "../../utils/axios.instance";
 
 const AssociationUpdateModal = ({ association, trigger }) => {
   const [open, setOpen] = useState(false)
@@ -31,8 +31,7 @@ const AssociationUpdateModal = ({ association, trigger }) => {
       if (logo) {
         formData.append('logo', logo)
       }
-      await axios.put(
-        `${process.env.NEXT_PUBLIC_API}/introduce/association/${association.uuid}`,
+      await PoPoAxios.put(`/introduce/association/${association.uuid}`,
         formData,
         {
           withCredentials: true,

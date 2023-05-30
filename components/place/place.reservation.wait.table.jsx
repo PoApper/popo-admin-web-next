@@ -3,13 +3,13 @@ import { Checkbox, Table, Button } from 'semantic-ui-react'
 import moment from 'moment'
 import PlaceReservationConfirmModal
   from './place.reservation.confirm.modal'
-import axios from 'axios'
+import { PoPoAxios } from "../../utils/axios.instance";
 
 const PlaceReservationWaitTable = ({reservations}) => {
   const [selectedUuidList, setSelectedUuidList] = useState([]);
 
   function acceptAllInProgressPlaceReservations() {
-    axios.patch(`${process.env.NEXT_PUBLIC_API}/reservation-place/all/status/accept`,
+    PoPoAxios.patch('/reservation-place/all/status/accept',
       {uuid_list: selectedUuidList}, {withCredentials: true}).then(() => {
       alert('선택한 장소 예약을 승인했습니다.')
       window.location.reload();

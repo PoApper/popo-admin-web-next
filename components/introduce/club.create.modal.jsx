@@ -1,6 +1,6 @@
 import { Form, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
-import axios from 'axios'
+import { PoPoAxios } from "../../utils/axios.instance";
 
 const ClubCreateModal = ({ trigger }) => {
   const [open, setOpen] = useState(false)
@@ -26,8 +26,8 @@ const ClubCreateModal = ({ trigger }) => {
       if (logo) {
         formData.append('logo', logo)
       }
-      await axios.post(
-        `${process.env.NEXT_PUBLIC_API}/introduce/club`,
+      await PoPoAxios.post(
+        '/introduce/club',
         formData,
         {
           withCredentials: true,

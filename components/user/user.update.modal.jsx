@@ -1,7 +1,7 @@
 import { Button, Form, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
-import axios from 'axios'
 import DeleteConfirmModal from '../common/delete.confirm.modal'
+import { PoPoAxios } from "../../utils/axios.instance";
 
 export const userTypeOptions = [
   { key: 'STUDENT', text: '학생', value: 'STUDENT' },
@@ -31,7 +31,7 @@ const UserUpdateModal = ({user, trigger}) => {
 
   const handleSubmit = async () => {
     try {
-      await axios.put(`${process.env.NEXT_PUBLIC_API}/user/${user.uuid}`, {
+      await PoPoAxios.put(`/user/${user.uuid}`, {
         'email': email,
         'id': id,
         'name': name,

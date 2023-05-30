@@ -1,7 +1,7 @@
 import { Button, Form, Icon, Image, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
-import axios from 'axios'
 import DeleteConfirmModal from '../common/delete.confirm.modal'
+import { PoPoAxios } from "../../utils/axios.instance";
 
 const ClubUpdateModal = ({ club, trigger}) => {
   const [open, setOpen] = useState(false)
@@ -34,8 +34,7 @@ const ClubUpdateModal = ({ club, trigger}) => {
       if (logo) {
         formData.append('logo', logo)
       }
-      await axios.put(
-        `${process.env.NEXT_PUBLIC_API}/introduce/club/${club.uuid}`,
+      await PoPoAxios.put(`/introduce/club/${club.uuid}`,
         formData,
         {
           withCredentials: true,
