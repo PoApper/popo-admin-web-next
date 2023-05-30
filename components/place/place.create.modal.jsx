@@ -1,8 +1,8 @@
 import { Form, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
-import axios from 'axios'
 import { RegionOptions } from '../../assets/region.options'
 import OpeningHoursEditor, { checkValid } from '../common/opening_hours.editor'
+import { PoPoAxios } from "../../utils/axios.instance";
 
 const PlaceCreateModal = ({ trigger }) => {
   const [open, setOpen] = useState(false)
@@ -40,8 +40,7 @@ const PlaceCreateModal = ({ trigger }) => {
       if (image) {
         formData.append('image', image)
       }
-      await axios.post(
-        `${process.env.NEXT_PUBLIC_API}/place`, formData,
+      await PoPoAxios.post('/place', formData,
         {
           withCredentials: true,
           headers: { 'Content-Type': 'multipart/form-data' },

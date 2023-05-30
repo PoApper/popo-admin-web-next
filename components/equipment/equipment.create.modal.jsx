@@ -1,7 +1,7 @@
 import { Form, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
-import axios from 'axios'
 import { OwnerOptions } from '../../assets/owner.options'
+import { PoPoAxios } from "../../utils/axios.instance";
 
 const EquipmentCreateModal = (props) => {
   const [open, setOpen] = useState(false)
@@ -28,9 +28,7 @@ const EquipmentCreateModal = (props) => {
       if (image) {
         formData.append('image', image)
       }
-      await axios.post(
-        `${process.env.NEXT_PUBLIC_API}/equip`,
-        formData,
+      await PoPoAxios.post('/equip', formData,
         {
           withCredentials: true,
           headers: { 'Content-Type': 'multipart/form-data' },

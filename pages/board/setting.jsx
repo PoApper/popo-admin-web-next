@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios'
-import { Button, Form } from 'semantic-ui-react'
+import { Form } from 'semantic-ui-react'
 import BoardLayout from '../../components/board/board.layout'
+import { PoPoAxios } from "../../utils/axios.instance";
 
 const SettingPage = () => {
   const [popoCRMEmail, setPOPOCRMEmail] = useState('');
   const [dongyeonBank, setDongyeonBank] = useState('');
 
   useEffect(() => {
-    axios.get(`${process.env.NEXT_PUBLIC_API}/setting`)
+    PoPoAxios.get('/setting')
          .then((res) => {
            setPOPOCRMEmail(res.data.popo_crm_email);
            setDongyeonBank(res.data.dongyeon_bank);
@@ -17,7 +17,7 @@ const SettingPage = () => {
   }, [])
 
   function handleSubmit () {
-    axios.post(`${process.env.NEXT_PUBLIC_API}/setting`, {
+    PoPoAxios.post('/setting', {
       popo_crm_email: popoCRMEmail,
       dongyeon_bank: dongyeonBank,
     }, {withCredentials: true})

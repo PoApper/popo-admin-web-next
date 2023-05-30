@@ -1,8 +1,8 @@
 import { Button, Form, Icon, Image, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
-import axios from 'axios'
 import DeleteConfirmModal from '../common/delete.confirm.modal'
 import { OwnerOptions } from '../../assets/owner.options'
+import { PoPoAxios } from "../../utils/axios.instance";
 
 const EquipmentUpdateModal = ({ equipmentInfo, trigger }) => {
   const [open, setOpen] = useState(false)
@@ -30,8 +30,8 @@ const EquipmentUpdateModal = ({ equipmentInfo, trigger }) => {
       if (image) {
         formData.append('image', image)
       }
-      await axios.put(
-        `${process.env.NEXT_PUBLIC_API}/equip/${equipmentInfo.uuid}`,
+      await PoPoAxios.put(
+        `/equip/${equipmentInfo.uuid}`,
         formData,
         {
           withCredentials: true,

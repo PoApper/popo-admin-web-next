@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
 
 import ReservationLayout from '../../components/reservation/reservation.layout'
 import { Pagination } from 'semantic-ui-react'
 import EquipmentReservationTable
   from '../../components/equipment/equipment.reservation.table'
+import { PoPoAxios } from "../../utils/axios.instance";
 
 const EquipmentReservationPage = () => {
   const [reservations, setReservations] = useState([])
@@ -14,14 +14,14 @@ const EquipmentReservationPage = () => {
 
   useEffect(() => {
     try {
-      axios.get(
-        `${process.env.NEXT_PUBLIC_API}/reservation-equip?take=${page_size}`, {
+      PoPoAxios.get(
+        `/reservation-equip?take=${page_size}`, {
           withCredentials: true,
         }).then((res) => {
         setReservations(res.data)
       })
-      axios.get(
-        `${process.env.NEXT_PUBLIC_API}/reservation-equip/count`,
+      PoPoAxios.get(
+        '/reservation-equip/count',
       ).then((res) => {
         setTotalCount(res.data)
       })
@@ -33,8 +33,8 @@ const EquipmentReservationPage = () => {
 
   const handlePageChange = async (e, target) => {
     const activePage = target.activePage
-    const ret = await axios.get(
-      `${process.env.NEXT_PUBLIC_API}/reservation-equip?take=${page_size}&skip=${page_size *
+    const ret = await PoPoAxios.get(
+      `/reservation-equip?take=${page_size}&skip=${page_size *
       (activePage - 1)}`, { withCredentials: true })
     setReservations(ret.data)
     setPage(activePage)

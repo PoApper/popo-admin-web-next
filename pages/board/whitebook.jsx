@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios'
 import { Button } from 'semantic-ui-react'
 import BoardLayout from '../../components/board/board.layout'
 import WhitebookCreateModal from '../../components/board/whitebook.create.modal'
 import WhitebookTable from '../../components/board/whitebook.table'
+import { PoPoAxios } from "../../utils/axios.instance";
 
 const WhitebookPage = () => {
   const [whitebooks, setWhitebooks] = useState([])
 
   useEffect(() => {
-    axios.get(
-      `${process.env.NEXT_PUBLIC_API}/whitebook/with-login?orderBy=click_count`,
+    PoPoAxios.get(
+      '/whitebook/with-login?orderBy=click_count',
       { withCredentials: true }).
       then((res) => setWhitebooks(res.data)).
       catch((err) => {

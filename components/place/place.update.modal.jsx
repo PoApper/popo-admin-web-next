@@ -1,9 +1,9 @@
 import { Button, Form, Icon, Image, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
-import axios from 'axios'
 import DeleteConfirmModal from '../common/delete.confirm.modal'
 import { RegionOptions } from '../../assets/region.options'
 import OpeningHoursEditor, { checkValid } from '../common/opening_hours.editor'
+import { PoPoAxios } from "../../utils/axios.instance";
 
 const PlaceUpdateModal = ({ placeInfo, trigger}) => {
   const [open, setOpen] = useState(false)
@@ -41,8 +41,8 @@ const PlaceUpdateModal = ({ placeInfo, trigger}) => {
       if (image) {
         formData.append('image', image)
       }
-      await axios.put(
-        `${process.env.NEXT_PUBLIC_API}/place/${placeInfo.uuid}`,
+      await PoPoAxios.put(
+        `/place/${placeInfo.uuid}`,
         formData,
         {
           withCredentials: true,

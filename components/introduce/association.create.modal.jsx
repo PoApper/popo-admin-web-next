@@ -1,6 +1,6 @@
 import { Form, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
-import axios from 'axios'
+import { PoPoAxios } from "../../utils/axios.instance";
 
 const AssociationCreateModal = ({ trigger }) => {
   const [open, setOpen] = useState(false)
@@ -23,9 +23,8 @@ const AssociationCreateModal = ({ trigger }) => {
       if (logo) {
         formData.append('logo', logo)
       }
-      await axios.post(
-        `${process.env.NEXT_PUBLIC_API}/introduce/association`,
-        formData,
+      await PoPoAxios.post(
+        `/introduce/association`, formData,
         {
           withCredentials: true,
           headers: { 'Content-Type': 'multipart/form-data' },

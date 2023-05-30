@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Table } from 'semantic-ui-react'
-import axios from 'axios'
 import PlaceUpdateModal from './place.update.modal'
+import { PoPoAxios } from "../../utils/axios.instance";
 
 const regionNames = {
   'STUDENT_HALL': '학생 회관',
@@ -13,8 +13,8 @@ const PlaceTable = () => {
   const [places, setPlaces] = useState([])
 
   useEffect(() => {
-    axios
-      .get(`${process.env.NEXT_PUBLIC_API}/place`)
+    PoPoAxios
+      .get('/place')
       .then((res) => setPlaces(res.data))
       .catch((err) => {
         alert('장소 목록을 불러오는데 실패했습니다.')

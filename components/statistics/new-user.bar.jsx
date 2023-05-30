@@ -1,14 +1,14 @@
 import { ResponsiveBar } from '@nivo/bar'
 import { useEffect, useState } from 'react'
-import axios from 'axios'
 import moment from 'moment'
+import { PoPoAxios } from "../../utils/axios.instance";
 
 const NewUserBar = () => {
   const [barData, setBarData] = useState([])
 
   useEffect(() => {
     const thisMonth = moment().format('YYYYMM')
-    axios.get(`${process.env.NEXT_PUBLIC_API}/statistics/user?start=202102&end=${thisMonth}`).
+    PoPoAxios.get(`/statistics/user?start=202102&end=${thisMonth}`).
       then((res) => {
         // process data format
         const barData = []

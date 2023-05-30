@@ -1,8 +1,8 @@
 import { Button, Form, Icon, Modal, Segment } from 'semantic-ui-react'
 import React, { useState } from 'react'
-import axios from 'axios'
 import moment from 'moment'
 import DeleteConfirmModal from '../common/delete.confirm.modal'
+import { PoPoAxios } from "../../utils/axios.instance";
 
 const PlaceReservationConfirmModal = ({trigger, reservation}) => {
   const [open, setOpen] = useState(false)
@@ -11,8 +11,8 @@ const PlaceReservationConfirmModal = ({trigger, reservation}) => {
   const handlePatch = async (e, data) => {
     try {
       const patch_type = data.name // {accept, reject}
-      await axios.patch(
-        `${process.env.NEXT_PUBLIC_API}/reservation-place/${reservation.uuid}/status/${patch_type}?sendEmail=${send_email}`,
+      await PoPoAxios.patch(
+        `/reservation-place/${reservation.uuid}/status/${patch_type}?sendEmail=${send_email}`,
         {}, {withCredentials: true})
       setOpen(false)
       window.location.reload()
