@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { Form, Image } from 'semantic-ui-react'
 import styled from 'styled-components'
-import axios from 'axios'
 import LoginLayout from '../components/layout.raw'
+import { PoPoAxios } from "../utils/axios.instance";
 
 const LoginPage = () => {
   const router = useRouter()
@@ -13,7 +13,7 @@ const LoginPage = () => {
 
   const handleLogin = async () => {
     try {
-      await axios.post(`${process.env.NEXT_PUBLIC_API}/auth/login/admin`, {
+      await PoPoAxios.post('/auth/login/admin', {
         id: id,
         password: password,
       }, { withCredentials: true })

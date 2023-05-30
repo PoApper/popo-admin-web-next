@@ -1,15 +1,14 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios'
 import { Dropdown, Menu } from 'semantic-ui-react'
 import { useRouter } from 'next/router'
+import { PoPoAxios } from "../../utils/axios.instance";
 
 const MenuItemUser = () => {
   const router = useRouter()
   const [user, setUser] = useState({})
 
   useEffect(() => {
-    axios.get(
-      `${process.env.NEXT_PUBLIC_API}/auth/verifyToken`, {
+    PoPoAxios.get('/auth/verifyToken', {
         withCredentials: true,
       }).then(res => setUser(res.data)).catch(() => {
       // Fail to login
@@ -21,7 +20,7 @@ const MenuItemUser = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.get(`${process.env.NEXT_PUBLIC_API}/auth/logout`, {
+      await PoPoAxios.get('/auth/logout', {
         withCredentials: true,
       })
       await router.push('/login')
