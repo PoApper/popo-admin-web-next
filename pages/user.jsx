@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios'
 import { Button, Icon, Input, Pagination } from 'semantic-ui-react'
 import LayoutMain from '../components/layout.main'
 import UserTable from '../components/user/user.table'
 import UserCreateModal from '../components/user/user.create.modal'
+import { PoPoAxios } from "../utils/axios.instance";
 
 const UserPage = () => {
   const PAGE_SIZE = 10
@@ -16,8 +16,8 @@ const UserPage = () => {
 
   useEffect(() => {
     const skip = PAGE_SIZE * (page - 1);
-    axios.get(
-      `${process.env.NEXT_PUBLIC_API}/search/user?q=${keyword}&take=${PAGE_SIZE}&skip=${skip}`,
+    PoPoAxios.get(
+      `/search/user?q=${keyword}&take=${PAGE_SIZE}&skip=${skip}`,
       { withCredentials: true })
       .then((res) => {
         const ret = res.data;

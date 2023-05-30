@@ -1,6 +1,6 @@
 import { Form, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
-import axios from 'axios'
+import { PoPoAxios } from "../../utils/axios.instance";
 
 export const userTypeOptions = [
   { key: 'STUDENT', text: '학생', value: 'STUDENT' },
@@ -23,7 +23,7 @@ const UserCreateModal = ({ trigger }) => {
 
   const handleSubmit = async () => {
     try {
-      await axios.post(`${process.env.NEXT_PUBLIC_API}/user`, {
+      await PoPoAxios.post('/user', {
         'email': email,
         'id': id,
         'password': password,

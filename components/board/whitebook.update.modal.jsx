@@ -1,7 +1,7 @@
 import { Button, Form, Icon, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
-import axios from 'axios'
 import DeleteConfirmModal from '../common/delete.confirm.modal'
+import { PoPoAxios } from "../../utils/axios.instance";
 
 const WhitebookUpdateModal = ({ trigger, whitebook }) => {
   const [open, setOpen] = useState(false)
@@ -14,8 +14,8 @@ const WhitebookUpdateModal = ({ trigger, whitebook }) => {
 
   const handleSubmit = async () => {
     try {
-      await axios.put(
-        `${process.env.NEXT_PUBLIC_API}/whitebook/${whitebook.uuid}`, {
+      await PoPoAxios.put(
+        `/whitebook/${whitebook.uuid}`, {
           title: title,
           link: link,
           content: content,

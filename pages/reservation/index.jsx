@@ -1,23 +1,23 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios'
 import ReservationLayout from '../../components/reservation/reservation.layout'
 import EquipmentReservationTable
   from '../../components/equipment/equipment.reservation.table'
 import PlaceReservationWaitTable
   from '../../components/place/place.reservation.wait.table'
+import { PoPoAxios } from "../../utils/axios.instance";
 
 const ReservationPage = () => {
   const [place_reservations, setPlaceReservations] = useState([])
   const [equip_reservations, setEquipReservations] = useState([])
 
   useEffect(() => {
-    axios.get(
-      `${process.env.NEXT_PUBLIC_API}/reservation-place?status=심사중`,
+    PoPoAxios.get(
+      '/reservation-place?status=심사중',
     ).then((res) => {
       setPlaceReservations(res.data)
     })
-    axios.get(
-      `${process.env.NEXT_PUBLIC_API}/reservation-equip?status=심사중`,
+    PoPoAxios.get(
+      '/reservation-equip?status=심사중',
     ).then((res) => {
       setEquipReservations(res.data)
     })

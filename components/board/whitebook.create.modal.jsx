@@ -1,6 +1,6 @@
 import { Form, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
-import axios from 'axios'
+import { PoPoAxios } from "../../utils/axios.instance";
 
 const WhitebookCreateModal = (props) => {
   const [open, setOpen] = useState(false)
@@ -11,8 +11,8 @@ const WhitebookCreateModal = (props) => {
 
   const handleSubmit = async () => {
     try {
-      await axios.post(
-        `${process.env.NEXT_PUBLIC_API}/whitebook`, {
+      await PoPoAxios.post(
+        '/whitebook', {
           title: title,
           link: link,
           content: content,
