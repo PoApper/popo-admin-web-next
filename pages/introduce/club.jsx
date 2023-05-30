@@ -1,16 +1,16 @@
 import IntroduceLayout from '../../components/introduce/introduce.layout'
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
 import { Button } from 'semantic-ui-react'
 import ClubTable from '../../components/introduce/club.table'
 import ClubCreateModal from '../../components/introduce/club.create.modal'
+import { PoPoAxios } from "../../utils/axios.instance";
 
 const ClubIntroducePage = () => {
   const [clubs, setClubs] = useState([])
 
   useEffect(() => {
-    axios
-      .get(`${process.env.NEXT_PUBLIC_API}/introduce/club`)
+    PoPoAxios
+      .get('/introduce/club')
       .then((res) => setClubs(res.data))
       .catch((err) => {
         alert('동아리 목록을 불러오는데 실패했습니다.')

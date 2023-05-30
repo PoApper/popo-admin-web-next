@@ -1,17 +1,17 @@
 import IntroduceLayout from '../../components/introduce/introduce.layout'
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
 import { Button } from 'semantic-ui-react'
 import AssociationTable from '../../components/introduce/association.table'
 import AssociationCreateModal
   from '../../components/introduce/association.create.modal'
+import { PoPoAxios } from "../../utils/axios.instance";
 
 const AssociationIntroducePage = () => {
   const [associations, setAssociations] = useState([])
 
   useEffect(() => {
-    axios
-      .get(`${process.env.NEXT_PUBLIC_API}/introduce/association`)
+    PoPoAxios
+      .get('/introduce/association')
       .then((res) => setAssociations(res.data))
       .catch((err) => {
         alert('자치단체 목록을 불러오는데 실패했습니다.')
