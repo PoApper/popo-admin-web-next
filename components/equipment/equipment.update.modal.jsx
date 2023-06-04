@@ -2,7 +2,7 @@ import { Button, Form, Icon, Image, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
 import DeleteConfirmModal from '../common/delete.confirm.modal'
 import { OwnerOptions } from '../../assets/owner.options'
-import { PoPoAxios } from "../../utils/axios.instance";
+import { popoApiUrl, PoPoAxios } from "../../utils/axios.instance";
 
 const EquipmentUpdateModal = ({ equipmentInfo, trigger }) => {
   const [open, setOpen] = useState(false)
@@ -104,7 +104,7 @@ const EquipmentUpdateModal = ({ equipmentInfo, trigger }) => {
           <p>이미지가 없으면 기본 이미지가 표시됩니다.</p>
           <div style={{ margin: '10px 0' }}>
             <Image
-              src={`${process.env.NEXT_PUBLIC_API}/equip/image/${equipmentInfo.imageName}`
+              src={`${popoApiUrl}/equip/image/${equipmentInfo.imageName}`
               ?? 'https://react.semantic-ui.com/images/wireframe/image.png'}
               alt={"equipment_image"}
               size={'medium'}
