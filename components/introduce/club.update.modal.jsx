@@ -1,7 +1,7 @@
 import { Button, Form, Icon, Image, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
 import DeleteConfirmModal from '../common/delete.confirm.modal'
-import { PoPoAxios } from "../../utils/axios.instance";
+import { popoApiUrl, PoPoAxios } from "../../utils/axios.instance";
 
 const ClubUpdateModal = ({ club, trigger}) => {
   const [open, setOpen] = useState(false)
@@ -141,7 +141,7 @@ const ClubUpdateModal = ({ club, trigger}) => {
           <p>이미지가 없으면 기본 이미지가 표시됩니다.</p>
           <div style={{ margin: '10px 0' }}>
             <Image
-              src={`${process.env.NEXT_PUBLIC_API}/introduce/club/image/${club.logoName}`
+              src={`${popoApiUrl}/introduce/club/image/${club.logoName}`
               ?? 'https://react.semantic-ui.com/images/wireframe/image.png'}
               alt={"club_image"}
               size={'medium'}

@@ -3,7 +3,7 @@ import { useState } from 'react'
 import DeleteConfirmModal from '../common/delete.confirm.modal'
 import { RegionOptions } from '../../assets/region.options'
 import OpeningHoursEditor, { checkValid } from '../common/opening_hours.editor'
-import { PoPoAxios } from "../../utils/axios.instance";
+import { popoApiUrl, PoPoAxios } from "../../utils/axios.instance";
 
 const PlaceUpdateModal = ({ placeInfo, trigger}) => {
   const [open, setOpen] = useState(false)
@@ -137,7 +137,7 @@ const PlaceUpdateModal = ({ placeInfo, trigger}) => {
           <p>이미지가 없으면 기본 이미지가 표시됩니다.</p>
           <div style={{ margin: '10px 0' }}>
             <Image
-              src={`${process.env.NEXT_PUBLIC_API}/place/image/${placeInfo.imageName}`
+              src={`${popoApiUrl}/place/image/${placeInfo.imageName}`
               ?? 'https://react.semantic-ui.com/images/wireframe/image.png'}
               alt={"place_image"}
               size={'medium'}
