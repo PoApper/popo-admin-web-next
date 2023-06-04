@@ -16,3 +16,7 @@ switch (next_env) {
 export const PoPoAxios = axios.create({
   baseURL: popoApiUrl,
 });
+
+export const PopoCdnAxios = axios.create({
+  baseURL: "https://cdn.popo.poapper.club",
+});

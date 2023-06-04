@@ -1,19 +1,21 @@
 import { useEffect, useState } from 'react'
 import { Form } from 'semantic-ui-react'
 import BoardLayout from '../../components/board/board.layout'
-import { PoPoAxios } from "../../utils/axios.instance";
+import { PoPoAxios, PopoCdnAxios } from "../../utils/axios.instance";
 
 const SettingPage = () => {
   const [popoCRMEmail, setPOPOCRMEmail] = useState('');
   const [dongyeonBank, setDongyeonBank] = useState('');
 
   useEffect(() => {
-    PoPoAxios.get('/setting')
-         .then((res) => {
-           setPOPOCRMEmail(res.data.popo_crm_email);
-           setDongyeonBank(res.data.dongyeon_bank);
-          })
-          .catch((err) => { alert('설정값을 불러오는데 실패했습니다.') })
+    PopoCdnAxios.get('/setting')
+      .then((res) => {
+        setPOPOCRMEmail(res.data.popo_crm_email);
+        setDongyeonBank(res.data.dongyeon_bank);
+      }).catch((err) => {
+        const errMsg = err.response.data.message;
+        alert(`설정값을 불러오는데 실패했습니다.\n${errMsg}`);
+      })
   }, [])
 
   function handleSubmit () {
@@ -23,9 +25,8 @@ const SettingPage = () => {
     }, {withCredentials: true})
       .then(() => alert('설정값을 저장했습니다!'))
       .catch((err) => {
-        console.log(err);
-        alert('설정값을 저장하는데 실패했습니다.')
-        
+        const errMsg = err.response.data.message;
+        alert(`설정값을 저장하는데 실패했습니다.\n${errMsg}`);
       })
   }
 
