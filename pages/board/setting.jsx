@@ -8,7 +8,7 @@ const SettingPage = () => {
   const [dongyeonBank, setDongyeonBank] = useState('');
 
   useEffect(() => {
-    PopoCdnAxios.get('/setting')
+    PopoCdnAxios.get('/popo-setting.json')
       .then((res) => {
         setPOPOCRMEmail(res.data.popo_crm_email);
         setDongyeonBank(res.data.dongyeon_bank);
