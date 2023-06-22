@@ -8,7 +8,7 @@ env:
   ECR_REPOSITORY: popo-admin-web
 
 jobs:
-  docker-build-and-push:
+  docker_build_and_push:
     name: Docker build and push
     runs-on: ubuntu-latest
     steps:
@@ -51,7 +51,7 @@ jobs:
   
   deploy_health_check:
     name: Check Application Status
-    needs: [docker-build-and-push]
+    needs: docker_build_and_push
     runs-on: ubuntu-latest
     steps:
       - name: Check the deployed service URL
