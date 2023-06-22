@@ -60,4 +60,4 @@ jobs:
           url: https://admin.popo.poapper.club|https://admin.popo-dev.poapper.club
           follow-redirect: true
           max-attempts: 3
-          retry-deplay: 10s
+          retry-delay: 10s
