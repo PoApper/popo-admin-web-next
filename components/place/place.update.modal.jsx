@@ -3,8 +3,8 @@ import { useState } from 'react'
 import DeleteConfirmModal from '../common/delete.confirm.modal'
 import { RegionOptions } from '../../assets/region.options'
 import OpeningHoursEditor, { checkValid } from '../common/opening_hours.editor'
-import { popoApiUrl, PoPoAxios, PopoCdnUrl } from "../../utils/axios.instance";
-import { ImageUpload } from '../../utils/image-upload'
+import { PoPoAxios, PopoCdnUrl } from "../../utils/axios.instance";
+import ImageUploadForm from '../common/image-upload.form'
 
 const PlaceUpdateModal = ({ placeInfo, trigger}) => {
   const [open, setOpen] = useState(false)
@@ -126,24 +126,10 @@ const PlaceUpdateModal = ({ placeInfo, trigger}) => {
           />
           <p>장소 예약이 생성되면, 담당자 메일로 예약 생성 메일이 갑니다.</p>
 
-          <Form.Input
-            label={'장소 사진'}
-            type={'file'}
-            accept={'image/*'}
-            onChange={evt => ImageUpload(`place/image/${placeInfo.uuid}`, evt.target.files[0])}
+          <ImageUploadForm 
+            uploadApiUri={`place/image/${placeInfo.uuid}`} 
+            originalImageUrl={`${PopoCdnUrl}/place/${placeInfo.uuid}`}
           />
-          <div style={{ margin: '10px 0' }}>
-            <Image
-              src={`${PopoCdnUrl}/place/${placeInfo.uuid}`}
-              alt={"place_image"}
-              height={200}
-              onError={({ currentTarget }) => {
-                currentTarget.onerror = null; // prevents looping
-                currentTarget.src='https://react.semantic-ui.com/images/wireframe/image.png';
-              }}
-            />
-          </div>
-          <p>이미지가 없으면 기본 이미지가 표시됩니다.</p>
 
           <Modal.Actions>
             <Form.Group>
