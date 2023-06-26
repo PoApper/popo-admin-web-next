@@ -24,30 +24,30 @@ const PlaceCreateModal = ({ trigger }) => {
       }
     }
 
-    try {
-      let formData = new FormData()
-      formData.append('name', name)
-      formData.append('region', region)
-      formData.append('location', location)
-      formData.append('description', description)
-      formData.append('staff_email', staff_email)
-      formData.append('opening_hours', opening_hours)
-      formData.append('enable_auto_accept', enable_auto_accept)
-      if (max_minutes) {
-        formData.append('max_minutes', max_minutes)
-      }
-      await PoPoAxios.post('/place', formData,
-        {
-          withCredentials: true,
-          headers: { 'Content-Type': 'multipart/form-data' },
-        },
-      )
-      setOpen(false)
-      window.location.reload()
-    } catch (e) {
-      alert('장소 생성에 실패했습니다.')
-      console.log(e)
+    const body = {
+      'name': name,
+      'region': region,
+      'location': location,
+      'description': description,
+      'staff_email': staff_email,
+      'opening_hours': opening_hours,
+      'enable_auto_accept': enable_auto_accept,
     }
+
+    if (max_minutes) {
+      body['max_minutes'] = max_minutes
+    }
+
+    await PoPoAxios.post('/place', 
+      body,
+      { withCredentials: true },
+    ).then(() => {
+      setOpen(false);
+      window.location.reload();
+    }).catch(err => {
+      console.log(err);
+      alert('장소 생성에 실패했습니다.');
+    })
   }
 
   return (
