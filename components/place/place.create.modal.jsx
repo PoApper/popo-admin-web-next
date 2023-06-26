@@ -38,7 +38,7 @@ const PlaceCreateModal = ({ trigger }) => {
       body['max_minutes'] = max_minutes
     }
 
-    await PoPoAxios.post('/place', 
+    PoPoAxios.post('/place', 
       body,
       { withCredentials: true },
     ).then(() => {

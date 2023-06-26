@@ -3,7 +3,7 @@ import { useState } from 'react'
 import DeleteConfirmModal from '../common/delete.confirm.modal'
 import { RegionOptions } from '../../assets/region.options'
 import OpeningHoursEditor, { checkValid } from '../common/opening_hours.editor'
-import { popoApiUrl, PoPoAxios } from "../../utils/axios.instance";
+import { popoApiUrl, PoPoAxios, PopoCdnUrl } from "../../utils/axios.instance";
 import { ImageUpload } from '../../utils/image-upload'
 
 const PlaceUpdateModal = ({ placeInfo, trigger}) => {
@@ -18,7 +18,6 @@ const PlaceUpdateModal = ({ placeInfo, trigger}) => {
   const [max_minutes, setMaxMinutes] = useState(placeInfo.max_minutes)
   const [opening_hours, setOpeningHours] = useState(JSON.parse(placeInfo.opening_hours))
   const [enable_auto_accept, setEnableAutoAccept] = useState(placeInfo.enable_auto_accept)
-  const [image, setImage] = useState()
 
   const handleSubmit = async () => {
     for(const day of Object.keys(opening_hours)) {
@@ -27,35 +26,31 @@ const PlaceUpdateModal = ({ placeInfo, trigger}) => {
         return;
       }
     }
-    try {
-      let formData = new FormData()
-      formData.append('name', name)
-      formData.append('region', region)
-      formData.append('location', location)
-      formData.append('description', description)
-      formData.append('staff_email', staff_email)
-      formData.append('opening_hours', JSON.stringify(opening_hours))
-      formData.append('enable_auto_accept', enable_auto_accept)
-      if (max_minutes) {
-        formData.append('max_minutes', max_minutes)
-      }
-      if (image) {
-        formData.append('image', image)
-      }
-      await PoPoAxios.put(
-        `/place/${placeInfo.uuid}`,
-        formData,
-        {
-          withCredentials: true,
-          headers: { 'Content-Type': 'multipart/form-data' },
-        },
-      )
-      setOpen(false)
-      window.location.reload()
-    } catch (e) {
-      alert('장소 정보 수정에 실패했습니다.')
-      console.log(e)
+
+    const body = {
+      'name': name,
+      'region': region,
+      'location': location,
+      'description': description,
+      'staff_email': staff_email,
+      'opening_hours': JSON.stringify(opening_hours),
+      'enable_auto_accept': enable_auto_accept,
     }
+
+    if (max_minutes) {
+      body['max_minutes'] = max_minutes
+    }
+
+    PoPoAxios.pu(`/place/${placeInfo.uuid}`, 
+      body,
+      { withCredentials: true },
+    ).then(() => {
+      setOpen(false);
+      window.location.reload();
+    }).catch(err => {
+      console.log(err);
+      alert('장소 정보 수정에 실패했습니다.');
+    })
   }
 
   return (
@@ -135,11 +130,11 @@ const PlaceUpdateModal = ({ placeInfo, trigger}) => {
             label={'장소 사진'}
             type={'file'}
             accept={'image/*'}
-            onChange={evt => ImageUpload(`place/${placeInfo.uuid}`, evt.target.files[0])}
+            onChange={evt => ImageUpload(`place/image/${placeInfo.uuid}`, evt.target.files[0])}
           />
           <div style={{ margin: '10px 0' }}>
             <Image
-              src={`${popoApiUrl}/place/image/${placeInfo.imageName}`
+              src={`${PopoCdnUrl}/place/${placeInfo.uuid}`
               ?? 'https://react.semantic-ui.com/images/wireframe/image.png'}
               alt={"place_image"}
               size={'medium'}
