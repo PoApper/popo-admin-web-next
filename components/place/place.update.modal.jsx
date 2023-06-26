@@ -129,6 +129,7 @@ const PlaceUpdateModal = ({ placeInfo, trigger}) => {
             onChange={e => setStaffEmail(e.target.value)}
           />
           <p>장소 예약이 생성되면, 담당자 메일로 예약 생성 메일이 갑니다.</p>
+
           <Form.Input
             label={'장소 사진'}
             type={'file'}
@@ -143,6 +144,7 @@ const PlaceUpdateModal = ({ placeInfo, trigger}) => {
               size={'medium'}
             />
           </div>
+
           <Modal.Actions>
             <Form.Group>
               <Form.Button
