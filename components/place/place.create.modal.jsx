@@ -13,7 +13,7 @@ const PlaceCreateModal = ({ trigger }) => {
   const [description, setDescription] = useState('')
   const [staff_email, setStaffEmail] = useState('')
   const [max_minutes, setMaxMinutes] = useState()
-  const [opening_hours, setOpeningHours] = useState({ Everyday: '00:00-24:00' })
+  const [opening_hours, setOpeningHours] = useState({ 'Everyday': '00:00-24:00' })
   const [enable_auto_accept, setEnableAutoAccept] = useState('Inactive')
 
   const handleSubmit = async () => {
@@ -30,7 +30,7 @@ const PlaceCreateModal = ({ trigger }) => {
       'location': location,
       'description': description,
       'staff_email': staff_email,
-      'opening_hours': opening_hours,
+      'opening_hours': JSON.stringify(opening_hours),
       'enable_auto_accept': enable_auto_accept,
     }
 
