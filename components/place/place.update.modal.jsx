@@ -134,10 +134,13 @@ const PlaceUpdateModal = ({ placeInfo, trigger}) => {
           />
           <div style={{ margin: '10px 0' }}>
             <Image
-              src={`${PopoCdnUrl}/place/${placeInfo.uuid}`
-              ?? 'https://react.semantic-ui.com/images/wireframe/image.png'}
+              src={`${PopoCdnUrl}/place/${placeInfo.uuid}`}
               alt={"place_image"}
-              size={'medium'}
+              height={200}
+              onError={({ currentTarget }) => {
+                currentTarget.onerror = null; // prevents looping
+                currentTarget.src='https://react.semantic-ui.com/images/wireframe/image.png';
+              }}
             />
           </div>
           <p>이미지가 없으면 기본 이미지가 표시됩니다.</p>
