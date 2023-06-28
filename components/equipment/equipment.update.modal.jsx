@@ -37,7 +37,7 @@ const EquipmentUpdateModal = ({ equipmentInfo, trigger }) => {
       window.location.reload();
     }).catch((err) => {
       alert('장비 정보 수정에 실패했습니다.')
-      console.log(e);
+      console.log(err);
     });
   }
 
@@ -94,8 +94,8 @@ const EquipmentUpdateModal = ({ equipmentInfo, trigger }) => {
 
           <ImageUploadForm
             type={'장비'}
-            uploadApiUri={`equip/image/${placeInfo.uuid}`} 
-            originalImageUrl={`${PopoCdnUrl}/equip/${placeInfo.uuid}`}
+            uploadApiUri={`equip/image/${equipmentInfo.uuid}`}
+            originalImageUrl={`${PopoCdnUrl}/equip/${equipmentInfo.uuid}`}
           />
 
           <Modal.Actions>
