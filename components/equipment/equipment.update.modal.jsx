@@ -1,8 +1,8 @@
-import { Button, Form, Icon, Image, Modal } from 'semantic-ui-react'
+import { Button, Form, Icon, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
+import { OwnerOptions } from '@/assets/owner.options'
+import { PoPoAxios, PopoCdnUrl } from "@/utils/axios.instance";
 import DeleteConfirmModal from '../common/delete.confirm.modal'
-import { OwnerOptions } from '../../assets/owner.options'
-import { popoApiUrl, PoPoAxios } from "../../utils/axios.instance";
 import ImageUploadForm from '../common/image-upload.form'
 
 const EquipmentUpdateModal = ({ equipmentInfo, trigger }) => {

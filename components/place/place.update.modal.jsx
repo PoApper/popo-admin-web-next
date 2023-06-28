@@ -1,9 +1,9 @@
 import { Button, Form, Icon, Image, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
+import { RegionOptions } from '@/assets/region.options'
+import { PoPoAxios, PopoCdnUrl } from "@/utils/axios.instance";
 import DeleteConfirmModal from '../common/delete.confirm.modal'
-import { RegionOptions } from '../../assets/region.options'
 import OpeningHoursEditor, { checkValid } from '../common/opening_hours.editor'
-import { PoPoAxios, PopoCdnUrl } from "../../utils/axios.instance";
 import ImageUploadForm from '../common/image-upload.form'
 
 const PlaceUpdateModal = ({ placeInfo, trigger}) => {

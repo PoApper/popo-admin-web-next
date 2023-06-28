@@ -1,8 +1,8 @@
 import { Form, Message, Modal } from "semantic-ui-react";
 import { useState } from 'react'
-import { RegionOptions } from '../../assets/region.options'
+import { RegionOptions } from '@/assets/region.options'
+import { PoPoAxios } from "@/utils/axios.instance";
 import OpeningHoursEditor, { checkValid } from '../common/opening_hours.editor'
-import { PoPoAxios } from "../../utils/axios.instance";
 
 const PlaceCreateModal = ({ trigger }) => {
   const [open, setOpen] = useState(false)

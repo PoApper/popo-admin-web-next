@@ -1,7 +1,7 @@
 import { Form, Message, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
-import { OwnerOptions } from '../../assets/owner.options'
-import { PoPoAxios } from "../../utils/axios.instance";
+import { OwnerOptions } from '@/assets/owner.options'
+import { PoPoAxios } from "@/utils/axios.instance";
 
 const EquipmentCreateModal = (props) => {
   const [open, setOpen] = useState(false)
