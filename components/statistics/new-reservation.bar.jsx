@@ -1,5 +1,6 @@
-import { ResponsiveBar } from '@nivo/bar'
 import { useEffect, useState } from 'react'
+import { ResponsiveBar } from '@nivo/bar'
+
 import { PoPoAxios } from '@/utils/axios.instance';
 
 const NewReservationBar = ({ year }) => {
