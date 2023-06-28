@@ -41,7 +41,7 @@ const PlaceUpdateModal = ({ placeInfo, trigger}) => {
       body['max_minutes'] = max_minutes
     }
 
-    PoPoAxios.pu(`/place/${placeInfo.uuid}`, 
+    PoPoAxios.put(`/place/${placeInfo.uuid}`, 
       body,
       { withCredentials: true },
     ).then(() => {
