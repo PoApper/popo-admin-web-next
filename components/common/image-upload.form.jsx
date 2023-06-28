@@ -39,7 +39,7 @@ const ImageUploadForm = ({ uploadApiUri, originalImageUrl }) => {
       {
         isChanged ? (
           <p style={{color: "red"}}>
-            새로운 이미지가 업로드 되었습니다!
+            새로운 이미지가 업로드 되었습니다! 이미지 캐시(cache)로 인해 이미지 반영까지 최대 30분 정도 소요될 수 있습니다.
           </p>
         ) : null
       }

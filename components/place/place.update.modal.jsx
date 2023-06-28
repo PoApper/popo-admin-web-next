@@ -126,7 +126,7 @@ const PlaceUpdateModal = ({ placeInfo, trigger}) => {
           />
           <p>장소 예약이 생성되면, 담당자 메일로 예약 생성 메일이 갑니다.</p>
 
-          <ImageUploadForm 
+          <ImageUploadForm
             uploadApiUri={`place/image/${placeInfo.uuid}`} 
             originalImageUrl={`${PopoCdnUrl}/place/${placeInfo.uuid}`}
           />
