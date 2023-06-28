@@ -15,7 +15,6 @@ const EquipmentUpdateModal = ({ equipmentInfo, trigger }) => {
   const [description, setDescription] = useState(equipmentInfo.description)
   const [staff_email, setStaffEmail] = useState(equipmentInfo.staff_email)
   const [max_minutes, setMaxMinutes] = useState(equipmentInfo.max_minutes)
-  const [image, setImage] = useState()
 
   const handleSubmit = async () => {
     const body = {
@@ -92,12 +91,6 @@ const EquipmentUpdateModal = ({ equipmentInfo, trigger }) => {
             onChange={e => setStaffEmail(e.target.value)}
           />
           <p>장비 예약이 생성되면, 담당자 메일로 예약 생성 메일이 갑니다.</p>
-
-          <Form.Input
-            label={'장비 사진'}
-            type={'file'}
-            onChange={e => setImage(e.target.files[0])}
-          />
 
           <ImageUploadForm
             type={'장비'}
