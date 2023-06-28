@@ -3,7 +3,7 @@ import { Checkbox, Table, Button } from 'semantic-ui-react'
 import moment from 'moment'
 import PlaceReservationConfirmModal
   from './place.reservation.confirm.modal'
-import { PoPoAxios } from "../../utils/axios.instance";
+import { PoPoAxios } from '@/utils/axios.instance';
 
 const PlaceReservationWaitTable = ({reservations}) => {
   const [selectedUuidList, setSelectedUuidList] = useState([]);

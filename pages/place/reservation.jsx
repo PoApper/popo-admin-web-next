@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-
-import ReservationLayout from '../../components/reservation/reservation.layout'
-import PlaceReservationTable
-  from '../../components/place/place.reservation.table'
 import { Pagination } from 'semantic-ui-react'
-import { PoPoAxios } from "../../utils/axios.instance";
+
+import ReservationLayout from '@/components/reservation/reservation.layout'
+import PlaceReservationTable
+  from '@/components/place/place.reservation.table'
+import { PoPoAxios } from '@/utils/axios.instance';
 
 const PlaceReservationPage = () => {
   const [reservations, setReservations] = useState([])

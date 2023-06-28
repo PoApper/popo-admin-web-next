@@ -1,8 +1,9 @@
-import LayoutMain from '../../components/layout.main'
-import { Dropdown, List } from "semantic-ui-react";
-import NewUserBar from '../../components/statistics/new-user.bar'
-import NewReservationBar from '../../components/statistics/new-reservation.bar'
 import { useState } from "react";
+import { Dropdown, List } from "semantic-ui-react";
+
+import LayoutMain from '@/components/layout.main'
+import NewUserBar from '@/components/statistics/new-user.bar'
+import NewReservationBar from '@/components/statistics/new-reservation.bar'
 
 const YearOptions = [
   {

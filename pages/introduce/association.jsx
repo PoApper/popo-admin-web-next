@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button } from 'semantic-ui-react'
+
 import IntroduceLayout from '@/components/introduce/introduce.layout'
 import AssociationTable from '@/components/introduce/association.table'
 import AssociationCreateModal

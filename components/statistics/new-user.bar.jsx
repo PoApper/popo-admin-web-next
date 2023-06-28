@@ -1,6 +1,6 @@
 import { ResponsiveBar } from '@nivo/bar'
 import { useEffect, useState } from 'react'
-import { PoPoAxios } from "../../utils/axios.instance";
+import { PoPoAxios } from '@/utils/axios.instance';
 
 const NewUserBar = ({ year }) => {
   const [barData, setBarData] = useState([])

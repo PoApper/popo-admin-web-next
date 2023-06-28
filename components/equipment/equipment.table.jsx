@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Table } from 'semantic-ui-react'
 import EquipmentUpdateModal from './equipment.update.modal'
-import { PoPoAxios } from "../../utils/axios.instance";
+import { PoPoAxios } from '@/utils/axios.instance';
 
 const ownerNames = {
   'chonghak': '총학생회',

@@ -1,5 +1,5 @@
-import LayoutMain from '../components/layout.main'
 import { Divider, Grid, Image, List } from 'semantic-ui-react'
+import LayoutMain from '@/components/layout.main'
 
 const HomePage = () => {
   return (

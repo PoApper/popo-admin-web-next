@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Dropdown, Menu } from 'semantic-ui-react'
 import { useRouter } from 'next/router'
-import { PoPoAxios } from "../../utils/axios.instance";
+import { PoPoAxios } from '@/utils/axios.instance';
 
 const MenuItemUser = () => {
   const router = useRouter()
