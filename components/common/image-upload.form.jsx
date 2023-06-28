@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Form, Image } from "semantic-ui-react"
-import { ImageUpload } from "../../utils/image-upload";
+import { ImageUpload } from "@/utils/image-upload";
 
 const ImageUploadForm = ({ type, uploadApiUri, originalImageUrl }) => {
   const [image_url, setImageUrl] = useState(originalImageUrl)

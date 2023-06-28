@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Button, Modal } from 'semantic-ui-react'
-import { PoPoAxios } from "../../utils/axios.instance";
+import { PoPoAxios } from "@/utils/axios.instance";
 
 const DeleteConfirmModal = (props) => {
   const deleteTarget = props.target
