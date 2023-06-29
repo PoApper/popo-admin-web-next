@@ -1,6 +1,6 @@
 import { Form, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
-import { PoPoAxios } from "../../utils/axios.instance";
+import { PoPoAxios } from '@/utils/axios.instance';
 
 const AssociationCreateModal = ({ trigger }) => {
   const [open, setOpen] = useState(false)

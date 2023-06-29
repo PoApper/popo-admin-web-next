@@ -1,4 +1,4 @@
-import IntroduceLayout from '../../components/introduce/introduce.layout'
+import IntroduceLayout from '@/components/introduce/introduce.layout'
 
 const IntroducePage = () => {
   return (

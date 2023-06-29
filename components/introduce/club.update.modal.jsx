@@ -1,7 +1,7 @@
 import { Button, Form, Icon, Image, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
 import DeleteConfirmModal from '../common/delete.confirm.modal'
-import { popoApiUrl, PoPoAxios } from "../../utils/axios.instance";
+import { popoApiUrl, PoPoAxios } from '@/utils/axios.instance';
 
 const ClubUpdateModal = ({ club, trigger}) => {
   const [open, setOpen] = useState(false)

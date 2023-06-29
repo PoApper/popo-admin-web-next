@@ -2,8 +2,9 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { Form, Image } from 'semantic-ui-react'
 import styled from 'styled-components'
-import LoginLayout from '../components/layout.raw'
-import { PoPoAxios } from "../utils/axios.instance";
+
+import LoginLayout from '@/components/layout.raw'
+import { PoPoAxios } from '@/utils/axios.instance';
 
 const LoginPage = () => {
   const router = useRouter()

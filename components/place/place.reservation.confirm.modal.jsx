@@ -2,7 +2,7 @@ import { Button, Form, Icon, Modal, Segment } from 'semantic-ui-react'
 import React, { useState } from 'react'
 import moment from 'moment'
 import DeleteConfirmModal from '../common/delete.confirm.modal'
-import { PoPoAxios } from "../../utils/axios.instance";
+import { PoPoAxios } from '@/utils/axios.instance';
 
 const PlaceReservationConfirmModal = ({trigger, reservation}) => {
   const [open, setOpen] = useState(false)

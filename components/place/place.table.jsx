@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Table } from 'semantic-ui-react'
+import { PoPoAxios } from "@/utils/axios.instance";
 import PlaceUpdateModal from './place.update.modal'
-import { PoPoAxios } from "../../utils/axios.instance";
 
 const regionNames = {
   'STUDENT_HALL': '학생 회관',

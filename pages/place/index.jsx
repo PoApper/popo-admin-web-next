@@ -1,8 +1,8 @@
-import ReservationLayout from '../../components/reservation/reservation.layout'
-import PlaceTable from '../../components/place/place.table'
-import PlaceCreateModal from '../../components/place/place.create.modal'
-import { Button } from 'semantic-ui-react'
 import React from 'react'
+import { Button } from 'semantic-ui-react'
+import ReservationLayout from '@/components/reservation/reservation.layout'
+import PlaceTable from '@/components/place/place.table'
+import PlaceCreateModal from '@/components/place/place.create.modal'
 
 const PlacePage = () => {
   return (

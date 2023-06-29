@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Button, Image } from 'semantic-ui-react'
-import LoginLayout from '../components/layout.raw'
+import LoginLayout from '@/components/layout.raw'
 
 const ErrorPage = () => {
   return (

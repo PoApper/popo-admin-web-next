@@ -11,6 +11,8 @@ export const PoPoAxios = axios.create({
   baseURL: popoApiUrl,
 });
 
+export const PopoCdnUrl = "https://cdn.popo.poapper.club";
+
 export const PopoCdnAxios = axios.create({
-  baseURL: "https://cdn.popo.poapper.club",
+  baseURL: PopoCdnUrl,
 });

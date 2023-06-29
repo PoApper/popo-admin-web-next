@@ -1,4 +1,4 @@
-import BoardLayout from '../../components/board/board.layout'
+import BoardLayout from '@/components/board/board.layout'
 
 const BoardIndexPage = () => {
   return (

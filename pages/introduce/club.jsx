@@ -1,9 +1,9 @@
-import IntroduceLayout from '../../components/introduce/introduce.layout'
+import IntroduceLayout from '@/components/introduce/introduce.layout'
 import React, { useEffect, useState } from 'react'
 import { Button } from 'semantic-ui-react'
-import ClubTable from '../../components/introduce/club.table'
-import ClubCreateModal from '../../components/introduce/club.create.modal'
-import { PoPoAxios } from "../../utils/axios.instance";
+import ClubTable from '@/components/introduce/club.table'
+import ClubCreateModal from '@/components/introduce/club.create.modal'
+import { PoPoAxios } from '@/utils/axios.instance';
 
 const ClubIntroducePage = () => {
   const [clubs, setClubs] = useState([])

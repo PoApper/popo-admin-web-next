@@ -1,8 +1,8 @@
-import { Form, Modal } from 'semantic-ui-react'
+import { Form, Message, Modal } from "semantic-ui-react";
 import { useState } from 'react'
-import { RegionOptions } from '../../assets/region.options'
+import { RegionOptions } from '@/assets/region.options'
+import { PoPoAxios } from "@/utils/axios.instance";
 import OpeningHoursEditor, { checkValid } from '../common/opening_hours.editor'
-import { PoPoAxios } from "../../utils/axios.instance";
 
 const PlaceCreateModal = ({ trigger }) => {
   const [open, setOpen] = useState(false)
@@ -13,9 +13,8 @@ const PlaceCreateModal = ({ trigger }) => {
   const [description, setDescription] = useState('')
   const [staff_email, setStaffEmail] = useState('')
   const [max_minutes, setMaxMinutes] = useState()
-  const [opening_hours, setOpeningHours] = useState({ Everyday: '00:00-24:00' })
+  const [opening_hours, setOpeningHours] = useState({ 'Everyday': '00:00-24:00' })
   const [enable_auto_accept, setEnableAutoAccept] = useState('Inactive')
-  const [image, setImage] = useState()
 
   const handleSubmit = async () => {
     for(const day of Object.keys(opening_hours)) {
@@ -25,33 +24,30 @@ const PlaceCreateModal = ({ trigger }) => {
       }
     }
 
-    try {
-      let formData = new FormData()
-      formData.append('name', name)
-      formData.append('region', region)
-      formData.append('location', location)
-      formData.append('description', description)
-      formData.append('staff_email', staff_email)
-      formData.append('opening_hours', opening_hours)
-      formData.append('enable_auto_accept', enable_auto_accept)
-      if (max_minutes) {
-        formData.append('max_minutes', max_minutes)
-      }
-      if (image) {
-        formData.append('image', image)
-      }
-      await PoPoAxios.post('/place', formData,
-        {
-          withCredentials: true,
-          headers: { 'Content-Type': 'multipart/form-data' },
-        },
-      )
-      setOpen(false)
-      window.location.reload()
-    } catch (e) {
-      alert('장소 생성에 실패했습니다.')
-      console.log(e)
+    const body = {
+      'name': name,
+      'region': region,
+      'location': location,
+      'description': description,
+      'staff_email': staff_email,
+      'opening_hours': JSON.stringify(opening_hours),
+      'enable_auto_accept': enable_auto_accept,
     }
+
+    if (max_minutes) {
+      body['max_minutes'] = max_minutes
+    }
+
+    PoPoAxios.post('/place', 
+      body,
+      { withCredentials: true },
+    ).then(() => {
+      setOpen(false);
+      window.location.reload();
+    }).catch(err => {
+      console.log(err);
+      alert('장소 생성에 실패했습니다.');
+    })
   }
 
   return (
@@ -121,12 +117,15 @@ const PlaceCreateModal = ({ trigger }) => {
             onChange={e => setStaffEmail(e.target.value)}
           />
           <p>장소 예약이 생성되면, 담당자 메일로 예약 생성 메일이 갑니다.</p>
-          <Form.Input
-            label={'장소 사진'}
-            type={'file'}
-            onChange={e => setImage(e.target.files[0])}
-          />
-          <p>이미지가 없으면 기본 이미지가 표시됩니다.</p>
+
+          <Message>
+            <Message.Header>장소 이미지</Message.Header>
+            <p>
+              장소 이미지는 장소 생성 후에 설정 할 수 있습니다.
+              장소의 이미지가 없으면 기본 이미지가 표시됩니다.
+            </p>
+          </Message>
+
           <Modal.Actions>
             <Form.Button type={'submit'}>
               생성

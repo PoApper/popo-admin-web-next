@@ -1,8 +1,8 @@
-import ReservationLayout from '../../components/reservation/reservation.layout'
+import ReservationLayout from '@/components/reservation/reservation.layout'
 import { Button } from 'semantic-ui-react'
-import EquipmentTable from '../../components/equipment/equipment.table'
+import EquipmentTable from '@/components/equipment/equipment.table'
 import EquipmentCreateModal
-  from '../../components/equipment/equipment.create.modal'
+  from '@/components/equipment/equipment.create.modal'
 
 const EquipmentPage = () => {
   return (

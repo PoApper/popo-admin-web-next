@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
-import ReservationLayout from '../../components/reservation/reservation.layout'
+import ReservationLayout from '@/components/reservation/reservation.layout'
 import EquipmentReservationTable
-  from '../../components/equipment/equipment.reservation.table'
+  from '@/components/equipment/equipment.reservation.table'
 import PlaceReservationWaitTable
-  from '../../components/place/place.reservation.wait.table'
-import { PoPoAxios } from "../../utils/axios.instance";
+  from '@/components/place/place.reservation.wait.table'
+import { PoPoAxios } from '@/utils/axios.instance';
 
 const ReservationPage = () => {
   const [place_reservations, setPlaceReservations] = useState([])

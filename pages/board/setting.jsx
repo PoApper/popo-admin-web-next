@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Form } from 'semantic-ui-react'
-import BoardLayout from '../../components/board/board.layout'
-import { PoPoAxios, PopoCdnAxios } from "../../utils/axios.instance";
+
+import BoardLayout from '@/components/board/board.layout'
+import { PoPoAxios, PopoCdnAxios } from '@/utils/axios.instance';
 
 const SettingPage = () => {
   const [popoCRMEmail, setPOPOCRMEmail] = useState('');

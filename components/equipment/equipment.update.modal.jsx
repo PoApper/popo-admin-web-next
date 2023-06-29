@@ -1,8 +1,9 @@
-import { Button, Form, Icon, Image, Modal } from 'semantic-ui-react'
+import { Button, Form, Icon, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
+import { OwnerOptions } from '@/assets/owner.options'
+import { PoPoAxios, PopoCdnUrl } from "@/utils/axios.instance";
 import DeleteConfirmModal from '../common/delete.confirm.modal'
-import { OwnerOptions } from '../../assets/owner.options'
-import { popoApiUrl, PoPoAxios } from "../../utils/axios.instance";
+import ImageUploadForm from '../common/image-upload.form'
 
 const EquipmentUpdateModal = ({ equipmentInfo, trigger }) => {
   const [open, setOpen] = useState(false)
@@ -14,36 +15,30 @@ const EquipmentUpdateModal = ({ equipmentInfo, trigger }) => {
   const [description, setDescription] = useState(equipmentInfo.description)
   const [staff_email, setStaffEmail] = useState(equipmentInfo.staff_email)
   const [max_minutes, setMaxMinutes] = useState(equipmentInfo.max_minutes)
-  const [image, setImage] = useState()
 
   const handleSubmit = async () => {
-    try {
-      let formData = new FormData()
-      formData.append('name', name)
-      formData.append('equip_owner', equip_owner)
-      formData.append('fee', fee)
-      formData.append('description', description)
-      formData.append('staff_email', staff_email)
-      if (max_minutes) {
-        formData.append('max_minutes', max_minutes)
-      }
-      if (image) {
-        formData.append('image', image)
-      }
-      await PoPoAxios.put(
-        `/equip/${equipmentInfo.uuid}`,
-        formData,
-        {
-          withCredentials: true,
-          headers: { 'Content-Type': 'multipart/form-data' },
-        },
-      )
-      setOpen(false)
-      window.location.reload()
-    } catch (e) {
-      alert('장비 정보 수정에 실패했습니다.')
-      console.log(e)
+    const body = {
+      'name': name,
+      'equip_owner': equip_owner,
+      'fee': fee,
+      'description': description,
+      'staff_email': staff_email,
+    };
+
+    if (max_minutes) {
+      body['max_minutes'] = max_minutes;
     }
+
+    PoPoAxios.put(`/equip/${equipmentInfo.uuid}`,
+      body,
+      { withCredentials: true },
+    ).then(() => {
+      setOpen(false);
+      window.location.reload();
+    }).catch((err) => {
+      alert('장비 정보 수정에 실패했습니다.')
+      console.log(err);
+    });
   }
 
   return (
@@ -96,20 +91,13 @@ const EquipmentUpdateModal = ({ equipmentInfo, trigger }) => {
             onChange={e => setStaffEmail(e.target.value)}
           />
           <p>장비 예약이 생성되면, 담당자 메일로 예약 생성 메일이 갑니다.</p>
-          <Form.Input
-            label={'장비 사진'}
-            type={'file'}
-            onChange={e => setImage(e.target.files[0])}
+
+          <ImageUploadForm
+            type={'장비'}
+            uploadApiUri={`equip/image/${equipmentInfo.uuid}`}
+            originalImageUrl={`${PopoCdnUrl}/equip/${equipmentInfo.uuid}`}
           />
-          <p>이미지가 없으면 기본 이미지가 표시됩니다.</p>
-          <div style={{ margin: '10px 0' }}>
-            <Image
-              src={`${popoApiUrl}/equip/image/${equipmentInfo.imageName}`
-              ?? 'https://react.semantic-ui.com/images/wireframe/image.png'}
-              alt={"equipment_image"}
-              size={'medium'}
-            />
-          </div>
+
           <Modal.Actions>
             <Form.Group>
               <Form.Button

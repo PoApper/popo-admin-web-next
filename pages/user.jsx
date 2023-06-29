@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Button, Icon, Input, Pagination } from 'semantic-ui-react'
-import LayoutMain from '../components/layout.main'
-import UserTable from '../components/user/user.table'
-import UserCreateModal from '../components/user/user.create.modal'
-import { PoPoAxios } from "../utils/axios.instance";
+import LayoutMain from '@/components/layout.main'
+import UserTable from '@/components/user/user.table'
+import UserCreateModal from '@/components/user/user.create.modal'
+import { PoPoAxios } from '@/utils/axios.instance';
 
 const UserPage = () => {
   const PAGE_SIZE = 10

@@ -1,10 +1,11 @@
-import IntroduceLayout from '../../components/introduce/introduce.layout'
 import React, { useEffect, useState } from 'react'
 import { Button } from 'semantic-ui-react'
-import AssociationTable from '../../components/introduce/association.table'
+
+import IntroduceLayout from '@/components/introduce/introduce.layout'
+import AssociationTable from '@/components/introduce/association.table'
 import AssociationCreateModal
-  from '../../components/introduce/association.create.modal'
-import { PoPoAxios } from "../../utils/axios.instance";
+  from '@/components/introduce/association.create.modal'
+import { PoPoAxios } from "@/utils/axios.instance";
 
 const AssociationIntroducePage = () => {
   const [associations, setAssociations] = useState([])
