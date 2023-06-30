@@ -17,6 +17,7 @@ const ClubUpdateModal = ({ club, trigger}) => {
   const [homepageUrl, setHomepageUrl] = useState(club.homepage_url)
   const [facebookUrl, setFacebookUrl] = useState(club.facebook_url)
   const [instagramUrl, setInstagramUrl] = useState(club.instagram_url)
+  const [youtubeUrl, setYoutubeUrl] = useState(club.youtube_url)
 
   const handleSubmit = async () => {
     try {
@@ -31,6 +32,7 @@ const ClubUpdateModal = ({ club, trigger}) => {
       formData.append('homepage_url', homepageUrl)
       formData.append('facebook_url', facebookUrl)
       formData.append('instagram_url', instagramUrl)
+      formData.append('youtube_url', youtubeUrl)
       if (logo) {
         formData.append('logo', logo)
       }
@@ -132,6 +134,12 @@ const ClubUpdateModal = ({ club, trigger}) => {
             placeholder={"https://www.instagram.com/OOOOOO"}
             value={instagramUrl}
             onChange={e => setInstagramUrl(e.target.value)}
+          />
+          <Form.Input
+            label={'유튜브'}
+            placeholder={"https://www.youtube.com/OOOOOO"}
+            value={youtubeUrl}
+            onChange={e => setYoutubeUrl(e.target.value)}
           />
           <Form.Input
             label={'동아리 로고'}
