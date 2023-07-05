@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Link from "next/link";
 import { Table } from 'semantic-ui-react'
 
-import { PoPoAxios } from "@/utils/axios.instance";
 
 const regionNames = {
   'STUDENT_HALL': '학생 회관',
@@ -10,18 +9,7 @@ const regionNames = {
   'COMMUNITY_CENTER': '커뮤니티 센터',
   'OTHERS': 'OTHERS',
 }
-const PlaceTable = () => {
-  const [places, setPlaces] = useState([])
-
-  useEffect(() => {
-    PoPoAxios
-      .get('/place')
-      .then((res) => setPlaces(res.data))
-      .catch((err) => {
-        alert('장소 목록을 불러오는데 실패했습니다.')
-        console.log(err)
-      })
-  }, [])
+const PlaceTable = ({ placeList }) => {
 
   return (
     <Table
@@ -39,7 +27,7 @@ const PlaceTable = () => {
       </Table.Header>
       <Table.Body>
         {
-          places.map((place, idx) => (
+          placeList.map((place, idx) => (
             <Link href={`place/update/${place.uuid}`} key={place.uuid}>
               <Table.Row>
                 <Table.Cell>{idx + 1}</Table.Cell>
@@ -67,4 +55,4 @@ const PlaceTable = () => {
   )
 }
 
-export default PlaceTable
+export default PlaceTable;
