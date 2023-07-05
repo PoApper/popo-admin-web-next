@@ -42,7 +42,7 @@ const PlaceCreatePage = () => {
       body,
       { withCredentials: true },
     ).then(() => {
-      setOpen(false);
+      alert('장소가 생성 되었습니다!')
       window.location.reload();
     }).catch(err => {
       console.log(err);
