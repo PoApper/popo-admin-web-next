@@ -43,7 +43,7 @@ const PlaceCreatePage = () => {
       { withCredentials: true },
     ).then(() => {
       alert('장소가 생성 되었습니다!')
-      window.location.reload();
+      router.push('/place');
     }).catch(err => {
       console.log(err);
       alert('장소 생성에 실패했습니다.');

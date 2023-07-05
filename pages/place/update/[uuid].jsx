@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 import { Button, Form, Icon } from "semantic-ui-react";
 
 import ReservationLayout from "@/components/reservation/reservation.layout";
@@ -9,6 +10,8 @@ import ImageUploadForm from "@/components/common/image-upload.form";
 import DeleteConfirmModal from "@/components/common/delete.confirm.modal";
 
 const PlaceUpdatePage = ({ placeInfo }) => {
+  const router = useRouter();
+
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
 
   const [name, setName] = useState(placeInfo.name)
@@ -48,7 +51,7 @@ const PlaceUpdatePage = ({ placeInfo }) => {
       { withCredentials: true },
     ).then(() => {
       alert('장소 정보가 수정 되었습니다!')
-      window.location.reload();
+      router.push('/place');
     }).catch(err => {
       console.log(err);
       alert('장소 정보 수정에 실패했습니다.');
