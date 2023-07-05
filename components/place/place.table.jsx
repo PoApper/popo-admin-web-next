@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import Link from "next/link";
 import { Table } from 'semantic-ui-react'
+
 import { PoPoAxios } from "@/utils/axios.instance";
-import PlaceUpdateModal from './place.update.modal'
 
 const regionNames = {
   'STUDENT_HALL': '학생 회관',
@@ -38,11 +39,9 @@ const PlaceTable = () => {
       </Table.Header>
       <Table.Body>
         {
-          places.map((place, idx) =>
-            <PlaceUpdateModal
-              key={place.uuid}
-              placeInfo={place}
-              trigger={<Table.Row key={place.uuid}>
+          places.map((place, idx) => (
+            <Link href={`place/update/${place.uuid}`} key={place.uuid}>
+              <Table.Row>
                 <Table.Cell>{idx + 1}</Table.Cell>
                 <Table.Cell>{place.name}</Table.Cell>
                 <Table.Cell>{place.location}</Table.Cell>
@@ -55,9 +54,9 @@ const PlaceTable = () => {
                   }
                 </Table.Cell>
                 <Table.Cell>{place.total_reservation_count.toLocaleString()}</Table.Cell>
-              </Table.Row>}
-            />,
-          )
+              </Table.Row>
+            </Link>
+          ))
         }
       </Table.Body>
       <Table.Footer>
