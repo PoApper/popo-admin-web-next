@@ -26,20 +26,16 @@ const ImageUploadForm = ({ type, uploadApiUri, originalImageUrl }) => {
       />
       <div style={{ margin: '10px 0' }}>
         <Image
-          src={image_url}
+          src={image_url ?? 'https://react.semantic-ui.com/images/wireframe/image.png'}
           alt={"place_image"}
           height={200}
-          onError={({ currentTarget }) => {
-            // currentTarget.onerror = null; // prevents looping
-            currentTarget.src='https://react.semantic-ui.com/images/wireframe/image.png';
-          }}
         />
       </div>
       <p>이미지가 없으면 기본 이미지가 표시됩니다.</p>
       {
         isChanged ? (
           <p style={{color: "red"}}>
-            새로운 이미지가 업로드 되었습니다! 이미지 캐시(cache)로 인해 이미지 반영까지 최대 30분 정도 소요될 수 있습니다.
+            새로운 이미지가 업로드 되었습니다!
           </p>
         ) : null
       }

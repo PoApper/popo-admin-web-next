@@ -1,13 +1,14 @@
 import { useState } from 'react'
+import { Button, Form, Icon } from "semantic-ui-react";
 
 import ReservationLayout from "@/components/reservation/reservation.layout";
 import OpeningHoursEditor, { checkValid } from "@/components/common/opening_hours.editor";
-import { PoPoAxios, PopoCdnUrl } from "@/utils/axios.instance";
-import { Button, Form, Icon } from "semantic-ui-react";
+import { PoPoAxios } from "@/utils/axios.instance";
 import { RegionOptions } from "@/assets/region.options";
 import ImageUploadForm from "@/components/common/image-upload.form";
 import DeleteConfirmModal from "@/components/common/delete.confirm.modal";
-const PlaceUpdatePage = () => {
+
+const PlaceUpdatePage = ({ placeInfo }) => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
 
   const [name, setName] = useState(placeInfo.name)
@@ -127,7 +128,7 @@ const PlaceUpdatePage = () => {
         <ImageUploadForm
           type={'장소'}
           uploadApiUri={`place/image/${placeInfo.uuid}`}
-          originalImageUrl={`${PopoCdnUrl}/place/${placeInfo.uuid}`}
+          originalImageUrl={placeInfo.image_url}
         />
 
         <Form.Group>
@@ -153,3 +154,11 @@ const PlaceUpdatePage = () => {
 }
 
 export default PlaceUpdatePage;
+
+export async function getServerSideProps(ctx) {
+  const { uuid } = ctx['params'];
+  const res = await PoPoAxios.get(`place/${uuid}`);
+  const placeInfo = res.data;
+
+  return { props: { placeInfo } }
+}
