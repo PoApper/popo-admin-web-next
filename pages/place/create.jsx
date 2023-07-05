@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useRouter } from "next/router";
 import { Form, Message } from "semantic-ui-react";
 
 import ReservationLayout from '@/components/reservation/reservation.layout'
@@ -7,6 +8,8 @@ import { PoPoAxios } from "@/utils/axios.instance";
 import OpeningHoursEditor, {checkValid} from '@/components/common/opening_hours.editor';
 
 const PlaceCreatePage = () => {
+  const router = useRouter();
+
   const [name, setName] = useState('')
   const [region, setRegion] = useState('')
   const [location, setLocation] = useState('')
