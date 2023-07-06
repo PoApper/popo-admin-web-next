@@ -1,6 +1,6 @@
 import React from 'react'
+import Link from "next/link";
 import { Table } from 'semantic-ui-react'
-import EquipmentUpdateModal from './equipment.update.modal'
 
 const ownerNames = {
   'chonghak': '총학생회',
@@ -26,11 +26,9 @@ const EquipmentTable = ({ equipmentList }) => {
       </Table.Header>
       <Table.Body>
         {
-          equipmentList.map((equipment, idx) =>
-            <EquipmentUpdateModal
-              key={equipment.uuid}
-              equipmentInfo={equipment}
-              trigger={<Table.Row key={equipment.uuid}>
+          equipmentList.map((equipment, idx) => (
+            <Link href={`equipment/update/${equipment.uuid}`} key={equipment.uuid}>
+              <Table.Row>
                 <Table.Cell>{idx + 1}</Table.Cell>
                 <Table.Cell>{equipment.name}</Table.Cell>
                 <Table.Cell>{ownerNames[equipment.equip_owner]}</Table.Cell>
@@ -43,9 +41,9 @@ const EquipmentTable = ({ equipmentList }) => {
                   }
                 </Table.Cell>
                 <Table.Cell>{equipment.total_reservation_count.toLocaleString()}</Table.Cell>
-              </Table.Row>}
-            />,
-          )
+              </Table.Row>
+            </Link>
+          ))
         }
       </Table.Body>
       <Table.Footer>

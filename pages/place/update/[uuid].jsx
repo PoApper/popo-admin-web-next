@@ -53,8 +53,8 @@ const PlaceUpdatePage = ({ placeInfo }) => {
       alert('장소 정보가 수정 되었습니다!')
       router.push('/place');
     }).catch(err => {
-      console.log(err);
       alert('장소 정보 수정에 실패했습니다.');
+      console.log(err);
     })
   }
 
