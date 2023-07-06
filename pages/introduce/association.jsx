@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Button } from 'semantic-ui-react'
 
 import IntroduceLayout from '@/components/introduce/introduce.layout'
@@ -7,19 +7,7 @@ import AssociationCreateModal
   from '@/components/introduce/association.create.modal'
 import { PoPoAxios } from "@/utils/axios.instance";
 
-const AssociationIntroducePage = () => {
-  const [associations, setAssociations] = useState([])
-
-  useEffect(() => {
-    PoPoAxios
-      .get('/introduce/association')
-      .then((res) => setAssociations(res.data))
-      .catch((err) => {
-        alert('자치단체 목록을 불러오는데 실패했습니다.')
-        console.log(err)
-      })
-  }, [])
-
+const AssociationIntroducePage = ({ associationList }) => {
   return (
     <IntroduceLayout>
       <h3>자치단체 소개글</h3>
@@ -30,11 +18,18 @@ const AssociationIntroducePage = () => {
       </div>
       <div>
         <AssociationTable
-          associations={associations}
+          associations={associationList}
         />
       </div>
     </IntroduceLayout>
   )
 }
 
-export default AssociationIntroducePage
+export default AssociationIntroducePage;
+
+export async function getServerSideProps() {
+  const res = await PoPoAxios.get('introduce/association');
+  const associationList = res.data;
+
+  return { props: { associationList } };
+}

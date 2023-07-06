@@ -1,23 +1,12 @@
-import IntroduceLayout from '@/components/introduce/introduce.layout'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Button } from 'semantic-ui-react'
+
+import IntroduceLayout from '@/components/introduce/introduce.layout'
 import ClubTable from '@/components/introduce/club.table'
 import ClubCreateModal from '@/components/introduce/club.create.modal'
 import { PoPoAxios } from '@/utils/axios.instance';
 
-const ClubIntroducePage = () => {
-  const [clubs, setClubs] = useState([])
-
-  useEffect(() => {
-    PoPoAxios
-      .get('/introduce/club')
-      .then((res) => setClubs(res.data))
-      .catch((err) => {
-        alert('동아리 목록을 불러오는데 실패했습니다.')
-        console.log(err)
-      })
-  }, [])
-
+const ClubIntroducePage = ({ clubList }) => {
   return (
     <IntroduceLayout>
       <h3>동아리 소개글</h3>
@@ -28,11 +17,18 @@ const ClubIntroducePage = () => {
       </div>
       <div>
         <ClubTable
-          clubs={clubs}
+          clubs={clubList}
         />
       </div>
     </IntroduceLayout>
   )
 }
 
-export default ClubIntroducePage
+export default ClubIntroducePage;
+
+export async function getServerSideProps() {
+  const res = await PoPoAxios.get('introduce/club');
+  const clubList = res.data;
+
+  return { props: { clubList } };
+}
