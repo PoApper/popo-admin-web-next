@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useRouter } from "next/router";
 import { Button, Form, Icon } from 'semantic-ui-react'
 
-import { PoPoAxios, PopoCdnUrl } from "@/utils/axios.instance";
+import { PoPoAxios } from "@/utils/axios.instance";
 import { OwnerOptions } from "@/assets/owner.options";
 import ReservationLayout from "@/components/reservation/reservation.layout";
 import ImageUploadForm from "@/components/common/image-upload.form";
@@ -94,7 +94,7 @@ const EquipmentUpdatePage = ({ equipmentInfo }) => {
         <ImageUploadForm
           type={'장비'}
           uploadApiUri={`equip/image/${equipmentInfo.uuid}`}
-          originalImageUrl={`${PopoCdnUrl}/equip/${equipmentInfo.uuid}`}
+          originalImageUrl={equipmentInfo.image_url}
         />
 
         <Form.Group>
