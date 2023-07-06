@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import Link from "next/link";
 import { Table } from 'semantic-ui-react'
-import { PoPoAxios } from "@/utils/axios.instance";
-import PlaceUpdateModal from './place.update.modal'
 
 const regionNames = {
   'STUDENT_HALL': '학생 회관',
@@ -9,18 +8,8 @@ const regionNames = {
   'COMMUNITY_CENTER': '커뮤니티 센터',
   'OTHERS': 'OTHERS',
 }
-const PlaceTable = () => {
-  const [places, setPlaces] = useState([])
 
-  useEffect(() => {
-    PoPoAxios
-      .get('/place')
-      .then((res) => setPlaces(res.data))
-      .catch((err) => {
-        alert('장소 목록을 불러오는데 실패했습니다.')
-        console.log(err)
-      })
-  }, [])
+const PlaceTable = ({ placeList }) => {
 
   return (
     <Table
@@ -38,11 +27,9 @@ const PlaceTable = () => {
       </Table.Header>
       <Table.Body>
         {
-          places.map((place, idx) =>
-            <PlaceUpdateModal
-              key={place.uuid}
-              placeInfo={place}
-              trigger={<Table.Row key={place.uuid}>
+          placeList.map((place, idx) => (
+            <Link href={`place/update/${place.uuid}`} key={place.uuid}>
+              <Table.Row>
                 <Table.Cell>{idx + 1}</Table.Cell>
                 <Table.Cell>{place.name}</Table.Cell>
                 <Table.Cell>{place.location}</Table.Cell>
@@ -55,9 +42,9 @@ const PlaceTable = () => {
                   }
                 </Table.Cell>
                 <Table.Cell>{place.total_reservation_count.toLocaleString()}</Table.Cell>
-              </Table.Row>}
-            />,
-          )
+              </Table.Row>
+            </Link>
+          ))
         }
       </Table.Body>
       <Table.Footer>
@@ -68,4 +55,4 @@ const PlaceTable = () => {
   )
 }
 
-export default PlaceTable
+export default PlaceTable;
