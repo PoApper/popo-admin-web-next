@@ -1,10 +1,12 @@
-import ReservationLayout from '@/components/reservation/reservation.layout'
 import { Button } from 'semantic-ui-react'
+
+import ReservationLayout from '@/components/reservation/reservation.layout'
 import EquipmentTable from '@/components/equipment/equipment.table'
 import EquipmentCreateModal
   from '@/components/equipment/equipment.create.modal'
+import { PoPoAxios } from "@/utils/axios.instance";
 
-const EquipmentPage = () => {
+const EquipmentPage = ({ equipmentList }) => {
   return (
     <ReservationLayout>
       <h3>장비 목록</h3>
@@ -17,10 +19,17 @@ const EquipmentPage = () => {
         장비는 마지막 수정일 순서로 정렬되어 표시됩니다!
       </p>
       <div>
-        <EquipmentTable/>
+        <EquipmentTable equipmentList={equipmentList}/>
       </div>
     </ReservationLayout>
   )
 }
 
-export default EquipmentPage
+export default EquipmentPage;
+
+export async function getServerSideProps() {
+  const res = await PoPoAxios.get('equip');
+  const equipmentList = res.data;
+
+  return { props: { equipmentList } };
+}
