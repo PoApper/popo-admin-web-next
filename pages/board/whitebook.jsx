@@ -26,11 +26,13 @@ const WhitebookPage = ({ whitebookList }) => {
 
 export default WhitebookPage;
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  const { cookie } = context.req.headers;
+
   try {
     const res = await PoPoAxios.get(
       'whitebook/with-login?orderBy=click_count',
-      { withCredentials: true }
+      { headers: cookie ? { cookie: cookie.toString() } : null }
     );
     const whitebookList = res.data;
     return { props: { whitebookList } };
