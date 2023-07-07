@@ -27,11 +27,14 @@ const WhitebookPage = ({ whitebookList }) => {
 export default WhitebookPage;
 
 export async function getServerSideProps() {
-  const res = await PoPoAxios.get(
-    'whitebook/with-login?orderBy=click_count',
-    { withCredentials: true }
-  );
-  const whitebookList = res.data;
-
-  return { props: { whitebookList } };
+  try {
+    const res = await PoPoAxios.get(
+      'whitebook/with-login?orderBy=click_count',
+      { withCredentials: true }
+    );
+    const whitebookList = res.data;
+    return { props: { whitebookList } };
+  } catch ({ response }) {
+    return { props: { error: response.data}}
+  }
 }
