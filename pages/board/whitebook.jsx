@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { Button } from 'semantic-ui-react'
 
 import BoardLayout from '@/components/board/board.layout'
@@ -5,7 +6,20 @@ import WhitebookCreateModal from '@/components/board/whitebook.create.modal'
 import WhitebookTable from '@/components/board/whitebook.table'
 import { PoPoAxios } from '@/utils/axios.instance';
 
-const WhitebookPage = ({ whitebookList }) => {
+const WhitebookPage = () => {
+  const [whitebooks, setWhitebooks] = useState([])
+
+  useEffect(() => {
+    PoPoAxios.get(
+      '/whitebook/with-login?orderBy=click_count',
+      { withCredentials: true }).
+      then((res) => setWhitebooks(res.data)).
+      catch((err) => {
+        alert('생활백서 목록을 불러오는데 실패했습니다.')
+        console.log(err)
+      })
+  }, [])
+
   return (
     <BoardLayout>
       <h3>생활백서</h3>
@@ -17,7 +31,7 @@ const WhitebookPage = ({ whitebookList }) => {
       <p>생활백서는 조회순으로 정렬되어 표시됩니다!</p>
       <div>
         <WhitebookTable
-          whitebooks={whitebookList}
+          whitebooks={whitebooks}
         />
       </div>
     </BoardLayout>
@@ -26,17 +40,18 @@ const WhitebookPage = ({ whitebookList }) => {
 
 export default WhitebookPage;
 
-export async function getServerSideProps(context) {
-  const { cookie } = context.req.headers;
+// TODO: cookie 이슈로 SSR 적용시 UnAuth 401 뜸.
+// export async function getServerSideProps(context) {
+//   const { cookie } = context.req.headers;
 
-  try {
-    const res = await PoPoAxios.get(
-      'whitebook/with-login?orderBy=click_count',
-      { headers: cookie ? { cookie: cookie.toString() } : null }
-    );
-    const whitebookList = res.data;
-    return { props: { whitebookList } };
-  } catch ({ response }) {
-    return { props: { error: response.data}}
-  }
-}
+//   try {
+//     const res = await PoPoAxios.get(
+//       'whitebook/with-login?orderBy=click_count',
+//       { headers: cookie ? { cookie: cookie.toString() } : null }
+//     );
+//     const whitebookList = res.data;
+//     return { props: { whitebookList } };
+//   } catch ({ response }) {
+//     return { props: { error: response.data}}
+//   }
+// }
