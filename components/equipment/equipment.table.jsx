@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import Link from "next/link";
 import { Table } from 'semantic-ui-react'
-import EquipmentUpdateModal from './equipment.update.modal'
-import { PoPoAxios } from '@/utils/axios.instance';
 
 const ownerNames = {
   'chonghak': '총학생회',
@@ -10,20 +9,7 @@ const ownerNames = {
   'saengna': '생각나눔',
   'others': '그 외',
 }
-const EquipmentTable = () => {
-  const [equipments, setEquipments] = useState([])
-
-  // TODO: move out to caller component
-  useEffect(() => {
-    PoPoAxios
-      .get('/equip')
-      .then((res) => setEquipments(res.data))
-      .catch((err) => {
-        alert('장비 목록을 불러오는데 실패했습니다.')
-        console.log(err)
-      })
-  }, [])
-
+const EquipmentTable = ({ equipmentList }) => {
   return (
     <Table
       celled selectable
@@ -40,11 +26,9 @@ const EquipmentTable = () => {
       </Table.Header>
       <Table.Body>
         {
-          equipments.map((equipment, idx) =>
-            <EquipmentUpdateModal
-              key={equipment.uuid}
-              equipmentInfo={equipment}
-              trigger={<Table.Row key={equipment.uuid}>
+          equipmentList.map((equipment, idx) => (
+            <Link href={`equipment/update/${equipment.uuid}`} key={equipment.uuid}>
+              <Table.Row>
                 <Table.Cell>{idx + 1}</Table.Cell>
                 <Table.Cell>{equipment.name}</Table.Cell>
                 <Table.Cell>{ownerNames[equipment.equip_owner]}</Table.Cell>
@@ -57,9 +41,9 @@ const EquipmentTable = () => {
                   }
                 </Table.Cell>
                 <Table.Cell>{equipment.total_reservation_count.toLocaleString()}</Table.Cell>
-              </Table.Row>}
-            />,
-          )
+              </Table.Row>
+            </Link>
+          ))
         }
       </Table.Body>
       <Table.Footer>

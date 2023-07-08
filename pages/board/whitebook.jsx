@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from 'semantic-ui-react'
+
 import BoardLayout from '@/components/board/board.layout'
 import WhitebookCreateModal from '@/components/board/whitebook.create.modal'
 import WhitebookTable from '@/components/board/whitebook.table'
@@ -37,4 +38,20 @@ const WhitebookPage = () => {
   )
 }
 
-export default WhitebookPage
+export default WhitebookPage;
+
+// TODO: cookie 이슈로 SSR 적용시 UnAuth 401 뜸.
+// export async function getServerSideProps(context) {
+//   const { cookie } = context.req.headers;
+
+//   try {
+//     const res = await PoPoAxios.get(
+//       'whitebook/with-login?orderBy=click_count',
+//       { headers: cookie ? { cookie: cookie.toString() } : null }
+//     );
+//     const whitebookList = res.data;
+//     return { props: { whitebookList } };
+//   } catch ({ response }) {
+//     return { props: { error: response.data}}
+//   }
+// }
