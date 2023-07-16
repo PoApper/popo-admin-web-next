@@ -1,10 +1,8 @@
 import moment from 'moment'
+import Link from "next/link";
 import { Table } from 'semantic-ui-react'
-import ClubUpdateModal from './club.update.modal'
 
-const ClubTable = (props) => {
-  const clubs = props.clubs
-
+const ClubTable = ({ clubs }) => {
   return (
     <Table
       celled selectable
@@ -24,24 +22,20 @@ const ClubTable = (props) => {
       <Table.Body>
         {
           clubs.map((club, idx) =>
-              <ClubUpdateModal
-                key={club.uuid}
-                club={club}
-                trigger={
-                  <Table.Row key={club.uuid}>
-                    <Table.Cell>{idx + 1}</Table.Cell>
-                    <Table.Cell>{club.name}</Table.Cell>
-                    <Table.Cell>{club.location}</Table.Cell>
-                    <Table.Cell>{club.representative}</Table.Cell>
-                    <Table.Cell>{club.contact}</Table.Cell>
-                    <Table.Cell>{club.views}</Table.Cell>
-                    <Table.Cell>
-                      {moment(club.updateAt).
-                        format('YYYY-MM-DD HH:mm')}
-                    </Table.Cell>
-                  </Table.Row>
-                }
-              />
+            <Link href={`introduce/club/update/${club.uuid}`} key={club.uuid}>
+              <Table.Row key={club.uuid}>
+                <Table.Cell>{idx + 1}</Table.Cell>
+                <Table.Cell>{club.name}</Table.Cell>
+                <Table.Cell>{club.location}</Table.Cell>
+                <Table.Cell>{club.representative}</Table.Cell>
+                <Table.Cell>{club.contact}</Table.Cell>
+                <Table.Cell>{club.views}</Table.Cell>
+                <Table.Cell>
+                  {moment(club.updateAt).
+                    format('YYYY-MM-DD HH:mm')}
+                </Table.Cell>
+              </Table.Row>
+            </Link>
           )
         }
       </Table.Body>
