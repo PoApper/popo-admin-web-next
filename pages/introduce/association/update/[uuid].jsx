@@ -120,7 +120,7 @@ const AssociationUpdatePage = ({ associationInfo }) => {
           <DeleteConfirmModal
             open={deleteModalOpen}
             target={name}
-            deleteURI={`introduce/association/${association.uuid}`}
+            deleteURI={`introduce/association/${associationInfo.uuid}`}
             trigger={(
               <Button negative
                       onClick={() => setDeleteModalOpen(true)}>

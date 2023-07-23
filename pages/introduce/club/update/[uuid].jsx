@@ -146,7 +146,7 @@ const ClubUpdatePage = ({ clubInfo }) => {
           <DeleteConfirmModal
             open={deleteModalOpen}
             target={name}
-            deleteURI={`introduce/club/${club.uuid}`}
+            deleteURI={`introduce/club/${clubInfo.uuid}`}
             trigger={(
               <Button
                 negative
