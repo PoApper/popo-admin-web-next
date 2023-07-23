@@ -22,7 +22,7 @@ const ClubTable = ({ clubs }) => {
       <Table.Body>
         {
           clubs.map((club, idx) =>
-            <Link href={`introduce/club/update/${club.uuid}`} key={club.uuid}>
+            <Link href={`/introduce/club/update/${club.uuid}`} key={club.uuid}>
               <Table.Row key={club.uuid}>
                 <Table.Cell>{idx + 1}</Table.Cell>
                 <Table.Cell>{club.name}</Table.Cell>
