@@ -1,6 +1,6 @@
 import moment from 'moment'
+import Link from "next/link";
 import { Table } from 'semantic-ui-react'
-import AssociationUpdateModal from './association.update.modal'
 
 const AssociationTable = (props) => {
   const associations = props.associations
@@ -24,24 +24,23 @@ const AssociationTable = (props) => {
       <Table.Body>
         {
           associations.map((association, idx) =>
-              <AssociationUpdateModal
-                key={association.uuid}
-                association={association}
-                trigger={
-                  <Table.Row key={association.uuid}>
-                    <Table.Cell>{idx + 1}</Table.Cell>
-                    <Table.Cell>{association.name}</Table.Cell>
-                    <Table.Cell>{association.location}</Table.Cell>
-                    <Table.Cell>{association.representative}</Table.Cell>
-                    <Table.Cell>{association.contact}</Table.Cell>
-                    <Table.Cell>{association.views}</Table.Cell>
-                    <Table.Cell>
-                      {moment(association.updateAt).
-                        format('YYYY-MM-DD HH:mm')}
-                    </Table.Cell>
-                  </Table.Row>
-                }
-              />
+            <Link
+              href={`/introduce/association/update/${association.uuid}`}
+              key={association.uuid}
+            >
+              <Table.Row key={association.uuid}>
+                <Table.Cell>{idx + 1}</Table.Cell>
+                <Table.Cell>{association.name}</Table.Cell>
+                <Table.Cell>{association.location}</Table.Cell>
+                <Table.Cell>{association.representative}</Table.Cell>
+                <Table.Cell>{association.contact}</Table.Cell>
+                <Table.Cell>{association.views}</Table.Cell>
+                <Table.Cell>
+                  {moment(association.updateAt).
+                    format('YYYY-MM-DD HH:mm')}
+                </Table.Cell>
+              </Table.Row>
+            </Link>
           )
         }
       </Table.Body>

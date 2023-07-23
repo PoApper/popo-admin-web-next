@@ -27,7 +27,7 @@ const EquipmentTable = ({ equipmentList }) => {
       <Table.Body>
         {
           equipmentList.map((equipment, idx) => (
-            <Link href={`equipment/update/${equipment.uuid}`} key={equipment.uuid}>
+            <Link href={`/equipment/update/${equipment.uuid}`} key={equipment.uuid}>
               <Table.Row>
                 <Table.Cell>{idx + 1}</Table.Cell>
                 <Table.Cell>{equipment.name}</Table.Cell>
