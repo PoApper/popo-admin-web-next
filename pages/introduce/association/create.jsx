@@ -2,66 +2,49 @@ import React, { useState } from 'react'
 import { useRouter } from "next/router";
 import { Form, Message } from "semantic-ui-react";
 
-import IntroduceLayout from '@/components/introduce/introduce.layout'
 import { PoPoAxios } from "@/utils/axios.instance";
-import { ClubTypeOptions } from "@/assets/club.type.options";
+import IntroduceLayout from "@/components/introduce/introduce.layout";
 
-const ClubIntroduceCreatePage = () => {
+const AssociationIntroduceCreatePage = () => {
   const router = useRouter();
 
   const [name, setName] = useState('')
-  const [short_desc, setShortDesc] = useState('')
-  const [clubType, setClubType] = useState('')
   const [content, setContent] = useState('')
   const [location, setLocation] = useState('')
   const [representative, setRepresentative] = useState('')
   const [contact, setContact] = useState('')
 
-  const handleSubmit = async () => {
+  async function handleSubmit() {
     const body = {
       'name': name,
-      'short_desc': short_desc,
-      'clubType': clubType,
       'content': content,
       'location': location,
       'representative': representative,
       'contact': contact,
-    }
+    };
 
     PoPoAxios.post(
-      '/introduce/club',
+      'introduce/association',
       body,
       { withCredentials: true, },
     ).then(() => {
-      alert('소개글을 생성 했습니다.')
-      router.push('/introduce/club');
+      alert('소개글을 생성 했습니다.');
+      router.push('/introduce/association');
     }).catch((err) => {
       alert('소개글 생성에 실패했습니다.');
       console.log(err);
-    })
+    });
   }
 
   return (
     <IntroduceLayout>
-      <h3>동아리 소개글 생성</h3>
+      <h3>자치단체 소개글 생성</h3>
 
       <Form>
         <Form.Input
           required
-          label={'동아리 이름'}
+          label={'자치단체 이름'}
           onChange={e => setName(e.target.value)}
-        />
-        <Form.Input
-          required
-          label={'짧은 설명'}
-          placeholder={'예: 개발, 축구, 재즈'}
-          onChange={e => setShortDesc(e.target.value)}
-        />
-        <Form.Select
-          required
-          label={'분과'}
-          options={ClubTypeOptions}
-          onChange={(e, { value }) => setClubType(value)}
         />
         <Form.TextArea
           required
@@ -75,33 +58,37 @@ const ClubIntroduceCreatePage = () => {
           onChange={e => setLocation(e.target.value)}
         />
         <Form.Input
+          required
           label={'대표자'}
           placeholder={'홍길동'}
           onChange={e => setRepresentative(e.target.value)}
         />
         <Form.Input
+          required
           label={'연락처'}
           placeholder={'OOOOO@postech.ac.kr'}
           onChange={e => setContact(e.target.value)}
         />
 
         <Message>
-          <Message.Header>동아리 로고</Message.Header>
+          <Message.Header>자치단체 로고</Message.Header>
           <p>
-            동아리 로고는 동아리 생성 후에 설정 할 수 있습니다.
-            동아리 로고가 없으면 기본 이미지가 표시됩니다.
+            자치단체 로고는 동아리 생성 후에 설정 할 수 있습니다.
+            자치단체 로고가 없으면 기본 이미지가 표시됩니다.
           </p>
         </Message>
 
-        <Form.Button
-          type={'submit'}
-          onClick={handleSubmit}
-        >
-          생성
-        </Form.Button>
+        <Form.Group>
+          <Form.Button
+            type={'submit'}
+            onClick={handleSubmit}
+          >
+            생성
+          </Form.Button>
+        </Form.Group>
       </Form>
     </IntroduceLayout>
   )
 }
 
-export default ClubIntroduceCreatePage;
+export default AssociationIntroduceCreatePage;
