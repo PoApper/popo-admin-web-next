@@ -4,7 +4,7 @@ import BoardLayout from '@/components/board/board.layout'
 import AffiliateCards from '@/components/board/affiliate.cards'
 import DiscountOfferCards from '@/components/board/discount.cards'
 
-import { affiliates, discountOffers } from './affiliate.data'; // Import the variable from the data.js file
+import { affiliates, discountOffers } from '../../assets/affiliate.data';
 
 const BenefitPage = () => {
   return (
