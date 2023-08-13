@@ -14,7 +14,7 @@ const DiscountOfferCards = ({discountOffers}) => {
   };
   
   return (
-    <Grid stackable columns={3} >
+    <Grid stackable columns={4} >
     {
       discountOffers.map((discountOffer, idx) =>
       <Grid.Column key={idx}>
@@ -22,7 +22,7 @@ const DiscountOfferCards = ({discountOffers}) => {
           closeIcon
           open={flags[idx]}
           trigger={
-            <Card color='pink'>
+            <Card color='pink' style={{minHeight:"160px"}}>
               <Card.Content>
                 <Card.Header>{discountOffer.title}</Card.Header>
                 <Card.Description>

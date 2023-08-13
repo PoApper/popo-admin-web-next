@@ -14,7 +14,7 @@ const AffiliateCards = ({affiliates}) => {
   };
   
   return (
-    <Grid stackable columns={3} >
+    <Grid stackable columns={4} >
     {
       affiliates.map((affiliate, idx) =>
       <Grid.Column key={idx}>
@@ -22,7 +22,7 @@ const AffiliateCards = ({affiliates}) => {
           closeIcon
           open={flags[idx]}
           trigger={
-            <Card color='pink'>
+            <Card color='pink' style={{minHeight:"160px"}}>
               <Card.Content>
                 <Card.Header>{affiliate.title}</Card.Header>
                 <Card.Description>
