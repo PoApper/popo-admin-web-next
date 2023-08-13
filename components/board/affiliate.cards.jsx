@@ -17,7 +17,7 @@ const AffiliateCards = ({affiliates}) => {
     <Grid stackable columns={3} >
     {
       affiliates.map((affiliate, idx) =>
-      <Grid.Column>
+      <Grid.Column key={idx}>
         <Modal
           closeIcon
           open={flags[idx]}

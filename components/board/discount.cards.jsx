@@ -17,7 +17,7 @@ const DiscountOfferCards = ({discountOffers}) => {
     <Grid stackable columns={3} >
     {
       discountOffers.map((discountOffer, idx) =>
-      <Grid.Column>
+      <Grid.Column key={idx}>
         <Modal
           closeIcon
           open={flags[idx]}
