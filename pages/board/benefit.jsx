@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react'
-
 import { Divider } from 'semantic-ui-react'
 import styled from 'styled-components'
 import BoardLayout from '@/components/board/board.layout'
@@ -7,7 +5,6 @@ import AffiliateCards from '@/components/board/affiliate.cards'
 import DiscountOfferCards from '@/components/board/discount.cards'
 
 import { affiliates, discountOffers } from './affiliate.data'; // Import the variable from the data.js file
-
 
 const BenefitPage = () => {
   return (
@@ -25,9 +22,9 @@ const BenefitPage = () => {
   )
 }
 
+export default BenefitPage
+
 const AffiliateDivider = styled(Divider)`  
   margin: 20px 0px 0px 0px;
   padding: 20px 0px 0px 0px;
 `
-
-export default BenefitPage
