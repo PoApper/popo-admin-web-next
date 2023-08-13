@@ -20,7 +20,6 @@ const UserTable = ({ users, startIdx }) => {
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell>idx.</Table.HeaderCell>
-          <Table.HeaderCell>ID</Table.HeaderCell>
           <Table.HeaderCell>이름</Table.HeaderCell>
           <Table.HeaderCell>유저 타입</Table.HeaderCell>
           <Table.HeaderCell>가입일</Table.HeaderCell>
@@ -37,7 +36,6 @@ const UserTable = ({ users, startIdx }) => {
                 trigger={
                   <Table.Row key={user.uuid}>
                     <Table.Cell>{startIdx + idx + 1}</Table.Cell>
-                    <Table.Cell>{user.id}</Table.Cell>
                     <Table.Cell>{user.name}</Table.Cell>
                     <Table.Cell>{userTypes[user.userType]}</Table.Cell>
                     <Table.Cell>{moment(user.createdAt).

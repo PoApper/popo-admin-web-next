@@ -24,7 +24,6 @@ const UserUpdateModal = ({user, trigger}) => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
 
   const [email, setEmail] = useState(user.email)
-  const [id, setID] = useState(user.id)
   const [name, setName] = useState(user.name)
   const [userType, setUserType] = useState(user.userType)
   const [userStatus, setUserStatus] = useState(user.userStatus)
@@ -33,7 +32,6 @@ const UserUpdateModal = ({user, trigger}) => {
     try {
       await PoPoAxios.put(`/user/${user.uuid}`, {
         'email': email,
-        'id': id,
         'name': name,
         'userType': userType,
         'userStatus': userStatus
@@ -61,11 +59,6 @@ const UserUpdateModal = ({user, trigger}) => {
             label={'email'}
             value={email}
             onChange={e => setEmail(e.target.value)}/>
-          <Form.Input
-            required
-            label={'ID'}
-            value={id}
-            onChange={e => setID(e.target.value)}/>
           <Form.Input
             required
             label={'이름'}

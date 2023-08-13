@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import { Form, Image } from 'semantic-ui-react'
+import { Form, Image, Message } from 'semantic-ui-react'
 import styled from 'styled-components'
 
 import LoginLayout from '@/components/layout.raw'
@@ -9,13 +9,13 @@ import { PoPoAxios } from '@/utils/axios.instance';
 const LoginPage = () => {
   const router = useRouter()
 
-  const [id, setID] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPW] = useState('')
 
   const handleLogin = async () => {
     try {
       await PoPoAxios.post('/auth/login/admin', {
-        id: id,
+        email: email,
         password: password,
       }, { withCredentials: true })
       await router.push('/')
@@ -35,8 +35,8 @@ const LoginPage = () => {
         <Form>
           <Form.Input
             required
-            label={'아이디'}
-            onChange={(e) => setID(e.target.value)}
+            label={'Email'}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <Form.Input
             required
@@ -44,6 +44,9 @@ const LoginPage = () => {
             label={'비밀번호'}
             onChange={(e) => setPW(e.target.value)}
           />
+          <Message>
+            `2023.08.13`부터 POPO 로그인 방식이 ID/PW에서 Email/PW로 변경 됩니다.
+          </Message>
           <Form.Button onClick={handleLogin}>
             로그인
           </Form.Button>

@@ -16,7 +16,6 @@ const UserCreateModal = ({ trigger }) => {
   const [open, setOpen] = useState(false)
 
   const [email, setEmail] = useState()
-  const [id, setID] = useState()
   const [password, setPW] = useState()
   const [name, setName] = useState()
   const [userType, setUserType] = useState()
@@ -25,7 +24,6 @@ const UserCreateModal = ({ trigger }) => {
     try {
       await PoPoAxios.post('/user', {
         'email': email,
-        'id': id,
         'password': password,
         'name': name,
         'userType': userType,
@@ -52,10 +50,6 @@ const UserCreateModal = ({ trigger }) => {
             required
             label={'email'} name="email"
             onChange={e => setEmail(e.target.value)}/>
-          <Form.Input
-            required
-            label={'ID'} name="id"
-            onChange={e => setID(e.target.value)}/>
           <Form.Input
             required
             label={'password'} name="password"
