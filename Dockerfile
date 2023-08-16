@@ -1,5 +1,5 @@
 # Buile Step
-FROM node:18.7-alpine AS builder
+FROM node:18.17-alpine AS builder
 
 # dev, prod
 ARG NEXT_PUBLIC_ENV
@@ -17,7 +17,7 @@ RUN npm run build
 RUN npm prune --production
 
 # Run Step
-FROM node:18.7-alpine AS runner
+FROM node:18.17-alpine AS runner
 
 WORKDIR /usr/src/app
 
