@@ -6,7 +6,11 @@ import PlaceReservationWaitTable
   from '@/components/place/place.reservation.wait.table'
 import { PoPoAxios } from '@/utils/axios.instance';
 
-const ReservationPage = () => {
+const ReservationPage = ({
+  totalReservationCnt, 
+  todayReservationCnt,
+  thisWeekReservationCnt,
+}) => {
   const [place_reservations, setPlaceReservations] = useState([])
   const [equip_reservations, setEquipReservations] = useState([])
 
@@ -26,6 +30,11 @@ const ReservationPage = () => {
   return (
     <ReservationLayout>
       <h3>예약 대기 목록</h3>
+      <p>
+        총 예약 수: {Number(totalReservationCnt).toLocaleString()}건<br/>
+        오늘 예약 수: {Number(todayReservationCnt).toLocaleString()}건<br/>
+        이번 주 예약 수: {Number(thisWeekReservationCnt).toLocaleString()}건<br/>
+      </p>
       <p>
         <b>심사중</b>인 모든 예약이 이곳에 표시됩니다. 예약 제목을 누르면 상세 예약 정보를 확인할 수 있습니다.
       </p>
@@ -60,3 +69,20 @@ const ReservationPage = () => {
 }
 
 export default ReservationPage
+
+export async function getServerSideProps() {
+  const res = await PoPoAxios.get('statistics/reservation/count');
+  const placeReservationCntStats = res.data;
+  
+  const { 
+    totalReservationCnt, 
+    todayReservationCnt,
+    thisWeekReservationCnt,
+  } = placeReservationCntStats;
+
+  return { props: { 
+    totalReservationCnt, 
+    todayReservationCnt,
+    thisWeekReservationCnt,
+  } };
+}
