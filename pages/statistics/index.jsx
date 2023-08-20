@@ -48,7 +48,7 @@ const StatisticsPage = () => {
         <NewUserBar year={year}/>
       </div>
       <hr/>
-      <h3>신규 예약</h3>
+      <h3>신규 장소 예약</h3>
       <div style={{ height: 360 }}>
         <NewReservationBar year={year}/>
       </div>
@@ -56,8 +56,6 @@ const StatisticsPage = () => {
       <h3>ToDo List 🚀</h3>
       <List as="ul">
         <List.Item as="li">일일 활성 유저 (Daily Active User)</List.Item>
-        <List.Item as="li">소개글 조회수</List.Item>
-        <List.Item as="li">생활백서 조회수</List.Item>
       </List>
     </LayoutMain>
   )
