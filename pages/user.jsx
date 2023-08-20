@@ -5,7 +5,11 @@ import UserTable from '@/components/user/user.table'
 import UserCreateModal from '@/components/user/user.create.modal'
 import { PoPoAxios } from '@/utils/axios.instance';
 
-const UserPage = () => {
+const UserPage = ({
+  totalUserCnt, 
+  todayRegisterUserCnt, todayLoginUserCnt, 
+  thisWeekRegisterUserCnt, thisWeekLoginUserCnt
+}) => {
   const PAGE_SIZE = 10
 
   const [keyword, setKeyword] = useState('')
@@ -44,6 +48,14 @@ const UserPage = () => {
           onChange={(_, {value}) => setKeyword(value)}
         />
       </div>
+      
+      <p>
+        총 유저 수: {Number(totalUserCnt).toLocaleString()}명<br/>
+        오늘 가입한 유저 수: {Number(todayRegisterUserCnt).toLocaleString()}명<br/>
+        오늘 로그인한 유저 수: {Number(todayLoginUserCnt).toLocaleString()}명<br/>
+        이번 주 가입한 유저 수: {Number(thisWeekRegisterUserCnt).toLocaleString()}명<br/>
+        이번 주 로그인한 유저 수: {Number(thisWeekLoginUserCnt).toLocaleString()}명<br/>
+      </p>
 
       <p>
         유저는 마지막 로그인 순으로 정렬되어 표시됩니다.
@@ -69,3 +81,20 @@ const UserPage = () => {
 }
 
 export default UserPage
+
+export async function getServerSideProps() {
+  const res = await PoPoAxios.get('statistics/user/count');
+  const userCntStats = res.data;
+  
+  const { 
+    totalUserCnt, 
+    todayRegisterUserCnt, todayLoginUserCnt, 
+    thisWeekRegisterUserCnt, thisWeekLoginUserCnt
+  } = userCntStats;
+
+  return { props: { 
+    totalUserCnt, 
+    todayRegisterUserCnt, todayLoginUserCnt, 
+    thisWeekRegisterUserCnt, thisWeekLoginUserCnt
+  } };
+}
