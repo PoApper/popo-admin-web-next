@@ -8,7 +8,7 @@ const SettingPage = () => {
   const [popoCRMEmail, setPOPOCRMEmail] = useState('');
   const [dongyeonBank, setDongyeonBank] = useState('');
   const [dongyeonServiceTime, setDongyeonServiceTime] = useState('');
-  const [donyeonContact, setDongyeonContact] = useState('');
+  const [dongyeonContact, setDongyeonContact] = useState('');
 
   useEffect(() => {
     PoPoAxios.get('/setting')
@@ -28,7 +28,7 @@ const SettingPage = () => {
       popo_crm_email: popoCRMEmail,
       dongyeon_bank: dongyeonBank,
       dongyeon_service_time: dongyeonServiceTime,
-      dongyeon_contact: donyeonContact,
+      dongyeon_contact: dongyeonContact,
     }, {withCredentials: true})
       .then(() => alert('설정값을 저장했습니다!'))
       .catch((err) => {
@@ -57,12 +57,12 @@ const SettingPage = () => {
         />
         <Form.Input
           label={'동아리 연합회 대여시간'}
-          value={dongyeonBank}
+          value={dongyeonServiceTime}
           onChange={e => setDongyeonServiceTime(e.target.value)}
         />
         <Form.Input
           label={'동아리 연합회 문의 번호'}
-          value={dongyeonBank}
+          value={dongyeonContact}
           onChange={e => setDongyeonContact(e.target.value)}
         />
 
