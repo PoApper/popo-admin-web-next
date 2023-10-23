@@ -1,5 +1,5 @@
 # Buile Step
-FROM node:18.17-alpine AS builder
+FROM node:18.18-alpine AS builder
 
 # dev, prod
 ARG NEXT_PUBLIC_ENV
