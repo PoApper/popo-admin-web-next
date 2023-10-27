@@ -38,7 +38,13 @@ const MenuItemUser = () => {
           border: 'none',
           boxShadow: '0 2px 5px 0px rgba(0, 0, 0, 0.2)',
         }}>
-          <Dropdown.Item text={'로그아웃'} onClick={handleLogout}/>
+          <Dropdown.Item
+            text={'로그아웃'}
+            onClick={handleLogout}
+          />
+          <Dropdown.Item
+            text={`popo-${process.env.NEXT_PUBLIC_POPO_VERSION}`}
+          />
         </Dropdown.Menu>
       </Dropdown>
     </Menu.Item>
