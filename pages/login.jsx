@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import { Form, Image, Message } from 'semantic-ui-react'
+import { Form, Image } from 'semantic-ui-react'
 import styled from 'styled-components'
 
 import LoginLayout from '@/components/layout.raw'
@@ -34,9 +34,6 @@ const LoginPage = () => {
       <SubTitle>관리자 페이지</SubTitle>
 
       <LoginFormDiv>
-        <Message>
-          2023.08.13부터 POPO 로그인 방식이 ID/PW에서 Email/PW로 변경 됩니다.
-        </Message>
         <Form>
           <Form.Input
             required
