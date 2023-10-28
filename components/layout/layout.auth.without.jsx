@@ -2,7 +2,7 @@ import Head from 'next/head'
 import React from 'react'
 import styled from 'styled-components'
 
-const LoginLayout = ({ children }) => {
+const LayoutWithoutAuth = ({ children }) => {
   return (
     <div>
       <Head>
@@ -29,4 +29,4 @@ const Wrapper = styled.div`
   align-items: center;
 `
 
-export default LoginLayout
+export default LayoutWithoutAuth

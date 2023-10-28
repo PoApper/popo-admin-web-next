@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Form, Image } from 'semantic-ui-react'
 import styled from 'styled-components'
 
-import LoginLayout from '@/components/layout.raw'
+import LayoutWithoutAuth from '@/components/layout/layout.auth.without'
 import { PoPoAxios } from '@/utils/axios.instance';
 
 const LoginPage = () => {
@@ -11,6 +11,15 @@ const LoginPage = () => {
 
   const [email, setEmail] = useState('')
   const [password, setPW] = useState('')
+
+  useEffect(() => {
+    PoPoAxios.get('/auth/verifyToken', {
+      withCredentials: true,
+    }).then(() => {
+      alert('이미 로그인 상태 입니다.')
+      router.push('/')
+    }).catch(() => {})
+  }, [router])
 
   const handleLogin = async () => {
     try {
@@ -26,7 +35,7 @@ const LoginPage = () => {
   }
 
   return (
-    <LoginLayout>
+    <LayoutWithoutAuth>
       <Image
         src={'/popo.svg'}
         alt={'popo-logo'}
@@ -52,7 +61,7 @@ const LoginPage = () => {
         </Form>
       </LoginFormDiv>
 
-    </LoginLayout>
+    </LayoutWithoutAuth>
   )
 }
 

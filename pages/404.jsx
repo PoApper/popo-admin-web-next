@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import { Button, Image } from 'semantic-ui-react'
-import LoginLayout from '@/components/layout.raw'
+import LayoutWithoutAuth from '@/components/layout/layout.auth.without'
 
 const ErrorPage = () => {
   return (
-    <LoginLayout>
+    <LayoutWithoutAuth>
       <Image
         src={'/popo.svg'}
         alt={'popo_logo'}/>
@@ -16,7 +16,7 @@ const ErrorPage = () => {
           홈으로 이동
         </Button>
       </Link>
-    </LoginLayout>
+    </LayoutWithoutAuth>
   )
 }
 

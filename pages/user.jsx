@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Button, Icon, Input, Pagination } from 'semantic-ui-react'
-import LayoutMain from '@/components/layout.main'
+import LayoutWithAuth from '@/components/layout/layout.auth.with'
 import UserTable from '@/components/user/user.table'
 import UserCreateModal from '@/components/user/user.create.modal'
 import { PoPoAxios } from '@/utils/axios.instance';
 
 const UserPage = ({
-  totalUserCnt, 
-  todayRegisterUserCnt, todayLoginUserCnt, 
+  totalUserCnt,
+  todayRegisterUserCnt, todayLoginUserCnt,
   thisWeekRegisterUserCnt, thisWeekLoginUserCnt
 }) => {
   const PAGE_SIZE = 10
@@ -31,7 +31,7 @@ const UserPage = ({
   }, [keyword, page])
 
   return (
-    <LayoutMain>
+    <LayoutWithAuth>
       <h2>유저 관리</h2>
 
       <div style={{ marginBottom: '1rem' }}>
@@ -48,7 +48,7 @@ const UserPage = ({
           onChange={(_, {value}) => setKeyword(value)}
         />
       </div>
-      
+
       <p>
         총 유저 수: {Number(totalUserCnt).toLocaleString()}명<br/>
         오늘 가입한 유저 수: {Number(todayRegisterUserCnt).toLocaleString()}명<br/>
@@ -76,7 +76,7 @@ const UserPage = ({
           />
         </div>
       </div>
-    </LayoutMain>
+    </LayoutWithAuth>
   )
 }
 
@@ -85,16 +85,16 @@ export default UserPage
 export async function getServerSideProps() {
   const res = await PoPoAxios.get('statistics/user/count');
   const userCntStats = res.data;
-  
-  const { 
-    totalUserCnt, 
-    todayRegisterUserCnt, todayLoginUserCnt, 
+
+  const {
+    totalUserCnt,
+    todayRegisterUserCnt, todayLoginUserCnt,
     thisWeekRegisterUserCnt, thisWeekLoginUserCnt
   } = userCntStats;
 
-  return { props: { 
-    totalUserCnt, 
-    todayRegisterUserCnt, todayLoginUserCnt, 
+  return { props: {
+    totalUserCnt,
+    todayRegisterUserCnt, todayLoginUserCnt,
     thisWeekRegisterUserCnt, thisWeekLoginUserCnt
   } };
 }

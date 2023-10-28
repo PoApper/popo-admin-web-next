@@ -10,13 +10,10 @@ const MenuItemUser = () => {
   useEffect(() => {
     PoPoAxios.get('/auth/verifyToken', {
         withCredentials: true,
-      }).then(res => setUser(res.data)).catch(() => {
-      // Fail to login
-      if (process.env.NODE_ENV !== 'development') {
-        router.push('/login')
-      }
-    })
-  }, [router])
+      })
+      .then(res => setUser(res.data))
+      .catch(() => {})
+  }, [])
 
   const handleLogout = async () => {
     try {

@@ -1,14 +1,29 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import styled, { ThemeProvider } from 'styled-components'
-import theme from '../styles/theme'
 import MediaQuery from 'react-responsive'
-import NavbarDesktop from './navbar/navbar.desktop'
-import NavbarMobile from './navbar/navbar.mobile'
-import SideBar from './navbar/sidebar'
 
-const LayoutMain = ({ children }) => {
+import theme from '../../styles/theme'
+import { PoPoAxios } from '@/utils/axios.instance';
+import NavbarDesktop from '../navbar/navbar.desktop'
+import NavbarMobile from '../navbar/navbar.mobile'
+import SideBar from '../navbar/sidebar'
+
+const LayoutWithAuth = ({ children }) => {
+  const router = useRouter()
   const [sidebarVisible, setSidebarVisible] = useState(false)
+
+  useEffect(() => {
+    if (process.env.NEXT_PUBLIC_ENV === 'local')
+      return
+    PoPoAxios.get('/auth/verifyToken', {
+      withCredentials: true,
+    })
+    .catch(() => {
+        router.push('/login')
+    })
+  }, [router])
 
   return (
     <ThemeProvider theme={theme}>
@@ -60,4 +75,4 @@ const Wrapper = styled.div`
   align-items: center;
 `
 
-export default LayoutMain
+export default LayoutWithAuth
