@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Form, Image } from 'semantic-ui-react'
 import styled from 'styled-components'
