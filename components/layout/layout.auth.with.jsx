@@ -1,14 +1,27 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import styled, { ThemeProvider } from 'styled-components'
-import theme from '../../styles/theme'
 import MediaQuery from 'react-responsive'
+
+import theme from '../../styles/theme'
 import NavbarDesktop from '../navbar/navbar.desktop'
 import NavbarMobile from '../navbar/navbar.mobile'
 import SideBar from '../navbar/sidebar'
 
 const LayoutWithAuth = ({ children }) => {
+  const router = useRouter()
   const [sidebarVisible, setSidebarVisible] = useState(false)
+
+  useEffect(() => {
+    // TODO: add skip auth check logic when dev mode
+    PoPoAxios.get('/auth/verifyToken', {
+      withCredentials: true,
+    })
+    .catch(() => {
+        router.push('/login')
+    })
+  }, [router])
 
   return (
     <ThemeProvider theme={theme}>
