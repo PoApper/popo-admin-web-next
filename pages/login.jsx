@@ -18,7 +18,7 @@ const LoginPage = () => {
     }).then(() => {
       alert('이미 로그인 상태 입니다.')
       router.push('/')
-    })
+    }).catch(() => {})
   }, [router])
 
   const handleLogin = async () => {
