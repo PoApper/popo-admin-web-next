@@ -12,7 +12,7 @@ const MenuItemUser = () => {
         withCredentials: true,
       }).then(res => setUser(res.data)).catch(() => {
       // Fail to login
-      if (process.env.NODE_ENV !== 'development') {
+      if (process.env.NEXT_PUBLIC_ENV !== 'development') {
         router.push('/login')
       }
     })

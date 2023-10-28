@@ -1,9 +1,9 @@
 import { Divider, Grid, Image, List } from 'semantic-ui-react'
-import LayoutMain from '@/components/layout.main'
+import LayoutWithAuth from '@/components/layout/layout.auth.with'
 
 const HomePage = () => {
   return (
-    <LayoutMain>
+    <LayoutWithAuth>
       <Grid columns="equal" stackable>
         <Grid.Column>
           <h2>POPO 관리자 페이지🎩</h2>
@@ -17,7 +17,7 @@ const HomePage = () => {
           </p>
           <p>
             리뉴얼 이전 &nbsp;
-            <a href="http://phome.postech.ac.kr/user/indexSub.action?codyMenuSeq=2316288&siteId=popo&menuUIType=top" 
+            <a href="http://phome.postech.ac.kr/user/indexSub.action?codyMenuSeq=2316288&siteId=popo&menuUIType=top"
                target="_blank" rel="noreferrer">
               (구) POPO 홈페이지
             </a> &nbsp;
@@ -41,7 +41,7 @@ const HomePage = () => {
         </Grid.Column>
       </Grid>
 
-    </LayoutMain>
+    </LayoutWithAuth>
   )
 }
 

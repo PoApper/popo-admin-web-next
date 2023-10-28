@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import Head from 'next/head'
 import styled, { ThemeProvider } from 'styled-components'
-import theme from '../styles/theme'
+import theme from '../../styles/theme'
 import MediaQuery from 'react-responsive'
-import NavbarDesktop from './navbar/navbar.desktop'
-import NavbarMobile from './navbar/navbar.mobile'
-import SideBar from './navbar/sidebar'
+import NavbarDesktop from '../navbar/navbar.desktop'
+import NavbarMobile from '../navbar/navbar.mobile'
+import SideBar from '../navbar/sidebar'
 
-const LayoutMain = ({ children }) => {
+const LayoutWithAuth = ({ children }) => {
   const [sidebarVisible, setSidebarVisible] = useState(false)
 
   return (
@@ -60,4 +60,4 @@ const Wrapper = styled.div`
   align-items: center;
 `
 
-export default LayoutMain
+export default LayoutWithAuth

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Dropdown, List } from "semantic-ui-react";
 
-import LayoutMain from '@/components/layout.main'
+import LayoutWithAuth from '@/components/layout/layout.auth.with'
 import NewUserBar from '@/components/statistics/new-user.bar'
 import NewReservationBar from '@/components/statistics/new-reservation.bar'
 
@@ -27,7 +27,7 @@ const StatisticsPage = () => {
   const [year, setYear] = useState(2023);
 
   return (
-    <LayoutMain>
+    <LayoutWithAuth>
       <h2>POPO 통계</h2>
       <p>
         We don&apos;t have better algorithms, we just have more data.<br/>
@@ -57,7 +57,7 @@ const StatisticsPage = () => {
       <List as="ul">
         <List.Item as="li">일일 활성 유저 (Daily Active User)</List.Item>
       </List>
-    </LayoutMain>
+    </LayoutWithAuth>
   )
 }
 

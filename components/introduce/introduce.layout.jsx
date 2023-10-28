@@ -1,13 +1,13 @@
-import LayoutMain from '../layout.main'
+import LayoutWithAuth from '../layout/layout.auth.with'
 import IntroduceMenubar from './introduce.menubar'
 
 const IntroduceLayout = ({ children }) => {
   return (
-    <LayoutMain>
+    <LayoutWithAuth>
       <h2>소개글 관리</h2>
       <IntroduceMenubar/>
       { children }
-    </LayoutMain>
+    </LayoutWithAuth>
   )
 }
 
