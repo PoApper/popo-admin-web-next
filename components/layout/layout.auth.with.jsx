@@ -5,6 +5,7 @@ import styled, { ThemeProvider } from 'styled-components'
 import MediaQuery from 'react-responsive'
 
 import theme from '../../styles/theme'
+import { PoPoAxios } from '@/utils/axios.instance';
 import NavbarDesktop from '../navbar/navbar.desktop'
 import NavbarMobile from '../navbar/navbar.mobile'
 import SideBar from '../navbar/sidebar'
