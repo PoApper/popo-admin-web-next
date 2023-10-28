@@ -12,6 +12,7 @@ const MenuItemUser = () => {
         withCredentials: true,
       })
       .then(res => setUser(res.data))
+      .catch(() => {})
   }, [])
 
   const handleLogout = async () => {

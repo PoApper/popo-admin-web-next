@@ -15,7 +15,8 @@ const LayoutWithAuth = ({ children }) => {
   const [sidebarVisible, setSidebarVisible] = useState(false)
 
   useEffect(() => {
-    // TODO: add skip auth check logic when dev mode
+    if (process.env.NEXT_PUBLIC_ENV === 'local')
+      return
     PoPoAxios.get('/auth/verifyToken', {
       withCredentials: true,
     })
