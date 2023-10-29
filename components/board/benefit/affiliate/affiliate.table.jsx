@@ -11,19 +11,29 @@ const AffiliateTable = ({ affiliateList }) => {
       textAlign={'center'}>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell>idx.</Table.HeaderCell>
-          <Table.HeaderCell>업체명</Table.HeaderCell>
-          <Table.HeaderCell>짤은 설명</Table.HeaderCell>
-          <Table.HeaderCell>설명</Table.HeaderCell>
-          <Table.HeaderCell>생성일</Table.HeaderCell>
+          <Table.HeaderCell width={1}>
+            idx.
+          </Table.HeaderCell>
+          <Table.HeaderCell width={2}>
+            업체명
+          </Table.HeaderCell>
+          <Table.HeaderCell width={4}>
+            짤은 설명
+          </Table.HeaderCell>
+          <Table.HeaderCell width={6}>
+            설명
+          </Table.HeaderCell>
+          <Table.HeaderCell width={2}>
+            생성일
+          </Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
         {
-          affiliateList.map((affiliate, idx) => (
-            <Link href={`benefit/affiliate/update/${affiliate.uuid}`} key={affiliate.uuid}>
+          affiliateList.map((affiliate) => (
+            <Link href={`benefit/affiliate/update/${affiliate.id}`} key={affiliate.id}>
               <Table.Row>
-                <Table.Cell>{idx + 1}</Table.Cell>
+                <Table.Cell>{affiliate.id}</Table.Cell>
                 <Table.Cell>{affiliate.title}</Table.Cell>
                 <Table.Cell>{affiliate.content_short}</Table.Cell>
                 <Table.Cell>{affiliate.content}</Table.Cell>

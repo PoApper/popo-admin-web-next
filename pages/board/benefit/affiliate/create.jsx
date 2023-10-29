@@ -24,7 +24,7 @@ const AffiliateCreatePage = () => {
       { withCredentials: true },
     ).then(() => {
       alert('제휴 업체가 등록 되었습니다!')
-      router.push('/place');
+      router.push('/board/benefit');
     }).catch(err => {
       const errMsg = err.response.data.message;
       alert(`제휴 업체 등록에 실패했습니다.\n${errMsg}`);
@@ -33,7 +33,7 @@ const AffiliateCreatePage = () => {
 
   return (
     <BoardLayout>
-      <h3>총학 제휴 업체 생성 생성</h3>
+      <h3>총학 제휴 업체 생성</h3>
 
       <Form onSubmit={handleSubmit}>
         <Form.Input
