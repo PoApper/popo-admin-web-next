@@ -2,13 +2,12 @@ import React from 'react'
 import Link from 'next/link'
 import { Button, Message } from 'semantic-ui-react'
 
-import PlaceTable from '@/components/place/place.table'
 import { PoPoAxios } from "@/utils/axios.instance";
 import BoardLayout from '@/components/board/board.layout'
 import AffiliateTable from '@/components/board/benefit/affiliate/affiliate.table';
 import DiscountTable from '@/components/board/benefit/discount/discount.table';
 
-const BenefitPage = ({ affilateList, discountList }) => {
+const BenefitPage = ({ affiliateList, discountList }) => {
   return (
     <BoardLayout>
       <h3>총학 혜택 목록</h3>
@@ -19,7 +18,7 @@ const BenefitPage = ({ affilateList, discountList }) => {
 
       <h4>총학 제휴 업체</h4>
       <div style={{ marginBottom: '1rem' }}>
-        <Link href={'/benefit/affiliate/create'}>
+        <Link href={'/board/benefit/affiliate/create'}>
           <Button>제휴 업체 등록</Button>
         </Link>
       </div>
@@ -41,15 +40,15 @@ const BenefitPage = ({ affilateList, discountList }) => {
   )
 }
 
-export default PlacePage;
+export default BenefitPage;
 
 export async function getServerSideProps() {
   const res1 = await PoPoAxios.get('benefit/affiliate');
-  const affilateList = res1.data;
+  const affiliateList = res1.data;
 
 
   const res2 = await PoPoAxios.get('benefit/discount');
   const discountList = res2.data;
 
-  return { props: { affilateList, discountList } };
+  return { props: { affiliateList, discountList } };
 }
