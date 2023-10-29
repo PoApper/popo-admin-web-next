@@ -72,6 +72,7 @@ const AffiliateUpdatePage = ({ affiliateInfo }) => {
             open={deleteModalOpen}
             target={title}
             deleteURI={`benefit/affiliate/${id}`}
+            afterDeleteURI={'/board/benefit'}
             trigger={(
               <Button negative
                       onClick={() => setDeleteModalOpen(true)}>

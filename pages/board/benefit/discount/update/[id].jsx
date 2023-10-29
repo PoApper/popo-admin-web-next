@@ -90,6 +90,7 @@ const DiscountUpdatePage = ({ discountInfo }) => {
             open={deleteModalOpen}
             target={title}
             deleteURI={`benefit/discount/${id}`}
+            afterDeleteURI={'/board/benefit'}
             trigger={(
               <Button negative
                       onClick={() => setDeleteModalOpen(true)}>
