@@ -43,7 +43,7 @@ const DiscountUpdatePage = ({ discountInfo }) => {
     <BoardLayout>
       <h3>총학 할인 업체 수정</h3>
 
-      <Form onSubmit={handleSubmit}>
+      <Form>
         <Form.Input
           required
           label={'업체 이름'}
