@@ -1,20 +1,29 @@
 import { useState } from 'react'
 import { Button, Modal } from 'semantic-ui-react'
+import { useRouter } from "next/router";
+
 import { PoPoAxios } from "@/utils/axios.instance";
 
 const DeleteConfirmModal = (props) => {
+  const router = useRouter();
+
   const deleteTarget = props.target
   const deleteURI = props.deleteURI
+  const afterDeleteURI = props.afterDeleteURI;
   const [open, setOpen] = useState(props.open)
 
   const handleDelete = async () => {
     try {
       await PoPoAxios.delete(`/${deleteURI}`,
         { withCredentials: true })
-      window.location.reload()
-    } catch (e) {
-      alert('장소 삭제에 실패했습니다.')
-      console.log(e)
+      if (afterDeleteURI) {
+        router.push(afterDeleteURI);
+      } else {
+        window.location.reload()
+      }
+    } catch (err) {
+      const errMsg = err.response.data.message;
+      alert(`삭제에 실패했습니다.\n${errMsg}`);
     }
   }
 
