@@ -11,21 +11,35 @@ const DiscountTable = ({ discountList }) => {
       textAlign={'center'}>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell>idx.</Table.HeaderCell>
-          <Table.HeaderCell>업체명</Table.HeaderCell>
-          <Table.HeaderCell>지역</Table.HeaderCell>
-          <Table.HeaderCell>영업 시간 </Table.HeaderCell>
-          <Table.HeaderCell>가게 번호</Table.HeaderCell>
-          <Table.HeaderCell>할인 내용</Table.HeaderCell>
-          <Table.HeaderCell>생성일</Table.HeaderCell>
+          <Table.HeaderCell width={1}>
+            id
+          </Table.HeaderCell>
+          <Table.HeaderCell width={2}>
+            업체명
+          </Table.HeaderCell>
+          <Table.HeaderCell width={1}>
+            지역
+          </Table.HeaderCell>
+          <Table.HeaderCell width={2}>
+            영업 시간
+          </Table.HeaderCell>
+          <Table.HeaderCell width={2}>
+            가게 번호
+          </Table.HeaderCell>
+          <Table.HeaderCell width={6}>
+            할인 내용
+          </Table.HeaderCell>
+          <Table.HeaderCell width={2}>
+            생성일
+          </Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
         {
-          discountList.map((discount, idx) => (
-            <Link href={`benefit/discount/update/${discount.uuid}`} key={discount.uuid}>
+          discountList.map((discount) => (
+            <Link href={`benefit/discount/update/${discount.id}`} key={discount.id}>
               <Table.Row>
-                <Table.Cell>{idx + 1}</Table.Cell>
+                <Table.Cell>{discount.id}</Table.Cell>
                 <Table.Cell>{discount.title}</Table.Cell>
                 <Table.Cell>{discount.region}</Table.Cell>
                 <Table.Cell>{discount.open_hour}</Table.Cell>

@@ -12,7 +12,7 @@ const AffiliateTable = ({ affiliateList }) => {
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell width={1}>
-            idx.
+            id
           </Table.HeaderCell>
           <Table.HeaderCell width={2}>
             업체명
