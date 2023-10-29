@@ -12,9 +12,9 @@ const DeleteConfirmModal = (props) => {
       await PoPoAxios.delete(`/${deleteURI}`,
         { withCredentials: true })
       window.location.reload()
-    } catch (e) {
-      alert('장소 삭제에 실패했습니다.')
-      console.log(e)
+    } catch (err) {
+      const errMsg = err.response.data.message;
+      alert(`삭제에 실패했습니다.\n${errMsg}`);
     }
   }
 
