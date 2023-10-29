@@ -29,7 +29,7 @@ const BenefitPage = ({ affiliateList, discountList }) => {
 
       <h4>총학 할인 업체</h4>
       <div style={{ marginBottom: '1rem' }}>
-        <Link href={'/benefit/discount/create'}>
+        <Link href={'/board/benefit/discount/create'}>
           <Button>할인 업체 등록</Button>
         </Link>
       </div>
