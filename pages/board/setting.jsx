@@ -1,27 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Form } from 'semantic-ui-react'
 
 import BoardLayout from '@/components/board/board.layout'
-import { PoPoAxios, PopoCdnAxios } from '@/utils/axios.instance';
+import { PoPoAxios } from '@/utils/axios.instance';
 
-const SettingPage = () => {
-  const [popoCRMEmail, setPOPOCRMEmail] = useState('');
-  const [dongyeonBank, setDongyeonBank] = useState('');
-  const [dongyeonServiceTime, setDongyeonServiceTime] = useState('');
-  const [dongyeonContact, setDongyeonContact] = useState('');
-
-  useEffect(() => {
-    PoPoAxios.get('/setting')
-      .then((res) => {
-        setPOPOCRMEmail(res.data.popo_crm_email);
-        setDongyeonBank(res.data.dongyeon_bank);
-        setDongyeonServiceTime(res.data.dongyeon_service_time);
-        setDongyeonContact(res.data.dongyeon_contact);
-      }).catch((err) => {
-        const errMsg = err.response.data.message;
-        alert(`설정값을 불러오는데 실패했습니다.\n${errMsg}`);
-      })
-  }, [])
+const SettingPage = ({ settingKeyValue }) => {
+  const [popoCRMEmail, setPOPOCRMEmail] = useState(settingKeyValue.popo_crm_email);
+  const [dongyeonBank, setDongyeonBank] = useState(settingKeyValue.dongyeon_bank);
+  const [dongyeonServiceTime, setDongyeonServiceTime] = useState(settingKeyValue.dongyeon_service_time);
+  const [dongyeonContact, setDongyeonContact] = useState(settingKeyValue.dongyeon_contact);
 
   function handleSubmit () {
     PoPoAxios.post('/setting', {
@@ -79,3 +66,10 @@ const SettingPage = () => {
 }
 
 export default SettingPage
+
+export async function getServerSideProps() {
+    const res = await PoPoAxios.get('/setting');
+    const settingKeyValue = res.data;
+
+    return { props: { settingKeyValue } }
+}

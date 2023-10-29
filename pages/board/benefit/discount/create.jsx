@@ -67,6 +67,7 @@ const DiscountCreatePage = () => {
         <Form.TextArea
           required
           label={'설명'}
+          style={{height: 300}}
           onChange={e => setContent(e.target.value)}
         />
 
