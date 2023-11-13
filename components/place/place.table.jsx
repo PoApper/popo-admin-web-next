@@ -6,6 +6,7 @@ const regionNames = {
   'STUDENT_HALL': '학생 회관',
   'JIGOK_CENTER': '지곡 회관',
   'COMMUNITY_CENTER': '커뮤니티 센터',
+  'RC': 'RC',
   'OTHERS': 'OTHERS',
 }
 
