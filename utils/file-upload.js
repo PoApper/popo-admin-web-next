@@ -9,3 +9,13 @@ export function ImageUpload(uri, image_file) {
     headers: { "Content-Type": "multipart/form-data" },
   });
 }
+
+export function CsvUpload(uri, csv_file) {
+  let formData = new FormData();
+  formData.append("csv", csv_file);
+
+  return PoPoAxios.post(uri, formData, {
+    withCredentials: true,
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+}
