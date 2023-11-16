@@ -18,8 +18,14 @@ const CsvUploadForm = ({ label, uploadUri }) => {
       />
 
       <Button onClick={async () => {
-          await CsvUpload(uploadUri, uploadedFile);
-          alert('업로드가 완료 되었습니다!');
+          CsvUpload(uploadUri, uploadedFile)
+          .then(res => {
+            alert('업로드가 완료 되었습니다!');
+          })
+          .catch(err => {
+            const errMsg = err.response.data.message;
+            alert(`업로드에 실패했습니다.\n${errMsg}`);
+          })
       }}>
         업로드
       </Button>
