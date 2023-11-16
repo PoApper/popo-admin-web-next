@@ -12,7 +12,7 @@ export function ImageUpload(uri, image_file) {
 
 export function CsvUpload(uri, csv_file) {
   let formData = new FormData();
-  formData.append("csv", csv_file);
+  formData.append("csv_file", csv_file);
 
   return PoPoAxios.post(uri, formData, {
     withCredentials: true,
