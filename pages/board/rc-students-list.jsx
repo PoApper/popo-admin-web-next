@@ -13,14 +13,16 @@ const RcStudentsListPage = ({ rcStdntCnt }) => {
         만약 RC 사생 명단 업로드 후에 RC 사생이 추가로 가입한다면, 자동으로 RC 사생으로 분류됩니다.
       </div>
 
-      <div>
+      <div style={{marginTop: 4}}>
         현재 RC 사생 수: {rcStdntCnt}명
       </div>
 
-      <CsvUploadForm
-        label={'RC 사생 명단'}
-        uploadUri={'/setting/rc-students-list'}
-      />
+      <div style={{marginTop: 4}}>
+        <CsvUploadForm
+          label={'RC 사생 명단'}
+          uploadUri={'/setting/rc-students-list'}
+        />
+      </div>
     </BoardLayout>
   )
 }
