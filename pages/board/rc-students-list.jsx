@@ -1,6 +1,7 @@
 import BoardLayout from '@/components/board/board.layout'
 import { PoPoAxios } from '@/utils/axios.instance';
 import CsvUploadForm from '@/components/common/csv-upload.form';
+import { Button } from 'semantic-ui-react';
 
 const RcStudentsListPage = ({ rcStdntCnt }) => {
   return (
@@ -14,7 +15,13 @@ const RcStudentsListPage = ({ rcStdntCnt }) => {
       </div>
 
       <div style={{marginTop: 4}}>
-        현재 RC 사생 수: {rcStdntCnt}명
+        현재 RC 사생 수: {rcStdntCnt}명 &nbsp;
+        <Button
+          size='tiny'
+          href={`${PoPoAxios.getUri()}/setting/rc-students-list`}
+        >
+          CSV 다운로드
+        </Button>
       </div>
 
       <div style={{marginTop: 4}}>
