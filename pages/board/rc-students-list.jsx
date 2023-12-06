@@ -15,12 +15,22 @@ const RcStudentsListPage = ({ rcStdntCnt }) => {
       </div>
 
       <div style={{marginTop: 4}}>
-        현재 RC 사생 수: {rcStdntCnt}명 &nbsp;
+        현재 RC 사생 수: {rcStdntCnt}명
+      </div>
+      
+      <div style={{marginTop: 4, gap: 8}}>
         <Button
           size='tiny'
-          href={`${PoPoAxios.getUri()}/setting/rc-students-list`}
+          href={`${PoPoAxios.getUri()}/setting/download-rc-students-list`}
         >
           CSV 다운로드
+        </Button>
+        
+        <Button
+          size='tiny'
+          href={`${PoPoAxios.getUri()}/setting/sync-rc-students-list`}
+        >
+          RC 사생 명단 Sync
         </Button>
       </div>
 
