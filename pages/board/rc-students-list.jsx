@@ -65,7 +65,7 @@ export async function getServerSideProps() {
   const res1 = await PoPoAxios.get('/user/count/RC_STUDENT');
   const popoRcStdntCnt = res1.data;
   
-  const res2 = await PoPoAxios.get('/setting/count-rc-student-list');
+  const res2 = await PoPoAxios.get('/setting/count-rc-students-list');
   const totalRcStdntCnt = res2.data;
 
   return { props: { popoRcStdntCnt, totalRcStdntCnt } }
