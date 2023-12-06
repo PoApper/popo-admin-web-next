@@ -26,7 +26,7 @@ const CsvUploadForm = ({ label, uploadUri }) => {
             alert(`업로드에 실패했습니다.\n${errMsg}`);
           })
 
-          PoPoAxios.get('/setting/sync-rc-students-list')
+          PoPoAxios.get('/setting/sync-rc-students-list', { withCredentials: true })
           .then(res => {
             alert('업로드가 완료 되었습니다!');
           })
