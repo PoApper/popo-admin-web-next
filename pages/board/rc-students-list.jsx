@@ -35,7 +35,17 @@ const RcStudentsListPage = ({ popoRcStdntCnt, totalRcStdntCnt }) => {
         
         <Button
           size='tiny'
-          href={`${PoPoAxios.getUri()}/setting/sync-rc-students-list`}
+          onClick={() => {
+            PoPoAxios.get('/setting/sync-rc-students-list')
+            .then(() => {
+              alert('싱크에 성공 했습니다.');
+              window.location.reload();
+            })
+            .catch((err) => {
+              const errMsg = err.response.data.message;
+              alert(`목록 싱크에 실패했습니다.\n${errMsg}`)
+            })
+          }}
         >
           RC 사생 명단 Sync
         </Button>
