@@ -3,7 +3,7 @@ import { PoPoAxios } from '@/utils/axios.instance';
 import CsvUploadForm from '@/components/common/csv-upload.form';
 import { Button } from 'semantic-ui-react';
 
-const RcStudentsListPage = ({ rcStdntCnt }) => {
+const RcStudentsListPage = ({ popoRcStdntCnt, totalRcStdntCnt }) => {
   return (
     <BoardLayout>
       <h3>RC 사생 명단 업로드</h3>
@@ -15,7 +15,14 @@ const RcStudentsListPage = ({ rcStdntCnt }) => {
       </div>
 
       <div style={{marginTop: 4}}>
-        현재 RC 사생 수: {rcStdntCnt}명
+        <ul>
+          <li>
+            POPO 가입 RC 사생 수: {popoRcStdntCnt}명 ({Number((popoRcStdntCnt / totalRcStdntCnt * 100).toFixed(1))}%) 
+          </li>
+          <li>
+            전체 RC 사생 수: {totalRcStdntCnt}명            
+          </li>
+        </ul>
       </div>
       
       <div style={{marginTop: 4, gap: 8}}>
@@ -47,8 +54,11 @@ const RcStudentsListPage = ({ rcStdntCnt }) => {
 export default RcStudentsListPage;
 
 export async function getServerSideProps() {
-  const res = await PoPoAxios.get('/user/count/RC_STUDENT');
-  const rcStdntCnt = res.data;
+  const res1 = await PoPoAxios.get('/user/count/RC_STUDENT');
+  const popoRcStdntCnt = res1.data;
+  
+  const res2 = await PoPoAxios.get('/setting/count-rc-student-list');
+  const totalRcStdntCnt = res2.data;
 
-  return { props: { rcStdntCnt } }
+  return { props: { popoRcStdntCnt, totalRcStdntCnt } }
 }
