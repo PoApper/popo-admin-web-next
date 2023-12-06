@@ -14,16 +14,14 @@ const RcStudentsListPage = ({ popoRcStdntCnt, totalRcStdntCnt }) => {
         만약 RC 사생 명단 업로드 후에 RC 사생이 추가로 가입한다면, 자동으로 RC 사생으로 분류됩니다.
       </div>
 
-      <div style={{marginTop: 4}}>
-        <ul>
-          <li>
-            POPO 가입 RC 사생 수: {popoRcStdntCnt}명 ({Number((popoRcStdntCnt / totalRcStdntCnt * 100).toFixed(1))}%) 
-          </li>
-          <li>
-            전체 RC 사생 수: {totalRcStdntCnt}명            
-          </li>
-        </ul>
-      </div>
+      <ul>
+        <li>
+          POPO 가입 RC 사생 수: {popoRcStdntCnt}명 ({Number((popoRcStdntCnt / totalRcStdntCnt * 100).toFixed(1))}%) 
+        </li>
+        <li>
+          전체 RC 사생 수: {totalRcStdntCnt}명            
+        </li>
+      </ul>
       
       <div style={{marginTop: 4, gap: 8}}>
         <Button
@@ -36,7 +34,7 @@ const RcStudentsListPage = ({ popoRcStdntCnt, totalRcStdntCnt }) => {
         <Button
           size='tiny'
           onClick={() => {
-            PoPoAxios.get('/setting/sync-rc-students-list')
+            PoPoAxios.get('/setting/sync-rc-students-list', { withCredentials: true })
             .then(() => {
               alert('싱크에 성공 했습니다.');
               window.location.reload();
@@ -51,7 +49,7 @@ const RcStudentsListPage = ({ popoRcStdntCnt, totalRcStdntCnt }) => {
         </Button>
       </div>
 
-      <div style={{marginTop: 4}}>
+      <div style={{marginTop: 12}}>
         <CsvUploadForm
           label={'RC 사생 명단'}
           uploadUri={'/setting/rc-students-list'}
