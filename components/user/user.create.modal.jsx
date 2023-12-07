@@ -4,6 +4,7 @@ import { PoPoAxios } from '@/utils/axios.instance';
 
 export const userTypeOptions = [
   { key: 'STUDENT', text: '학생', value: 'STUDENT' },
+  { key: 'RC_STUDENT', text: 'RC 학부생', value: 'RC_STUDENT' },
   { key: 'FACULTY', text: '교직원', value: 'FACULTY' },
   { key: 'CLUB', text: '동아리', value: 'CLUB' },
   { key: 'ASSOCIATION', text: '학생단체', value: 'ASSOCIATION' },
