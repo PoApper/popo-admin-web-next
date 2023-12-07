@@ -22,9 +22,6 @@ export default class BoardMenubar extends Component {
         <Menu.Item href={'/board/benefit'} passHref>
           총학 제휴/할인 업체
         </Menu.Item>
-        <Menu.Item disabled>
-          동아리 게시물
-        </Menu.Item>
       </Menu>
     )
   }

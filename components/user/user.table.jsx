@@ -4,6 +4,7 @@ import UserUpdateModal from './user.update.modal'
 
 const userTypes = {
   'STUDENT': '학생',
+  'RC_STUDENT': 'RC 학부생',
   'FACULTY': '교직원',
   'CLUB': '동아리',
   'ASSOCIATION': '학생단체',
