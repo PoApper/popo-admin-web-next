@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import ReservationLayout from '@/components/reservation/reservation.layout'
 import EquipmentReservationTable
   from '@/components/equipment/equipment.reservation.table'
@@ -10,23 +9,9 @@ const ReservationPage = ({
   totalReservationCnt, 
   todayReservationCnt,
   thisWeekReservationCnt,
+  placeReservations,
+  equipReservations,
 }) => {
-  const [place_reservations, setPlaceReservations] = useState([])
-  const [equip_reservations, setEquipReservations] = useState([])
-
-  useEffect(() => {
-    PoPoAxios.get(
-      '/reservation-place?status=심사중',
-    ).then((res) => {
-      setPlaceReservations(res.data)
-    })
-    PoPoAxios.get(
-      '/reservation-equip?status=심사중',
-    ).then((res) => {
-      setEquipReservations(res.data)
-    })
-  }, [])
-
   return (
     <ReservationLayout>
       <h3>예약 대기 목록</h3>
@@ -43,22 +28,22 @@ const ReservationPage = ({
       </p>
 
       <div style={{marginBottom: 24}}>
-        <h4>장소 예약</h4>
+        <h4>장소 예약 (${placeReservations.length})</h4>
         {
-          place_reservations.length ?
+          placeReservations.length ?
             <PlaceReservationWaitTable
-              reservations={place_reservations}
+              reservations={placeReservations}
               startIdx={0}
             /> : <p>대기 중인 장소 예약이 없습니다 🎈</p>
         }
       </div>
 
       <div style={{marginBottom: 24}}>
-        <h4>장비 예약</h4>
+        <h4>장비 예약 (${equipReservations.length})</h4>
         {
-          equip_reservations.length ?
+          equipReservations.length ?
             <EquipmentReservationTable
-              reservations={equip_reservations}
+              reservations={equipReservations}
               startIdx={0}
             /> : <p>대기 중인 장비 예약이 없습니다 🎈</p>
         }
@@ -71,8 +56,14 @@ const ReservationPage = ({
 export default ReservationPage
 
 export async function getServerSideProps() {
-  const res = await PoPoAxios.get('statistics/reservation/count');
-  const placeReservationCntStats = res.data;
+  const res1 = await PoPoAxios.get('statistics/reservation/count');
+  const placeReservationCntStats = res1.data;
+  
+  const res2 = await PoPoAxios.get('/reservation-place?status=심사중');
+  const placeReservations = res2.data;
+  
+  const res3 = await PoPoAxios.get('/reservation-equip?status=심사중');
+  const equipReservations = res3.data;
   
   const { 
     totalReservationCnt, 
@@ -84,5 +75,7 @@ export async function getServerSideProps() {
     totalReservationCnt, 
     todayReservationCnt,
     thisWeekReservationCnt,
+    placeReservations,
+    equipReservations,
   } };
 }
