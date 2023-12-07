@@ -28,7 +28,7 @@ const ReservationPage = ({
       </p>
 
       <div style={{marginBottom: 24}}>
-        <h4>장소 예약 (${placeReservations.length})</h4>
+        <h4>장소 예약 ({placeReservations.length}건)</h4>
         {
           placeReservations.length ?
             <PlaceReservationWaitTable
@@ -39,7 +39,7 @@ const ReservationPage = ({
       </div>
 
       <div style={{marginBottom: 24}}>
-        <h4>장비 예약 (${equipReservations.length})</h4>
+        <h4>장비 예약 ({equipReservations.length}건)</h4>
         {
           equipReservations.length ?
             <EquipmentReservationTable
