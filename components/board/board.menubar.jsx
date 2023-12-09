@@ -11,6 +11,11 @@ export default class BoardMenubar extends Component {
             POPO 설정값
           </Menu.Item>
         </Link>
+        <Link href={'/board/announcement'} passHref>
+          <Menu.Item>
+            공지
+          </Menu.Item>
+        </Link>
         <Menu.Item href={'/board/rc-students-list'} passHref>
           RC 사생 명단 업로드
         </Menu.Item>

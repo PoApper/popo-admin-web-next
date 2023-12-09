@@ -1,6 +1,6 @@
 import { Button, Form, Icon, Modal } from 'semantic-ui-react'
 import { useState } from 'react'
-import DeleteConfirmModal from '../common/delete.confirm.modal'
+import DeleteConfirmModal from '../../common/delete.confirm.modal'
 import { PoPoAxios } from '@/utils/axios.instance';
 
 const WhitebookUpdateModal = ({ trigger, whitebook }) => {
