@@ -15,6 +15,7 @@ const NoticeUpdatePage = ({ noticeInfo }) => {
 
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
   
+  const id = noticeInfo.id;
   const [title, setTitle] = useState(noticeInfo.title)
   const [content, setContent] = useState(noticeInfo.content)
   const [link, setLink] = useState(noticeInfo.link)
@@ -62,7 +63,7 @@ const NoticeUpdatePage = ({ noticeInfo }) => {
         />
         
         <Message>
-          공지사항은 이미지 업로드는 공지사항 생성 후, 수정 페이지에서 가능합니다.
+          공지사항 이미지 업로드는 공지사항 생성 후, 수정 페이지에서 가능합니다.
         </Message>
 
         <Form.TextArea
@@ -84,8 +85,8 @@ const NoticeUpdatePage = ({ noticeInfo }) => {
 
         <ImageUploadForm
           type={'공지사항'}
-          uploadApiUri={`notice/image/${notice.id}`}
-          originalImageUrl={notice.image_url}
+          uploadApiUri={`notice/image/${id}`}
+          originalImageUrl={noticeInfo.image_url}
         />
         <Message>
           권장 이미지 사이즈(가로 x 세로): 540 x 200
