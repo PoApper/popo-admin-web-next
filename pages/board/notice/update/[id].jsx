@@ -8,7 +8,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 import { PoPoAxios } from "@/utils/axios.instance";
 import BoardLayout from '@/components/board/board.layout';
 import DeleteConfirmModal from "@/components/common/delete.confirm.modal";
-import ImageUploadForm from '@/components/common/image-upload.form';
+// import ImageUploadForm from '@/components/common/image-upload.form';
 
 const NoticeUpdatePage = ({ noticeInfo }) => {
   const router = useRouter();
@@ -38,7 +38,7 @@ const NoticeUpdatePage = ({ noticeInfo }) => {
       return;
     }
 
-    PoPoAxios.put('/notice',
+    PoPoAxios.put(`/notice/${id}`,
       body,
       { withCredentials: true },
     ).then(() => {
@@ -83,14 +83,14 @@ const NoticeUpdatePage = ({ noticeInfo }) => {
           링크가 존재하는 공지사항일 경우 링크를 입력해주세요.
         </p>
 
-        <ImageUploadForm
+        {/* <ImageUploadForm
           type={'공지사항'}
           uploadApiUri={`notice/image/${id}`}
           originalImageUrl={noticeInfo.image_url}
         />
         <Message>
           권장 이미지 사이즈(가로 x 세로): 540 x 200
-        </Message>
+        </Message> */}
         
         <div style={{display: 'flex', gap: 12}}>
           <div className={'required field'}>
