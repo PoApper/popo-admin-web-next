@@ -24,8 +24,8 @@ const NoticeTable
       <Table.Body>
         {
           notices.map((notice, idx) =>
-          <Link href={`benefit/notice/update/${affiliate.id}`} key={affiliate.id}>
-          <Table.Row key={notice.id}>
+            <Link href={`benefit/notice/update/${notice.id}`} key={notice.id}>
+              <Table.Row key={notice.id}>
                 <Table.Cell>{idx + 1}</Table.Cell>
                 <Table.Cell>
                   <a href={notice.link} target={'_blank'} rel={"noreferrer"}>
