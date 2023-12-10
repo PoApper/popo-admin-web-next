@@ -72,7 +72,6 @@ const NoticeCreatePage = () => {
         />
         
         <Form.Input
-          required
           label={'공지사항 링크'}
           onChange={e => setLink(e.target.value)}
         />

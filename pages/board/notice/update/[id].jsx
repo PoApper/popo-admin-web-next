@@ -74,7 +74,6 @@ const NoticeUpdatePage = ({ noticeInfo }) => {
         />
         
         <Form.Input
-          required
           label={'공지사항 링크'}
           value={link}
           onChange={e => setLink(e.target.value)}
