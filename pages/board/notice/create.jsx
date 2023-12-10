@@ -12,7 +12,7 @@ const NoticeCreatePage = () => {
   const router = useRouter();
 
   const [title, setTitle] = useState('')
-  const [memo, setMemo] = useState()
+  const [content, setContent] = useState()
   const [link, setLink] = useState()
   const [start_datetime, setStartDatetime] = useState()
   const [end_datetime, setEndDatetime] = useState()
@@ -22,7 +22,7 @@ const NoticeCreatePage = () => {
   const handleSubmit = async () => {
     const body = {
       'title': title,
-      'memo': memo,
+      'content': content,
       'link': link,
       'start_datetime': start_datetime,
       'end_datetime': end_datetime,
@@ -62,13 +62,13 @@ const NoticeCreatePage = () => {
         />
         
         <Message warning>
-          공지사항은 이미지가 업로드 되어야 게시됩니다. 이미지 업로드는 공지사항 생성 후, 등록 할 수 있습니다.
+          공지사항 이미지 업로드는 공지사항 생성 후, 등록 할 수 있습니다.
         </Message>
 
         <Form.TextArea
           required
-          label={'메모'}
-          onChange={e => setMemo(e.target.value)}
+          label={'내용'}
+          onChange={e => setContent(e.target.value)}
         />
         
         <Form.Input

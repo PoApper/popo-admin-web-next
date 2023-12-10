@@ -15,7 +15,7 @@ const NoticeUpdatePage = ({ noticeInfo }) => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
   
   const [title, setTitle] = useState(noticeInfo.title)
-  const [memo, setMemo] = useState(noticeInfo.memo)
+  const [content, setContent] = useState(noticeInfo.content)
   const [link, setLink] = useState(noticeInfo.link)
   const [start_datetime, setStartDatetime] = useState(noticeInfo.start_datetime)
   const [end_datetime, setEndDatetime] = useState(noticeInfo.end_datetime)
@@ -25,7 +25,7 @@ const NoticeUpdatePage = ({ noticeInfo }) => {
   const handleSubmit = async () => {
     const body = {
       'title': title,
-      'memo': memo,
+      'content': content,
       'link': link,
       'start_datetime': start_datetime,
       'end_datetime': end_datetime,
@@ -61,14 +61,14 @@ const NoticeUpdatePage = ({ noticeInfo }) => {
         />
         
         <Message>
-          공지사항은 이미지가 업로드 되어야 게시됩니다.
+          공지사항은 이미지 업로드는 공지사항 생성 후, 수정 페이지에서 가능합니다.
         </Message>
 
         <Form.TextArea
           required
-          label={'메모'}
-          value={memo}
-          onChange={e => setMemo(e.target.value)}
+          label={'내용'}
+          value={content}
+          onChange={e => setContent(e.target.value)}
         />
         
         <Form.Input

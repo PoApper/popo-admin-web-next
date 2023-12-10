@@ -4,6 +4,7 @@ import { Table } from 'semantic-ui-react'
 
 const NoticeTable
  = ({notices}) => {
+  const duration = moment(end_datetime).diff(moment(start_datetime), 'hours');
 
   return (
     <Table
@@ -14,11 +15,10 @@ const NoticeTable
         <Table.Row>
           <Table.HeaderCell>id.</Table.HeaderCell>
           <Table.HeaderCell>제목</Table.HeaderCell>
+          <Table.HeaderCell>내용</Table.HeaderCell>
           <Table.HeaderCell>이미지</Table.HeaderCell>
-          <Table.HeaderCell>메모</Table.HeaderCell>
           <Table.HeaderCell>게시 일자</Table.HeaderCell>
           <Table.HeaderCell>클릭수</Table.HeaderCell>
-          <Table.HeaderCell></Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
@@ -32,10 +32,14 @@ const NoticeTable
                     {notice.title}
                   </a>
                 </Table.Cell>
-                <Table.Cell>{notice.content}</Table.Cell>
                 <Table.Cell>
-                  {moment(notice.created_at).
-                    format('YYYY-MM-DD HH:mm')}
+                  {notice.content}
+                </Table.Cell>
+                <Table.Cell>
+                  <Image href={notice.link}/>
+                </Table.Cell>
+                <Table.Cell>
+                  {notice.start_datetime} ~ {notice.end_datetime} ({Number(duration/24).toFixed(0)}일 {duration%24}시간)
                 </Table.Cell>
                 <Table.Cell>
                   {notice.click_count}
