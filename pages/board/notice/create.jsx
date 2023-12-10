@@ -4,6 +4,7 @@ import { Form, Message } from "semantic-ui-react";
 
 import { PoPoAxios } from "@/utils/axios.instance";
 import BoardLayout from '@/components/board/board.layout';
+import ReactDatePicker from 'react-datepicker';
 
 const NoticeCreatePage = () => {
   const router = useRouter();
@@ -21,6 +22,11 @@ const NoticeCreatePage = () => {
       'link': link,
       'start_datetime': start_datetime,
       'end_datetime': end_datetime,
+    }
+    
+    if (!start_datetime || !end_datetime) {
+      alert('시작 일자와 종료 일자를 입력해주세요.')
+      return;
     }
     
     if (start_datetime > end_datetime) {
@@ -69,6 +75,13 @@ const NoticeCreatePage = () => {
         <p>
           링크가 존재하는 공지사항일 경우 링크를 입력해주세요.
         </p>
+        
+        <div className={'required field'}>
+          <label>시작 날짜</label>
+          <ReactDatePicker>
+            
+          </ReactDatePicker>
+        </div>
 
         <Form.Button type={'submit'}>
           생성

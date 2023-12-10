@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useRouter } from "next/router";
-import { Form, Message } from "semantic-ui-react";
+import { Button,Form, Icon, Message } from "semantic-ui-react";
 
 import { PoPoAxios } from "@/utils/axios.instance";
 import BoardLayout from '@/components/board/board.layout';
