@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import moment from 'moment'
-import { Table } from 'semantic-ui-react'
+import { Image, Table } from 'semantic-ui-react'
 
 const NoticeTable
  = ({notices}) => {
