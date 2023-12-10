@@ -22,11 +22,12 @@ const NoticeTable
       <Table.Body>
         {
           notices.map((notice, idx) => {
+            const isActive = moment().isBetween(moment(notice.start_datetime), moment(notice.end_datetime));
             const duration = moment(notice.end_datetime).diff(moment(notice.start_datetime), 'hours');
             return (
               <Link href={`/board/notice/update/${notice.id}`} key={notice.id}>
-                <Table.Row key={notice.id}>
-                  <Table.Cell>{idx + 1}</Table.Cell>
+                <Table.Row key={notice.id} positive={isActive}>
+                  <Table.Cell>{notice.id}</Table.Cell>
                   <Table.Cell>
                     {
                       notice.link ? (
