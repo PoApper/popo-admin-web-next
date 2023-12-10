@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { useRouter } from "next/router";
+import moment from 'moment'
 import { Form, Message } from "semantic-ui-react";
+import ReactDatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css'
 
 import { PoPoAxios } from "@/utils/axios.instance";
 import BoardLayout from '@/components/board/board.layout';
-import ReactDatePicker from 'react-datepicker';
 
 const NoticeCreatePage = () => {
   const router = useRouter();
@@ -15,6 +17,8 @@ const NoticeCreatePage = () => {
   const [start_datetime, setStartDatetime] = useState()
   const [end_datetime, setEndDatetime] = useState()
 
+  const duration = moment(end_datetime).diff(moment(start_datetime), 'hours');
+  
   const handleSubmit = async () => {
     const body = {
       'title': title,
@@ -57,7 +61,7 @@ const NoticeCreatePage = () => {
           onChange={e => setTitle(e.target.value)}
         />
         
-        <Message>
+        <Message warning>
           공지사항은 이미지가 업로드 되어야 게시됩니다. 이미지 업로드는 공지사항 생성 후, 등록 할 수 있습니다.
         </Message>
 
@@ -76,12 +80,45 @@ const NoticeCreatePage = () => {
           링크가 존재하는 공지사항일 경우 링크를 입력해주세요.
         </p>
         
-        <div className={'required field'}>
-          <label>시작 날짜</label>
-          <ReactDatePicker>
-            
-          </ReactDatePicker>
+        <div style={{display: 'flex', gap: 12}}>
+          <div className={'required field'}>
+            <label>시작 날짜</label>
+            <ReactDatePicker
+              selected={start_datetime ? moment(start_datetime).toDate() : null}
+              onChange={(date) => setStartDatetime(moment(date).format('YYYY-MM-DD HH:mm:ss'))}
+              onKeyDown={e => e.preventDefault()}
+              dateFormat="yyyy-MM-dd HH:mm"
+              timeIntervals={60}
+              minDate={new Date()}
+              showTimeSelect
+            />
+          </div>
+          <div className={'required field'}>
+            <label>종료 날짜</label>
+            <ReactDatePicker 
+              selected={end_datetime ? moment(end_datetime).toDate(): null}
+              onChange={(date) => setEndDatetime(moment(date).format('YYYY-MM-DD HH:mm:ss'))}
+              onKeyDown={e => e.preventDefault()}
+              dateFormat="yyyy-MM-dd HH:mm"
+              timeIntervals={60}
+              minDate={moment(start_datetime).toDate()}
+              showTimeSelect
+            />
+          </div>
         </div>
+        <Message>
+          {
+            (!start_datetime || !end_datetime)  ? (
+              "게시 시작 날짜와 종료 날짜를 입력해주세요."
+            ) : (
+              start_datetime > end_datetime ? (
+                "시작 날짜가 종료 날짜보다 늦을 수 없습니다."
+              ) : (
+                `게시 기간: ${start_datetime} ~ ${end_datetime} (${Number(duration/24).toFixed(0)}일 ${duration%24}시간)`
+              )
+            )
+          }
+        </Message>
 
         <Form.Button type={'submit'}>
           생성

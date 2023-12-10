@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import moment from 'moment'
 import { Card, Modal, Grid, Header } from 'semantic-ui-react'
 
 const AffiliateCards = ({affiliates}) => {

@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import { useRouter } from "next/router";
-import { Button,Form, Icon, Message } from "semantic-ui-react";
+import moment from 'moment'
+import { Button, Form, Icon, Message } from "semantic-ui-react";
+import ReactDatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css'
 
 import { PoPoAxios } from "@/utils/axios.instance";
 import BoardLayout from '@/components/board/board.layout';
@@ -17,6 +20,8 @@ const NoticeUpdatePage = ({ noticeInfo }) => {
   const [start_datetime, setStartDatetime] = useState(noticeInfo.start_datetime)
   const [end_datetime, setEndDatetime] = useState(noticeInfo.end_datetime)
 
+  const duration = moment(end_datetime).diff(moment(start_datetime), 'hours');
+  
   const handleSubmit = async () => {
     const body = {
       'title': title,
@@ -25,7 +30,7 @@ const NoticeUpdatePage = ({ noticeInfo }) => {
       'start_datetime': start_datetime,
       'end_datetime': end_datetime,
     }
-    
+        
     if (start_datetime > end_datetime) {
       alert('시작 일자가 종료 일자보다 늦을 수 없습니다.')
       return;
@@ -51,6 +56,7 @@ const NoticeUpdatePage = ({ noticeInfo }) => {
         <Form.Input
           required
           label={'제목'}
+          value={title}
           onChange={e => setTitle(e.target.value)}
         />
         
@@ -61,17 +67,59 @@ const NoticeUpdatePage = ({ noticeInfo }) => {
         <Form.TextArea
           required
           label={'메모'}
+          value={memo}
           onChange={e => setMemo(e.target.value)}
         />
         
         <Form.Input
           required
           label={'공지사항 링크'}
+          value={link}
           onChange={e => setLink(e.target.value)}
         />
         <p>
           링크가 존재하는 공지사항일 경우 링크를 입력해주세요.
         </p>
+        
+        <div style={{display: 'flex', gap: 12}}>
+          <div className={'required field'}>
+            <label>시작 날짜</label>
+            <ReactDatePicker
+              selected={start_datetime ? moment(start_datetime).toDate() : null}
+              onChange={(date) => setStartDatetime(moment(date).format('YYYY-MM-DD HH:mm:ss'))}
+              onKeyDown={e => e.preventDefault()}
+              dateFormat="yyyy-MM-dd HH:mm"
+              timeIntervals={60}
+              minDate={new Date()}
+              showTimeSelect
+            />
+          </div>
+          <div className={'required field'}>
+            <label>종료 날짜</label>
+            <ReactDatePicker 
+              selected={end_datetime ? moment(end_datetime).toDate(): null}
+              onChange={(date) => setEndDatetime(moment(date).format('YYYY-MM-DD HH:mm:ss'))}
+              onKeyDown={e => e.preventDefault()}
+              dateFormat="yyyy-MM-dd HH:mm"
+              timeIntervals={60}
+              minDate={moment(start_datetime).toDate()}
+              showTimeSelect
+            />
+          </div>
+        </div>
+        <Message>
+          {
+            (!start_datetime || !end_datetime)  ? (
+              "게시 시작 날짜와 종료 날짜를 입력해주세요."
+            ) : (
+              start_datetime > end_datetime ? (
+                "시작 날짜가 종료 날짜보다 늦을 수 없습니다."
+              ) : (
+                `게시 기간: ${start_datetime} ~ ${end_datetime} (${Number(duration/24).toFixed(0)}일 ${duration%24}시간)`
+              )
+            )
+          }
+        </Message>
 
 
         <Form.Group>
