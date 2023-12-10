@@ -54,7 +54,7 @@ const NoticeUpdatePage = ({ noticeInfo }) => {
     <BoardLayout>
       <h3>공지사항 수정</h3>
 
-      <Form onSubmit={handleSubmit}>
+      <Form>
         <Form.Input
           required
           label={'제목'}
@@ -134,7 +134,7 @@ const NoticeUpdatePage = ({ noticeInfo }) => {
 
 
         <Form.Group>
-          <Form.Button type={'submit'}>
+          <Form.Button type={'submit'} onClick={handleSubmit}>
             수정
           </Form.Button>
           <DeleteConfirmModal
