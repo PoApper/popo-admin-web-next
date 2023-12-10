@@ -17,7 +17,10 @@ const AnnouncementPage = ({ noticeList }) => {
       
       <Message>
         공지사항은 빠른 게시 시작 일자로 정렬되어 표시됩니다!
-        이미지가 업로드 되지 않은 공지는 생성되어도 게시되지 않습니다.
+      </Message>
+      
+      <Message warning>
+        기능 개발이 계속 이뤄지고 있습니다.
       </Message>
       
       <div>

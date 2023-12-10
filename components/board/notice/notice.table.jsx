@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import moment from 'moment'
-import { Image, Table } from 'semantic-ui-react'
+import { Table } from 'semantic-ui-react'
 
 const NoticeTable
  = ({notices}) => {
@@ -11,12 +11,12 @@ const NoticeTable
     >
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell>id.</Table.HeaderCell>
-          <Table.HeaderCell>제목</Table.HeaderCell>
-          <Table.HeaderCell>내용</Table.HeaderCell>
-          <Table.HeaderCell>이미지</Table.HeaderCell>
-          <Table.HeaderCell>게시 일자</Table.HeaderCell>
-          <Table.HeaderCell>클릭수</Table.HeaderCell>
+          <Table.HeaderCell width={1}>id.</Table.HeaderCell>
+          <Table.HeaderCell width={4}>제목</Table.HeaderCell>
+          <Table.HeaderCell width={6}>내용</Table.HeaderCell>
+          {/* <Table.HeaderCell>이미지</Table.HeaderCell> */}
+          <Table.HeaderCell width={5}>게시 일자</Table.HeaderCell>
+          <Table.HeaderCell width={1}>클릭수</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
@@ -28,18 +28,23 @@ const NoticeTable
                 <Table.Row key={notice.id}>
                   <Table.Cell>{idx + 1}</Table.Cell>
                   <Table.Cell>
-                    <a href={notice.link} target={'_blank'} rel={"noreferrer"}>
-                      {notice.title}
-                    </a>
+                    {
+                      notice.link ? (
+                      <a href={notice.link} target={'_blank'} rel={"noreferrer"}>
+                        {notice.title}
+                      </a>
+                      ) : notice.title
+                    }
                   </Table.Cell>
-                  <Table.Cell>
+                  <Table.Cell style={{whiteSpace: "pre-line", textAlign: "left"}}>
                     {notice.content}
                   </Table.Cell>
-                  <Table.Cell>
+                  {/* <Table.Cell>
                     <Image href={notice.link}/>
-                  </Table.Cell>
+                  </Table.Cell> */}
                   <Table.Cell>
-                    {moment(notice.start_datetime).format('YYYY-MM-DD HH:mm')} ~ {moment(notice.end_datetime).format('YYYY-MM-DD HH:mm')} ({Number(duration/24).toFixed(0)}일 {duration%24}시간)
+                    {moment(notice.start_datetime).format('YYYY-MM-DD HH:mm')} ~ {moment(notice.end_datetime).format('YYYY-MM-DD HH:mm')}<br/>
+                    ({Number(duration/24).toFixed(0)}일 {duration%24}시간)
                   </Table.Cell>
                   <Table.Cell>
                     {notice.click_count}
