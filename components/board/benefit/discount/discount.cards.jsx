@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import moment from 'moment'
 import { Card, Modal, Grid, Header, Divider, Icon } from 'semantic-ui-react'
 
 const DiscountOfferCards = ({discountOffers}) => {

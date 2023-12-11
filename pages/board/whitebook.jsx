@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react'
 import { Button } from 'semantic-ui-react'
 
 import BoardLayout from '@/components/board/board.layout'
-import WhitebookCreateModal from '@/components/board/whitebook.create.modal'
-import WhitebookTable from '@/components/board/whitebook.table'
+import WhitebookCreateModal from '@/components/board/whitebook/whitebook.create.modal'
+import WhitebookTable from '@/components/board/whitebook/whitebook.table'
 import { PoPoAxios } from '@/utils/axios.instance';
 
 const WhitebookPage = () => {
