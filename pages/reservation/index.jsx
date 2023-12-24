@@ -36,11 +36,11 @@ const ReservationPage = ({
   return (
     <ReservationLayout>
       <h3>예약 대기 목록</h3>
-      <p>
-        총 예약 수: {Number(totalReservationCnt).toLocaleString()}건<br/>
-        오늘 예약 수: {Number(todayReservationCnt).toLocaleString()}건<br/>
-        이번 주 예약 수: {Number(thisWeekReservationCnt).toLocaleString()}건<br/>
-      </p>
+      <ul style={{padding: '0 0 0 20px'}}>
+        <li>총 예약 수: {Number(totalReservationCnt).toLocaleString()}건</li>
+        <li>오늘 예약 수: {Number(todayReservationCnt).toLocaleString()}건</li>
+        <li>이번 주 예약 수: {Number(thisWeekReservationCnt).toLocaleString()}건</li>
+      </ul>
       <p>
         <b>심사중</b>인 모든 예약이 이곳에 표시됩니다. 예약 제목을 누르면 상세 예약 정보를 확인할 수 있습니다.
       </p>

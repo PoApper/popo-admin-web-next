@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Button, Icon, Input, Pagination } from 'semantic-ui-react'
+
 import LayoutWithAuth from '@/components/layout/layout.auth.with'
 import UserTable from '@/components/user/user.table'
 import UserCreateModal from '@/components/user/user.create.modal'
@@ -49,13 +50,13 @@ const UserPage = ({
         />
       </div>
 
-      <p>
-        총 유저 수: {Number(totalUserCnt).toLocaleString()}명<br/>
-        오늘 가입한 유저 수: {Number(todayRegisterUserCnt).toLocaleString()}명<br/>
-        오늘 로그인한 유저 수: {Number(todayLoginUserCnt).toLocaleString()}명<br/>
-        이번 주 가입한 유저 수: {Number(thisWeekRegisterUserCnt).toLocaleString()}명<br/>
-        이번 주 로그인한 유저 수: {Number(thisWeekLoginUserCnt).toLocaleString()}명<br/>
-      </p>
+      <ul style={{padding: '0 0 0 20px'}}>
+        <li>총 유저 수: {Number(totalUserCnt).toLocaleString()}명</li>
+        <li>오늘 가입한 유저 수: {Number(todayRegisterUserCnt).toLocaleString()}명</li>
+        <li>오늘 로그인한 유저 수: {Number(todayLoginUserCnt).toLocaleString()}명</li>
+        <li>이번 주 가입한 유저 수: {Number(thisWeekRegisterUserCnt).toLocaleString()}명</li>
+        <li>이번 주 로그인한 유저 수: {Number(thisWeekLoginUserCnt).toLocaleString()}명</li>
+      </ul>
 
       <p>
         유저는 마지막 로그인 순으로 정렬되어 표시됩니다.
