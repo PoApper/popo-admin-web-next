@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { PoPoAxios } from '@/utils/axios.instance';
 import ReservationLayout from '@/components/reservation/reservation.layout'
@@ -27,10 +27,10 @@ const ReservationPage = ({
     }
 
     Promise.all([
-      getCurrentPlaceReservations,
-      getCurrentEquipReservations,
+      getCurrentPlaceReservations(),
+      getCurrentEquipReservations(),
     ]).then(() => setIsLoading(false));
-  })
+  }, [])
 
 
   return (
