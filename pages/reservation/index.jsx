@@ -6,6 +6,7 @@ import EquipmentReservationTable
   from '@/components/equipment/equipment.reservation.table'
 import PlaceReservationWaitTable
   from '@/components/place/place.reservation.wait.table'
+import moment from 'moment';
 
 const ReservationPage = ({
   totalReservationCnt,
@@ -13,17 +14,25 @@ const ReservationPage = ({
   thisWeekReservationCnt,
 }) => {
   const [isLoading, setIsLoading] = useState(true);
+
   const [placeReservations, setPlaceReservations] = useState([]);
+  const firstPlaceReservation = placeReservations[placeReservations.length - 1];
+  const lastPlaceReservation = placeReservations[0];
+
   const [equipReservations, setEquipReservations] = useState([]);
+  const firstEquipReservation = equipReservations[equipReservations.length - 1];
+  const lastEquipReservation = equipReservations[0];
 
   useEffect(() => {
     async function getCurrentPlaceReservations() {
       const res = await PoPoAxios.get('reservation-place?status=심사중');
-      setPlaceReservations(res.data);
+      const sortedPlace = res.data.sort((a, b) => new moment(`${b.date}T${b.start_time}`) - new moment(`${a.date}T${a.start_time}`));
+      setPlaceReservations(sortedPlace);
     }
     async function getCurrentEquipReservations() {
       const res = await PoPoAxios.get('reservation-equip?status=심사중');
-      setEquipReservations(res.data);
+      const sortedEquip = res.data.sort((a, b) => new moment(`${b.date}T${b.start_time}`) - new moment(`${a.date}T${a.start_time}`));
+      setEquipReservations(sortedEquip);
     }
 
     Promise.all([
@@ -49,7 +58,17 @@ const ReservationPage = ({
       </p>
 
       <div style={{marginBottom: 24}}>
-        <h4>장소 예약 ({placeReservations.length}건 대기중)</h4>
+        <h4>
+          장소 예약
+          (
+            {
+              isLoading ? '로딩중' : (
+                placeReservations.length === 0 ? '대기중인 예약이 없습니다' :
+                  `${placeReservations.length}건 대기중: ${new moment(firstPlaceReservation.date).format('YYYY-MM-DD')} ~ ${new moment(lastPlaceReservation.date).format('YYYY-MM-DD')}`
+              )
+            }
+          )
+        </h4>
         {
           isLoading ? <p>로딩 중...</p> : (
             placeReservations.length ?
@@ -62,7 +81,17 @@ const ReservationPage = ({
       </div>
 
       <div style={{marginBottom: 24}}>
-        <h4>장비 예약 ({equipReservations.length}건 대기중)</h4>
+        <h4>
+          장비 예약
+          (
+            {
+              isLoading ? '로딩중' : (
+                equipReservations.length === 0 ? '대기중인 예약이 없습니다' :
+                  `${equipReservations.length}건 대기중: ${new moment(firstEquipReservation.date).format('YYYY-MM-DD')} ~ ${new moment(lastEquipReservation.date).format('YYYY-MM-DD')}`
+              )
+            }
+          )
+        </h4>
         {
           isLoading ? <p>로딩 중...</p> : (
             equipReservations.length ?
