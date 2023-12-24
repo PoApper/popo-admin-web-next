@@ -1,17 +1,38 @@
+import { useEffect } from 'react';
+
+import { PoPoAxios } from '@/utils/axios.instance';
 import ReservationLayout from '@/components/reservation/reservation.layout'
 import EquipmentReservationTable
   from '@/components/equipment/equipment.reservation.table'
 import PlaceReservationWaitTable
   from '@/components/place/place.reservation.wait.table'
-import { PoPoAxios } from '@/utils/axios.instance';
 
 const ReservationPage = ({
-  totalReservationCnt, 
+  totalReservationCnt,
   todayReservationCnt,
   thisWeekReservationCnt,
-  placeReservations,
-  equipReservations,
 }) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [placeReservations, setPlaceReservations] = useState([]);
+  const [equipReservations, setEquipReservations] = useState([]);
+
+  useEffect(() => {
+    async function getCurrentPlaceReservations() {
+      const res = await PoPoAxios.get('reservation-place?status=심사중');
+      setPlaceReservations(res.data);
+    }
+    async function getCurrentEquipReservations() {
+      const res = await PoPoAxios.get('reservation-equip?status=심사중');
+      setEquipReservations(res.data);
+    }
+
+    Promise.all([
+      getCurrentPlaceReservations,
+      getCurrentEquipReservations,
+    ]).then(() => setIsLoading(false));
+  })
+
+
   return (
     <ReservationLayout>
       <h3>예약 대기 목록</h3>
@@ -28,24 +49,28 @@ const ReservationPage = ({
       </p>
 
       <div style={{marginBottom: 24}}>
-        <h4>장소 예약 ({placeReservations.length}건)</h4>
+        <h4>장소 예약 ({placeReservations.length}건 대기중)</h4>
         {
-          placeReservations.length ?
-            <PlaceReservationWaitTable
-              reservations={placeReservations}
-              startIdx={0}
-            /> : <p>대기 중인 장소 예약이 없습니다 🎈</p>
+          isLoading ? <p>로딩 중...</p> : (
+            placeReservations.length ?
+              <PlaceReservationWaitTable
+                reservations={placeReservations}
+                startIdx={0}
+              /> : <p>대기 중인 장소 예약이 없습니다 🎈</p>
+          )
         }
       </div>
 
       <div style={{marginBottom: 24}}>
-        <h4>장비 예약 ({equipReservations.length}건)</h4>
+        <h4>장비 예약 ({equipReservations.length}건 대기중)</h4>
         {
-          equipReservations.length ?
-            <EquipmentReservationTable
-              reservations={equipReservations}
-              startIdx={0}
-            /> : <p>대기 중인 장비 예약이 없습니다 🎈</p>
+          isLoading ? <p>로딩 중...</p> : (
+            equipReservations.length ?
+              <EquipmentReservationTable
+                reservations={equipReservations}
+                startIdx={0}
+              /> : <p>대기 중인 장비 예약이 없습니다 🎈</p>
+          )
         }
       </div>
 
@@ -58,24 +83,16 @@ export default ReservationPage
 export async function getServerSideProps() {
   const res1 = await PoPoAxios.get('statistics/reservation/count');
   const placeReservationCntStats = res1.data;
-  
-  const res2 = await PoPoAxios.get('/reservation-place?status=심사중');
-  const placeReservations = res2.data;
-  
-  const res3 = await PoPoAxios.get('/reservation-equip?status=심사중');
-  const equipReservations = res3.data;
-  
-  const { 
-    totalReservationCnt, 
+
+  const {
+    totalReservationCnt,
     todayReservationCnt,
     thisWeekReservationCnt,
   } = placeReservationCntStats;
 
-  return { props: { 
-    totalReservationCnt, 
+  return { props: {
+    totalReservationCnt,
     todayReservationCnt,
     thisWeekReservationCnt,
-    placeReservations,
-    equipReservations,
   } };
 }
