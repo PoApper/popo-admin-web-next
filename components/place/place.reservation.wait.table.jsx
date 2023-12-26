@@ -14,8 +14,8 @@ const PlaceReservationWaitTable = ({reservations}) => {
       alert('선택한 장소 예약을 승인했습니다.')
       window.location.reload();
     }).catch(err => {
-      alert('전체 예약 승인에 실패했습니다.')
-      console.log(err)
+      const errMsg = err.response.data.message;
+      alert(`전체 예약 승인에 실패했습니다.\n${errMsg}`);
     })
   }
 
