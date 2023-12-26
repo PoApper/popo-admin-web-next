@@ -20,6 +20,7 @@ const PlaceUpdatePage = ({ placeInfo }) => {
   const [description, setDescription] = useState(placeInfo.description)
   const [staff_email, setStaffEmail] = useState(placeInfo.staff_email)
   const [max_minutes, setMaxMinutes] = useState(placeInfo.max_minutes)
+  const [max_concurrent_reservation, setMaxConcurrentReservation] = useState(placeInfo.max_concurrent_reservation)
   const [opening_hours, setOpeningHours] = useState(JSON.parse(placeInfo.opening_hours))
   const [enable_auto_accept, setEnableAutoAccept] = useState(placeInfo.enable_auto_accept)
 
@@ -38,12 +39,10 @@ const PlaceUpdatePage = ({ placeInfo }) => {
       'location': location,
       'description': description,
       'staff_email': staff_email,
+      'max_minutes': max_minutes,
+      'max_concurrent_reservation': max_concurrent_reservation,
       'opening_hours': JSON.stringify(opening_hours),
       'enable_auto_accept': enable_auto_accept,
-    }
-
-    if (max_minutes) {
-      body['max_minutes'] = max_minutes
     }
 
     PoPoAxios.put(`/place/${placeInfo.uuid}`,
@@ -94,6 +93,13 @@ const PlaceUpdatePage = ({ placeInfo }) => {
           onChange={e => setMaxMinutes(e.target.value)}
         />
         <p>최대 예약가능 시간이 넘는 예약이 생성되지 않도록 합니다. (단위: minutes)</p>
+
+        <Form.Input
+          label={'최대 동시 예약 갯수'}
+          placeholder={'해당 장소를 동시 예약 가능한 최대 갯수를 입력해주세요 (ex. 1)'}
+          value={max_concurrent_reservation}
+          onChange={e => setMaxConcurrentReservation(e.target.value)}
+        />
 
         <OpeningHoursEditor
           currentOpeningHour={JSON.parse(placeInfo.opening_hours)}
