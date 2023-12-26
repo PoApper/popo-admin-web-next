@@ -37,6 +37,18 @@ const PlaceReservationWaitTable = ({reservations}) => {
         textAlign={'center'}>
         <Table.Header>
           <Table.Row>
+              <Table.HeaderCell colSpan={6}>
+                <Button
+                  positive
+                  size='small'
+                  floated='right'
+                  onClick={acceptAllInProgressPlaceReservations}
+                >
+                  예약 일괄 승인
+                </Button>
+              </Table.HeaderCell>
+            </Table.Row>
+          <Table.Row>
             <Table.HeaderCell width={1}>idx.</Table.HeaderCell>
             <Table.HeaderCell width={3}>장소명</Table.HeaderCell>
             <Table.HeaderCell width={2}>사용자</Table.HeaderCell>
@@ -95,7 +107,7 @@ const PlaceReservationWaitTable = ({reservations}) => {
                 floated='right'
                 onClick={acceptAllInProgressPlaceReservations}
               >
-                예약 승인
+                예약 일괄 승인
               </Button>
             </Table.HeaderCell>
           </Table.Row>
