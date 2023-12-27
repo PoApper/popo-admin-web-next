@@ -94,12 +94,12 @@ const PlaceReservationConfirmModal = ({trigger, reservation}) => {
           <Modal.Actions>
             <Button.Group floated={'left'}>
               <Button
-                positive name={'accept'}
+                positive name={'통과'}
                 onClick={handlePatch}>
                 <Icon name={'check'}/> 예약 승인
               </Button>
               <Button
-                negative name={'reject'}
+                negative name={'거절'}
                 onClick={handlePatch}>
                 <Icon name={'ban'}/> 예약 거절
               </Button>
