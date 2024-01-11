@@ -6,8 +6,8 @@ import { Dropdown, List } from "semantic-ui-react";
 import LayoutWithAuth from '@/components/layout/layout.auth.with'
 
 // https://github.com/plouc/nivo/issues/1941
-const NewUserBar = dynamic(() => import('@/components/statistics/new-user.bar'), { ssr: false })
-const NewReservationBar = dynamic(() => import('@/components/statistics/new-reservation.bar'), { ssr: false })
+const NewUserBar = dynamic(() => import('../../components/statistics/new-user.bar'), { ssr: false })
+const NewReservationBar = dynamic(() => import('../../components/statistics/new-reservation.bar'), { ssr: false })
 
 const YearOptions = [
   {
