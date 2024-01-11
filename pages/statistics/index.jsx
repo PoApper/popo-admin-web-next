@@ -1,9 +1,13 @@
 import { useState } from "react";
+import dynamic from 'next/dynamic';
 import { Dropdown, List } from "semantic-ui-react";
 
+
 import LayoutWithAuth from '@/components/layout/layout.auth.with'
-import NewUserBar from '@/components/statistics/new-user.bar'
-import NewReservationBar from '@/components/statistics/new-reservation.bar'
+
+// https://github.com/plouc/nivo/issues/1941
+const NewUserBar = dynamic(() => import('@/components/statistics/new-user.bar'), { ssr: false })
+const NewReservationBar = dynamic(() => import('@/components/statistics/new-reservation.bar'), { ssr: false })
 
 const YearOptions = [
   {
