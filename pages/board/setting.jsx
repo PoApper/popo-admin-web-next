@@ -6,6 +6,7 @@ import { PoPoAxios } from '@/utils/axios.instance';
 
 const SettingPage = ({ settingKeyValue }) => {
   const [popoCRMEmail, setPOPOCRMEmail] = useState(settingKeyValue.popo_crm_email);
+  const [STUEmail, setSTUEmail] = useState(settingKeyValue.stu_email);
   const [dongyeonBank, setDongyeonBank] = useState(settingKeyValue.dongyeon_bank);
   const [dongyeonServiceTime, setDongyeonServiceTime] = useState(settingKeyValue.dongyeon_service_time);
   const [dongyeonContact, setDongyeonContact] = useState(settingKeyValue.dongyeon_contact);
@@ -13,6 +14,7 @@ const SettingPage = ({ settingKeyValue }) => {
   function handleSubmit () {
     PoPoAxios.post('/setting', {
       popo_crm_email: popoCRMEmail,
+      stu_email: STUEmail,
       dongyeon_bank: dongyeonBank,
       dongyeon_service_time: dongyeonServiceTime,
       dongyeon_contact: dongyeonContact,
@@ -36,6 +38,11 @@ const SettingPage = ({ settingKeyValue }) => {
           label={'POPO 문의 이메일'}
           value={popoCRMEmail}
           onChange={e => setPOPOCRMEmail(e.target.value)}
+        />
+        <Form.Input
+          label={'학생회 이메일'}
+          value={STUEmail}
+          onChange={e => setSTUEmail(e.target.value)}
         />
         <Form.Input
           label={'동아리 연합회 계좌 (장비 예약비)'}
