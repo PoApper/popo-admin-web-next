@@ -25,9 +25,9 @@ const ReservationDatetimePicker = ({
           minDate={now.toDate()}
           maxDate={now.add(30, 'day').toDate()}
           selected={date.toDate()}
-          onChange={(date: Date) => {
-            const targetDate: string = moment(date).format('YYYY-MM-DD')
-            const nowDate: string = now.format('YYYY-MM-DD');
+          onChange={(date) => {
+            const targetDate = moment(date).format('YYYY-MM-DD')
+            const nowDate = now.format('YYYY-MM-DD');
             if (targetDate === nowDate) {
               setDate(now);
               setStartTime(now);
