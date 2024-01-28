@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/router';
 import moment from 'moment'
-import { Form, Message } from 'semantic-ui-react';
+import { Divider, Form, Message } from 'semantic-ui-react';
 
 import ReservationLayout from '@/components/reservation/reservation.layout'
 import { PoPoAxios } from '@/utils/axios.instance';
@@ -32,6 +32,7 @@ const PlaceReservationCreatePage = ({ placeList }) => {
   }})
 
   const [placeInfo, setPlaceInfo] = useState({})
+  const [userInfo, setUserInfo] = useState(null)
 
   const [phone, setPhone] = useState('')
   const [title, setTitle] = useState('')
@@ -45,7 +46,15 @@ const PlaceReservationCreatePage = ({ placeList }) => {
   const [endTime, setEndTime] = useState(nowNext30Min) // HHmm
 
   useEffect(() => {
-  }, [region, router])
+    PoPoAxios.get(
+      '/auth/verifyToken',
+      { withCredentials: true }).
+      then(res => setUserInfo(res.data)).
+      catch(() => {
+        // alert('로그인 후 예약 할 수 있습니다.');
+        // router.push('/auth/login');
+      })
+  }, [router])
 
   return (
     <ReservationLayout>
@@ -70,6 +79,27 @@ const PlaceReservationCreatePage = ({ placeList }) => {
             onChange={(e, { value }) => setPlaceInfo(value)}
           />
         </Form.Group>
+
+        <Form.Input
+          required readOnly label={'사용자'}
+          value={userInfo ? userInfo.name : ''}/>
+
+        <Form.Input
+          required label={'전화번호'}
+          placeholder={'010-xxxx-xxxx'}
+          onChange={e => setPhone(e.target.value)}/>
+        <Form.Input
+          required label={'예약 제목'}
+          placeholder={'예약 제목을 작성해주세요.'}
+          onChange={e => setTitle(e.target.value)}/>
+        <Form.TextArea
+          required label={'설명'}
+          placeholder={'사용 인원을 꼭 작성 해주세요.'}
+          onChange={e => setDescription(e.target.value)}/>
+
+        <Divider/>
+
+
       </Form>
 
     </ReservationLayout>
