@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/router';
 import moment from 'moment'
 import { Form, Message } from 'semantic-ui-react';
@@ -16,10 +16,21 @@ const RegionKorNameMapping = {
   RESIDENTIAL_COLLEGE: 'RC',
 }
 
-const PlaceReservationCreatePage = () => {
+const PlaceReservationCreatePage = ({ placeList }) => {
   const router = useRouter()
 
   const [region, setRegion] = useState()
+
+  const filteredPlaceList = useMemo(() => {
+    return placeList.filter(place => place.region === region);
+  }, [region, placeList]);
+
+  const placeOptions = filteredPlaceList.map(place => { return {
+    key: place.id,
+    value: place,
+    text: place.name,
+  }})
+
   const [placeInfo, setPlaceInfo] = useState({})
 
   const [phone, setPhone] = useState('')
@@ -50,11 +61,13 @@ const PlaceReservationCreatePage = () => {
             required label={'지역'} name="region"
             options={RegionOptions}
             value={region}
-            onAddItem={(e, { value }) => setRegion(value)}
+            onChange={(e, { value }) => setRegion(value)}
           />
           <Form.Select
             required label={'장소'} name="place"
-            value={placeInfo.name}
+            options={placeOptions}
+            value={placeOptions.id}
+            onChange={(e, { value }) => setPlaceInfo(value)}
           />
         </Form.Group>
       </Form>
@@ -64,3 +77,10 @@ const PlaceReservationCreatePage = () => {
 }
 
 export default PlaceReservationCreatePage;
+
+export async function getServerSideProps() {
+  const res = await PoPoAxios.get('place');
+  const placeList = res.data;
+
+  return { props: { placeList } };
+}
