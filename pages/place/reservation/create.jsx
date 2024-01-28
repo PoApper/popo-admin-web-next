@@ -7,6 +7,9 @@ import ReservationLayout from '@/components/reservation/reservation.layout'
 import { PoPoAxios } from '@/utils/axios.instance';
 import { RegionOptions } from '@/assets/region.options';
 import { roundUpByDuration } from '@/utils/time-date';
+import ReservationDatetimePicker from '@/components/reservation/reservation.datetime.picker';
+import OpeningHoursList from '@/components/reservation/opening_hours.list';
+import { isOnOpeningHours } from '@/utils/opening_hours';
 
 const RegionKorNameMapping = {
   STUDENT_HALL: '학생 회관',
@@ -31,8 +34,9 @@ const PlaceReservationCreatePage = ({ placeList }) => {
     text: place.name,
   }})
 
-  const [placeInfo, setPlaceInfo] = useState({})
+  const [placeInfo, setPlaceInfo] = useState(null)
   const [userInfo, setUserInfo] = useState(null)
+  console.log(placeInfo)
 
   const [phone, setPhone] = useState('')
   const [title, setTitle] = useState('')
@@ -45,6 +49,13 @@ const PlaceReservationCreatePage = ({ placeList }) => {
   const [startTime, setStartTime] = useState(now) // HHmm
   const [endTime, setEndTime] = useState(nowNext30Min) // HHmm
 
+  const isPossible = placeInfo ? isOnOpeningHours(
+    placeInfo.opening_hours,
+    date.format('dddd'), // Monday
+    startTime.format('HH:mm'),
+    endTime.format('HH:mm')
+  ) : false;
+
   useEffect(() => {
     PoPoAxios.get(
       '/auth/verifyToken',
@@ -55,6 +66,33 @@ const PlaceReservationCreatePage = ({ placeList }) => {
         // router.push('/auth/login');
       })
   }, [router])
+
+  function handleSubmit () {
+    if (!isPossible) {
+      alert(`예약이 불가능한 시간대입니다. ${placeInfo.name}의 사용 가능 시간을 확인해주세요.`);
+      return;
+    }
+
+    if (title.length == 1 || description.length == 1) {
+      alert('예약 설명이 너무 짤습니다.');
+      return;
+    }
+
+    PoPoAxios.post('/reservation-place', {
+      place_id: placeInfo.uuid,
+      phone: phone,
+      title: title,
+      description: description,
+      date: date.format('YYYYMMDD'), // YYYYMMDD
+      start_time: startTime.format('HHmm'), // HHmm
+      end_time: endTime.format('HHmm'), // HHmm
+    }, { withCredentials: true }).then(() => {
+      alert('예약을 생성했습니다!');
+      router.push('/auth/my-reservation');
+    }).catch((error) => {
+      alert(`예약 생성에 실패했습니다: ${error.response.data.message}`);
+    })
+  }
 
   return (
     <ReservationLayout>
@@ -99,9 +137,30 @@ const PlaceReservationCreatePage = ({ placeList }) => {
 
         <Divider/>
 
+        {
+          placeInfo ? (
+            <>
+              <Form.Group>
+                <ReservationDatetimePicker
+                  date={date} startTime={startTime} endTime={endTime}
+                  setDate={setDate} setStartTime={setStartTime} setEndTime={setEndTime}
+                />
+              </Form.Group>
 
+              <div className={'field'} style={{maxWidth: 240}}>
+                <label>사용 가능 시간</label>
+                <div style={{color: 'gray'}}>
+                  <OpeningHoursList openingHours={JSON.parse(placeInfo.opening_hours)}/>
+                </div>
+              </div>
+
+              <Form.Button onClick={handleSubmit} disabled={!isPossible}>
+                생성
+              </Form.Button>
+            </>
+          ) : null
+        }
       </Form>
-
     </ReservationLayout>
   )
 }
