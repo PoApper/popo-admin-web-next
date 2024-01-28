@@ -18,9 +18,9 @@ const EquipmentReservationConfirmModal = (props) => {
         {}, {withCredentials: true})
       setOpen(false)
       window.location.reload()
-    } catch (e) {
-      alert('예약 승인/거절에 실패했습니다.')
-      console.log(e)
+    } catch (err) {
+      const errMsg = err.response.data.message;
+      alert(`예약 승인/거절에 실패했습니다.\n${errMsg}`);
     }
   }
 
