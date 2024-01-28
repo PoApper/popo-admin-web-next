@@ -6,6 +6,11 @@ export default class ReservationMenubar extends Component {
   render() {
     return (
       <Menu>
+        <Link href={"/reservation"} passHref>
+          <Menu.Item>
+            예약 대기 목록
+          </Menu.Item>
+        </Link>
         <Link href={"/place"} passHref>
           <Menu.Item>
             장소 목록

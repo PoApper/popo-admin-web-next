@@ -4,10 +4,10 @@ import moment from 'moment';
 
 import { PoPoAxios } from '@/utils/axios.instance';
 import ReservationLayout from '@/components/reservation/reservation.layout'
-import EquipmentReservationTable
-  from '@/components/equipment/equipment.reservation.table'
 import PlaceReservationWaitTable
   from '@/components/place/place.reservation.wait.table'
+import EquipmentReservationWaitTable
+  from '@/components/equipment/equipment.reservation.wait.table';
 
 const ReservationPage = ({
   totalReservationCnt,
@@ -96,7 +96,7 @@ const ReservationPage = ({
               {
                 isLoading ? <p>로딩 중...</p> : (
                   equipReservations.length ?
-                    <EquipmentReservationTable
+                    <EquipmentReservationWaitTable
                       reservations={equipReservations}
                       startIdx={0}
                     /> : <p>대기 중인 장비 예약이 없습니다 🎈</p>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Pagination } from 'semantic-ui-react'
+import { Button, Pagination } from 'semantic-ui-react'
 
 import ReservationLayout from '@/components/reservation/reservation.layout'
 import PlaceReservationTable
@@ -46,6 +46,11 @@ const PlaceReservationPage = () => {
       <p>
         예약은 생성일 순서로 정렬되어 표시됩니다!<br/>
         예약 내용을 수정하는 건 <b>불가능</b>합니다. 예약 승인/거절/삭제만 가능합니다.
+      </p>
+      <p>
+        <Button href={"/place/reservation/create"}>
+          장소 예약 생성 (관리자)
+        </Button>
       </p>
       <div>
         <PlaceReservationTable

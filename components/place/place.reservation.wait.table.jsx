@@ -68,12 +68,16 @@ const PlaceReservationWaitTable = ({reservations}) => {
       <Table.Body>
         {
           reservations.map((reservation, idx) => {
-            const reservation_end_datetime = moment(
+            const start_datetime = moment(
+              `${reservation.date} ${reservation.start_time}`, 'YYYYMMDD HHmm')
+            const end_datetime = moment(
               `${reservation.date} ${reservation.end_time}`, 'YYYYMMDD HHmm')
-            const isOutdated = moment() > reservation_end_datetime
+
+            const isOutdated = moment() > end_datetime;
+            const isNow = start_datetime <= moment() && moment() <= end_datetime;
 
             return (
-              <Table.Row key={reservation.uuid} error={isOutdated}>
+              <Table.Row key={reservation.uuid} negative={isOutdated} positive={isNow}>
                 <Table.Cell>{idx + 1}</Table.Cell>
                 <Table.Cell>{reservation.place.name}</Table.Cell>
                 <Table.Cell>{reservation.booker.name}</Table.Cell>

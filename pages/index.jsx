@@ -24,11 +24,11 @@ const HomePage = () => {
             (2014 ~ 2019)
           </p>
           <Divider/>
-          <h2>ToDo List 🚀</h2>
+          <h2>최근 추가된 신규 기능 🚀</h2>
           <List as="ul">
-            <List.Item as="li">게시판 기능</List.Item>
-            <List.Item as="li">PoApper SSO 유저 정보 이전</List.Item>
-            <List.Item as="li">Full Responsive Web</List.Item>
+            <List.Item as="li">공지사항 기능</List.Item>
+            <List.Item as="li">대기중인 예약 목록 가시성 향상</List.Item>
+            <List.Item as="li">관리자 페이지에서 날짜 조건 없이 예약 생성 가능</List.Item>
           </List>
         </Grid.Column>
         <Grid.Column>
