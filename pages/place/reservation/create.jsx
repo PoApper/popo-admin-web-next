@@ -6,7 +6,7 @@ import { Divider, Form, Message } from 'semantic-ui-react';
 import ReservationLayout from '@/components/reservation/reservation.layout'
 import { PoPoAxios } from '@/utils/axios.instance';
 import { RegionOptions } from '@/assets/region.options';
-import { roundUpByDuration } from '@/utils/time-date';
+import { hourDiff, roundUpByDuration } from '@/utils/time-date';
 import ReservationDatetimePicker from '@/components/reservation/reservation.datetime.picker';
 import OpeningHoursList from '@/components/reservation/opening_hours.list';
 import { isOnOpeningHours } from '@/utils/opening_hours';
@@ -88,7 +88,7 @@ const PlaceReservationCreatePage = ({ placeList }) => {
       end_time: endTime.format('HHmm'), // HHmm
     }, { withCredentials: true }).then(() => {
       alert('예약을 생성했습니다!');
-      router.push('/auth/my-reservation');
+      router.push('/place/reservation');
     }).catch((error) => {
       alert(`예약 생성에 실패했습니다: ${error.response.data.message}`);
     })
@@ -147,12 +147,29 @@ const PlaceReservationCreatePage = ({ placeList }) => {
                 />
               </Form.Group>
 
+              {
+                isPossible ? null : (
+                  <Message negative>
+                    예약이 불가능한 시간대입니다. {placeInfo.name}의 사용 가능 시간을 확인해주세요.
+                  </Message>
+                )
+              }
+
               <div className={'field'} style={{maxWidth: 240}}>
                 <label>사용 가능 시간</label>
                 <div style={{color: 'gray'}}>
                   <OpeningHoursList openingHours={JSON.parse(placeInfo.opening_hours)}/>
                 </div>
               </div>
+
+              <Message>
+                <Message.Header>예약 장소와 예약 시간을 꼭 확인해주세요!</Message.Header>
+                <p>
+                  {
+                    RegionKorNameMapping[placeInfo.region]
+                  } {placeInfo.name}, {hourDiff(startTime, endTime)}시간 예약입니다.
+                </p>
+              </Message>
 
               <Form.Button onClick={handleSubmit} disabled={!isPossible}>
                 생성

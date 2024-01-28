@@ -23,7 +23,7 @@ const ReservationDatetimePicker = ({
           onKeyDown={e => e.preventDefault()}
           dateFormat={'yyyy-MM-dd'}
           minDate={now.toDate()}
-          maxDate={now.add(30, 'day').toDate()}
+          // maxDate={now.add(30, 'day').toDate()}
           selected={date.toDate()}
           onChange={(date) => {
             const targetDate = moment(date).format('YYYY-MM-DD')
