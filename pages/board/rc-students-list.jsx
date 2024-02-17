@@ -1,9 +1,24 @@
-import BoardLayout from '@/components/board/board.layout'
-import { PoPoAxios } from '@/utils/axios.instance';
-import CsvUploadForm from '@/components/common/csv-upload.form';
+import { useEffect, useState } from 'react';
 import { Button } from 'semantic-ui-react';
 
+import { PoPoAxios } from '@/utils/axios.instance';
+import BoardLayout from '@/components/board/board.layout'
+import CsvUploadForm from '@/components/common/csv-upload.form';
+import RcUserTable from '@/components/user/rc-user.table';
+
 const RcStudentsListPage = ({ popoRcStdntCnt, totalRcStdntCnt }) => {
+  const [rcStudentList, setRcStudentList] = useState([]);
+
+  useEffect(() => {
+    PoPoAxios.get('/setting/get-rc-students-list', { withCredentials: true })
+      .then((res) => {
+        setRcStudentList(res.data);
+      })
+      .catch((err) => {
+        alert(`RC 사생 명단을 불러오는데 실패했습니다.\n${err.response.data.message}`)
+      })
+  }, [popoRcStdntCnt, totalRcStdntCnt])
+
   return (
     <BoardLayout>
       <h3>RC 사생 명단 업로드</h3>
@@ -16,13 +31,13 @@ const RcStudentsListPage = ({ popoRcStdntCnt, totalRcStdntCnt }) => {
 
       <ul>
         <li>
-          POPO 가입 RC 사생 수: {popoRcStdntCnt}명 ({Number((popoRcStdntCnt / totalRcStdntCnt * 100).toFixed(1))}%) 
+          POPO 가입 RC 사생 수: {popoRcStdntCnt}명 ({Number((popoRcStdntCnt / totalRcStdntCnt * 100).toFixed(1))}%)
         </li>
         <li>
-          전체 RC 사생 수: {totalRcStdntCnt}명            
+          전체 RC 사생 수: {totalRcStdntCnt}명
         </li>
       </ul>
-      
+
       <div style={{marginTop: 4, gap: 8}}>
         <Button
           size='tiny'
@@ -30,7 +45,7 @@ const RcStudentsListPage = ({ popoRcStdntCnt, totalRcStdntCnt }) => {
         >
           CSV 다운로드
         </Button>
-        
+
         <Button
           size='tiny'
           onClick={() => {
@@ -55,6 +70,12 @@ const RcStudentsListPage = ({ popoRcStdntCnt, totalRcStdntCnt }) => {
           uploadUri={'/setting/rc-students-list'}
         />
       </div>
+
+      <div>
+        <RcUserTable
+          users={rcStudentList}
+        />
+      </div>
     </BoardLayout>
   )
 }
@@ -64,7 +85,7 @@ export default RcStudentsListPage;
 export async function getServerSideProps() {
   const res1 = await PoPoAxios.get('/user/count/RC_STUDENT');
   const popoRcStdntCnt = res1.data;
-  
+
   const res2 = await PoPoAxios.get('/setting/count-rc-students-list');
   const totalRcStdntCnt = res2.data;
 
