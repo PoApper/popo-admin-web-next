@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Button, Form } from "semantic-ui-react"
 import { CsvUpload } from "@/utils/file-upload";
-import { Axios } from "axios";
 import { PoPoAxios } from "@/utils/axios.instance";
 
 const CsvUploadForm = ({ label, uploadUri }) => {
@@ -15,11 +14,19 @@ const CsvUploadForm = ({ label, uploadUri }) => {
         accept={'csv'}
         onChange={async (evt) => {
           const file = evt.target.files[0];
+          if (!file.name.includes('.csv')) {
+            alert('CSV 파일만 업로드 가능합니다.');
+            return;
+          }
           setUploadedFile(file);
         }}
       />
 
       <Button onClick={async () => {
+          if (!uploadedFile.name.includes('.csv')) {
+            alert('CSV 파일만 업로드 가능합니다.');
+            return;
+          }
           CsvUpload(uploadUri, uploadedFile)
           .catch(err => {
             const errMsg = err.response.data.message;
