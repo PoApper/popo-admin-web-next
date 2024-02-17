@@ -1,7 +1,7 @@
 import { useState } from "react";
 import dynamic from 'next/dynamic';
 import { Dropdown, List } from "semantic-ui-react";
-
+import moment from 'moment'
 
 import LayoutWithAuth from '@/components/layout/layout.auth.with'
 
@@ -9,26 +9,20 @@ import LayoutWithAuth from '@/components/layout/layout.auth.with'
 const NewUserBar = dynamic(() => import('../../components/statistics/new-user.bar'), { ssr: false })
 const NewReservationBar = dynamic(() => import('../../components/statistics/new-reservation.bar'), { ssr: false })
 
-const YearOptions = [
-  {
-    key: 2021,
-    text: '2021년',
-    value: 2021,
-  },
-  {
-    key: 2022,
-    text: '2022년',
-    value: 2022,
-  },
-  {
-    key: 2023,
-    text: '2023년',
-    value: 2023,
-  }
-]
-
 const StatisticsPage = () => {
-  const [year, setYear] = useState(2023);
+  const thisYear = moment().year();
+  const popoStartYear = 2021;
+
+  const [year, setYear] = useState(thisYear);
+
+  const YearOptions = Array.from(
+    {length: thisYear - popoStartYear + 1},
+    (v, k) => { return {
+      key: k + popoStartYear,
+      text: `${k + popoStartYear}년`,
+      value: k + popoStartYear
+    } }
+  );
 
   return (
     <LayoutWithAuth>
