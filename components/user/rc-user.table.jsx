@@ -1,6 +1,6 @@
 import { Table } from 'semantic-ui-react'
 
-const RcUserTable = ({ users }) => {
+const RcUserTable = ({ userStatusList }) => {
   return (
     <Table
       celled selectable
@@ -10,17 +10,21 @@ const RcUserTable = ({ users }) => {
           <Table.HeaderCell>idx.</Table.HeaderCell>
           <Table.HeaderCell>이름</Table.HeaderCell>
           <Table.HeaderCell>이메일</Table.HeaderCell>
-          <Table.HeaderCell>POPO 가입여부</Table.HeaderCell>
+          <Table.HeaderCell>POPO 이름</Table.HeaderCell>
+          <Table.HeaderCell>POPO 가입일</Table.HeaderCell>
+          <Table.HeaderCell>POPO 유저타입</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
         {
-          users.map((user, idx) => { return (
-            <Table.Row key={user.uuid}>
+          userStatusList.map((userStatus, idx) => { return (
+            <Table.Row key={userStatus.uuid} negative={userStatus.status === 'not_registered'}>
               <Table.Cell>{idx + 1}</Table.Cell>
-              <Table.Cell>{user.email}</Table.Cell>
-              <Table.Cell></Table.Cell>
-              <Table.Cell></Table.Cell>
+              <Table.Cell>{userStatus.name}</Table.Cell>
+              <Table.Cell>{userStatus.email}</Table.Cell>
+              <Table.Cell>{userStatus.user_name}</Table.Cell>
+              <Table.Cell>{userStatus.created_at}</Table.Cell>
+              <Table.Cell>{userStatus.user_type}</Table.Cell>
             </Table.Row>
           )})
         }
