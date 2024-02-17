@@ -29,7 +29,7 @@ const RcStudentsListPage = ({ popoRcStdntCnt, totalRcStdntCnt }) => {
         아래 주소에서 CSV 파일을 다운 받아 요 형식에 맞춰 입력 후, 다시 CSV 파일을 업로드 해주세요.
         <span style={{color: "red"}}>(name, email 컬럼은 필수 입니다.)</span><br/>
         CSV 파일이 업로드 되면, RC 사생 명단 초기화(reset) 후 업로드 된 명단에 있는 Povis ID를 가진 모든 유저를 RC 사생으로 분류합니다.<br/>
-        만약 RC 사생 명단을 업로드 한 후에, RC 사생이 가입한다면 그때는 "자동"으로 RC 사생으로 분류됩니다.
+        만약 RC 사생 명단을 업로드 한 후에, RC 사생이 가입한다면 그때는 <strong>자동</strong>으로 RC 사생으로 분류됩니다.
       </p>
 
       <ul>
