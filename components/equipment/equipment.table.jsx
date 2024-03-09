@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from "next/link";
 import { Table } from 'semantic-ui-react'
+import _ from 'lodash'
 
 const ownerNames = {
   'chonghak': '총학생회',
@@ -10,23 +11,77 @@ const ownerNames = {
   'others': '그 외',
 }
 const EquipmentTable = ({ equipmentList }) => {
+  const [state, dispatch] = React.useReducer(exampleReducer, {
+    column: null,
+    data: equipmentList,
+    direction: null,
+  })
+  const { column, data, direction } = state
+
+  function exampleReducer(state, action) {
+    switch (action.type) {
+      case 'CHANGE_SORT':
+        if (state.column === action.column) {
+          return {
+            ...state,
+            data: state.data.slice().reverse(),
+            direction:
+              state.direction === 'ascending' ? 'descending' : 'ascending',
+          }
+        }
+
+        return {
+          column: action.column,
+          data: _.sortBy(state.data, [action.column]),
+          direction: 'ascending',
+        }
+      default:
+        throw new Error()
+    }
+  }
+
   return (
     <Table
-      celled selectable
+      celled selectable sortable
       textAlign={'center'}>
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell>idx.</Table.HeaderCell>
-          <Table.HeaderCell>장비명</Table.HeaderCell>
-          <Table.HeaderCell>장비 소속</Table.HeaderCell>
-          <Table.HeaderCell>대여비</Table.HeaderCell>
-          <Table.HeaderCell>일일 한도 (분)</Table.HeaderCell>
-          <Table.HeaderCell>총 예약 갯수</Table.HeaderCell>
+          <Table.HeaderCell
+            sorted={column === 'name' ? direction : null}
+            onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'name' })}
+          >
+            장비명
+          </Table.HeaderCell>
+          <Table.HeaderCell
+            sorted={column === 'equip_owner' ? direction : null}
+            onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'equip_owner' })}
+          >
+            장비 소속
+          </Table.HeaderCell>
+          <Table.HeaderCell
+            sorted={column === 'fee' ? direction : null}
+            onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'fee' })}
+          >
+            대여비
+          </Table.HeaderCell>
+          <Table.HeaderCell
+            sorted={column === 'max_minutes' ? direction : null}
+            onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'max_minutes' })}
+          >
+            일일 한도 (분)
+          </Table.HeaderCell>
+          <Table.HeaderCell
+            sorted={column === 'total_reservation_count' ? direction : null}
+            onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'total_reservation_count' })}
+          >
+            총 예약 갯수
+          </Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
         {
-          equipmentList.map((equipment, idx) => (
+          data.map((equipment, idx) => (
             <Link href={`/equipment/update/${equipment.uuid}`} key={equipment.uuid}>
               <Table.Row>
                 <Table.Cell>{idx + 1}</Table.Cell>
