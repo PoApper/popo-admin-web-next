@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from "next/link";
 import { Table } from 'semantic-ui-react'
+import _ from 'lodash'
 
 const regionNames = {
   'STUDENT_HALL': '학생 회관',
@@ -11,24 +12,77 @@ const regionNames = {
 }
 
 const PlaceTable = ({ placeList }) => {
+  const [state, dispatch] = React.useReducer(exampleReducer, {
+    column: null,
+    data: placeList,
+    direction: null,
+  })
+  const { column, data, direction } = state
+
+  function exampleReducer(state, action) {
+    switch (action.type) {
+      case 'CHANGE_SORT':
+        if (state.column === action.column) {
+          return {
+            ...state,
+            data: state.data.slice().reverse(),
+            direction:
+              state.direction === 'ascending' ? 'descending' : 'ascending',
+          }
+        }
+
+        return {
+          column: action.column,
+          data: _.sortBy(state.data, [action.column]),
+          direction: 'ascending',
+        }
+      default:
+        throw new Error()
+    }
+  }
 
   return (
     <Table
-      celled selectable
+      celled selectable sortable
       textAlign={'center'}>
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell>idx.</Table.HeaderCell>
-          <Table.HeaderCell>장소명</Table.HeaderCell>
-          <Table.HeaderCell>위치</Table.HeaderCell>
-          <Table.HeaderCell>지역</Table.HeaderCell>
-          <Table.HeaderCell>일일 한도 (분)</Table.HeaderCell>
-          <Table.HeaderCell>총 예약 갯수</Table.HeaderCell>
+          <Table.HeaderCell
+            sorted={column === 'name' ? direction : null}
+            onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'name' })}
+          >
+            장소명
+          </Table.HeaderCell>
+          <Table.HeaderCell
+            sorted={column === 'location' ? direction : null}
+            onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'location' })}
+          >
+            위치
+          </Table.HeaderCell>
+          <Table.HeaderCell
+            sorted={column === 'region' ? direction : null}
+            onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'region' })}
+          >
+            지역
+          </Table.HeaderCell>
+          <Table.HeaderCell
+            sorted={column === 'max_minutes' ? direction : null}
+            onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'max_minutes' })}
+          >
+            일일 한도 (분)
+          </Table.HeaderCell>
+          <Table.HeaderCell
+            sorted={column === 'total_reservation_count' ? direction : null}
+            onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'total_reservation_count' })}
+          >
+            총 예약 갯수
+          </Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
         {
-          placeList.map((place, idx) => (
+          data.map((place, idx) => (
             <Link href={`place/update/${place.uuid}`} key={place.uuid}>
               <Table.Row>
                 <Table.Cell>{idx + 1}</Table.Cell>
