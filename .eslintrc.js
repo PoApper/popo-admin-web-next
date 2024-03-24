@@ -13,12 +13,9 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:prettier/recommended',
+    'plugin:@next/next/recommended',
+    'next/core-web-vitals',
   ],
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-  },
-  plugins: ['react'],
   rules: {
     'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',

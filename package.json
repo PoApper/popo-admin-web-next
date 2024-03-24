@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start -p 3001",
     "format": "prettier --w .",
-    "lint": "eslint . --ext .js,.jsx --ignore-path .gitignore"
+    "lint": "next lint"
   },
   "dependencies": {
     "@nivo/bar": "^0.85.1",
