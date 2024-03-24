@@ -16,7 +16,7 @@ const NoticeTable = ({ notices }) => {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {notices.map((notice, idx) => {
+        {notices.map((notice) => {
           const isActive = moment().isBetween(
             moment(notice.start_datetime),
             moment(notice.end_datetime),
