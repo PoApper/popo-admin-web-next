@@ -78,7 +78,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Redeploy Dev Service
-        run: curl -X POST $PORTAINER_DEV_SERVICE_WEBHOOK
+        run: curl -X POST ${{ secrets.PORTAINER_DEV_SERVICE_WEBHOOK }}
 
   deploy_health_check:
     name: Check Application Status
