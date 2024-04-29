@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start -p 3001",
+    "format_check": "prettier --c .",
     "format": "prettier --w .",
     "lint": "next lint"
   },
