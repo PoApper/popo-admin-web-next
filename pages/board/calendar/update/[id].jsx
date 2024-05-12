@@ -16,9 +16,7 @@ const CalendarUpdatePage = ({ calendarInfo }) => {
 
   const id = calendarInfo.id;
   const [title, setTitle] = useState(calendarInfo.title);
-  const [start_date, setStartDate] = useState(
-    calendarInfo.start_date,
-  );
+  const [start_date, setStartDate] = useState(calendarInfo.start_date);
   const [end_date, setEndDate] = useState(calendarInfo.end_date);
 
   const duration = moment(end_date).diff(moment(start_date), 'days');
@@ -74,9 +72,7 @@ const CalendarUpdatePage = ({ calendarInfo }) => {
             <label>종료 날짜</label>
             <ReactDatePicker
               selected={end_date ? moment(end_date).toDate() : null}
-              onChange={(date) =>
-                setEndDate(moment(date).format('YYYY-MM-DD'))
-              }
+              onChange={(date) => setEndDate(moment(date).format('YYYY-MM-DD'))}
               onKeyDown={(e) => e.preventDefault()}
               dateFormat="yyyy-MM-dd"
               minDate={moment(start_date).toDate()}

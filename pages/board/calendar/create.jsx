@@ -72,9 +72,7 @@ const CalendarCreatePage = () => {
             <label>종료 날짜</label>
             <ReactDatePicker
               selected={end_date ? moment(end_date).toDate() : null}
-              onChange={(date) =>
-                setEndDate(moment(date).format('YYYY-MM-DD'))
-              }
+              onChange={(date) => setEndDate(moment(date).format('YYYY-MM-DD'))}
               onKeyDown={(e) => e.preventDefault()}
               dateFormat="yyyy-MM-dd"
               minDate={moment(start_date).toDate()}
