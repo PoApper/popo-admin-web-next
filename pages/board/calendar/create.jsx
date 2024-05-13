@@ -12,14 +12,14 @@ const CalendarCreatePage = () => {
   const router = useRouter();
 
   const [title, setTitle] = useState('');
-  const [start_date, setStartDate] = useState();
+  const [event_date, setEventDate] = useState();
 
   const dDay = moment(event_date).diff(moment(), 'days');
 
   const handleSubmit = async () => {
     const body = {
       title: title,
-      start_date: start_date,
+      event_date: event_date,
     };
 
     PoPoAxios.post('/calendar', body, { withCredentials: true })
@@ -48,9 +48,9 @@ const CalendarCreatePage = () => {
           <div className={'required field'}>
             <label>시작 날짜</label>
             <ReactDatePicker
-              selected={start_date ? moment(start_date).toDate() : null}
+              selected={event_date ? moment(event_date).toDate() : null}
               onChange={(date) =>
-                setStartDate(moment(date).format('YYYY-MM-DD'))
+                setEventDate(moment(date).format('YYYY-MM-DD'))
               }
               onKeyDown={(e) => e.preventDefault()}
               dateFormat="yyyy-MM-dd"
