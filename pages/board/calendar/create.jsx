@@ -13,26 +13,14 @@ const CalendarCreatePage = () => {
 
   const [title, setTitle] = useState('');
   const [start_date, setStartDate] = useState();
-  const [end_date, setEndDate] = useState();
 
-  const duration = moment(end_date).diff(moment(start_date), 'days');
+  const dDay = moment(event_date).diff(moment(), 'days');
 
   const handleSubmit = async () => {
     const body = {
       title: title,
       start_date: start_date,
-      end_date: end_date,
     };
-
-    if (!start_date || !end_date) {
-      alert('시작 일자와 종료 일자를 입력해주세요.');
-      return;
-    }
-
-    if (start_date > end_date) {
-      alert('시작 일자가 종료 일자보다 늦을 수 없습니다.');
-      return;
-    }
 
     PoPoAxios.post('/calendar', body, { withCredentials: true })
       .then(() => {
@@ -68,23 +56,9 @@ const CalendarCreatePage = () => {
               dateFormat="yyyy-MM-dd"
             />
           </div>
-          <div className={'required field'}>
-            <label>종료 날짜</label>
-            <ReactDatePicker
-              selected={end_date ? moment(end_date).toDate() : null}
-              onChange={(date) => setEndDate(moment(date).format('YYYY-MM-DD'))}
-              onKeyDown={(e) => e.preventDefault()}
-              dateFormat="yyyy-MM-dd"
-              minDate={moment(start_date).toDate()}
-            />
-          </div>
         </div>
         <Message>
-          {!start_date || !end_date
-            ? '행사 시작 날짜와 종료 날짜를 입력해주세요.'
-            : start_date > end_date
-              ? '시작 날짜가 종료 날짜보다 늦을 수 없습니다.'
-              : `행사 기간: ${start_date} ~ ${end_date} (${duration}일)`}
+          {!event_date ? '게시 시작 날짜와 종료 날짜를 입력해주세요.' : `D-${dDay}`}
         </Message>
 
         <Form.Button type={'submit'}>생성</Form.Button>

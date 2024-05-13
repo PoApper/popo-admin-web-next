@@ -16,22 +16,15 @@ const CalendarUpdatePage = ({ calendarInfo }) => {
 
   const id = calendarInfo.id;
   const [title, setTitle] = useState(calendarInfo.title);
-  const [start_date, setStartDate] = useState(calendarInfo.start_date);
-  const [end_date, setEndDate] = useState(calendarInfo.end_date);
+  const [event_date, setEventDate] = useState(calendarInfo.event_date);
 
-  const duration = moment(end_date).diff(moment(start_date), 'days');
+  const dDay = moment(event_date).diff(moment(), 'days');
 
   const handleSubmit = async () => {
     const body = {
       title: title,
-      start_date: start_date,
-      end_date: end_date,
+      event_date: event_date,
     };
-
-    if (start_date > end_date) {
-      alert('시작 일자가 종료 일자보다 늦을 수 없습니다.');
-      return;
-    }
 
     PoPoAxios.put(`/calendar/${id}`, body, { withCredentials: true })
       .then(() => {
@@ -60,31 +53,17 @@ const CalendarUpdatePage = ({ calendarInfo }) => {
           <div className={'required field'}>
             <label>시작 날짜</label>
             <ReactDatePicker
-              selected={start_date ? moment(start_date).toDate() : null}
+              selected={event_date ? moment(event_date).toDate() : null}
               onChange={(date) =>
-                setStartDate(moment(date).format('YYYY-MM-DD'))
+                setEventDate(moment(date).format('YYYY-MM-DD'))
               }
               onKeyDown={(e) => e.preventDefault()}
               dateFormat="yyyy-MM-dd"
             />
           </div>
-          <div className={'required field'}>
-            <label>종료 날짜</label>
-            <ReactDatePicker
-              selected={end_date ? moment(end_date).toDate() : null}
-              onChange={(date) => setEndDate(moment(date).format('YYYY-MM-DD'))}
-              onKeyDown={(e) => e.preventDefault()}
-              dateFormat="yyyy-MM-dd"
-              minDate={moment(start_date).toDate()}
-            />
-          </div>
         </div>
         <Message>
-          {!start_date || !end_date
-            ? '게시 시작 날짜와 종료 날짜를 입력해주세요.'
-            : start_date > end_date
-              ? '시작 날짜가 종료 날짜보다 늦을 수 없습니다.'
-              : `게시 기간: ${start_date} ~ ${end_date} (${duration}일)`}
+          {!event_date ? '게시 시작 날짜와 종료 날짜를 입력해주세요.' : `D-${dDay}`}
         </Message>
 
         <Form.Group>

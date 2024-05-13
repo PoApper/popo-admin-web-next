@@ -7,29 +7,22 @@ const CalendarTable = ({ calendars }) => {
     <Table celled selectable textAlign={'center'}>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell width={4}>제목</Table.HeaderCell>
-          <Table.HeaderCell width={6}>기간</Table.HeaderCell>
-          <Table.HeaderCell width={1}>D-Day</Table.HeaderCell>
+          <Table.HeaderCell width={6}>제목</Table.HeaderCell>
+          <Table.HeaderCell width={4}>날짜</Table.HeaderCell>
+          <Table.HeaderCell width={2}>D-Day</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
         {calendars.map((calendar) => {
-          const isActive = moment().isBetween(
-            moment(calendar.start_date),
-            moment(calendar.end_date),
-          );
-          const duration = moment(calendar.end_date).diff(
-            moment(calendar.start_date),
-            'days',
-          );
-          const dDay = moment(calendar.start_date).diff(moment(), 'days');
+          const isDisabled = moment().isAfter(moment(calendar.event_date));
+          const dDay = moment(calendar.event_date).diff(moment(), 'days');
 
           return (
             <Link
               href={`/board/calendar/update/${calendar.id}`}
               key={calendar.id}
             >
-              <Table.Row key={calendar.id} positive={isActive}>
+              <Table.Row key={calendar.id} disabled={isDisabled}>
                 <Table.Cell>
                   {calendar.link ? (
                     <a
@@ -44,9 +37,7 @@ const CalendarTable = ({ calendars }) => {
                   )}
                 </Table.Cell>
                 <Table.Cell>
-                  {moment(calendar.start_date).format('YYYY-MM-DD')} ~{' '}
-                  {moment(calendar.end_date).format('YYYY-MM-DD')} ({duration}
-                  일)
+                  {calendar.event_date}
                 </Table.Cell>
                 <Table.Cell>{dDay ? `D-${dDay}` : 'D-Day'}</Table.Cell>
               </Table.Row>
