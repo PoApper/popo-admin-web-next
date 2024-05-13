@@ -58,7 +58,9 @@ const CalendarCreatePage = () => {
           </div>
         </div>
         <Message>
-          {!event_date ? '게시 시작 날짜와 종료 날짜를 입력해주세요.' : `D-${dDay}`}
+          {!event_date
+            ? '게시 시작 날짜와 종료 날짜를 입력해주세요.'
+            : `D-${dDay}`}
         </Message>
 
         <Form.Button type={'submit'}>생성</Form.Button>

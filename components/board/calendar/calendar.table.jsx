@@ -36,9 +36,7 @@ const CalendarTable = ({ calendars }) => {
                     calendar.title
                   )}
                 </Table.Cell>
-                <Table.Cell>
-                  {calendar.event_date}
-                </Table.Cell>
+                <Table.Cell>{calendar.event_date}</Table.Cell>
                 <Table.Cell>{dDay ? `D-${dDay}` : 'D-Day'}</Table.Cell>
               </Table.Row>
             </Link>
