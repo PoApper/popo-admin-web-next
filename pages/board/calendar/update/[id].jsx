@@ -63,7 +63,11 @@ const CalendarUpdatePage = ({ calendarInfo }) => {
           </div>
         </div>
         <Message>
-          {!event_date ? '게시 시작 날짜와 종료 날짜를 입력해주세요.' : `D-${dDay}`}
+          {!event_date
+            ? '게시 시작 날짜와 종료 날짜를 입력해주세요.'
+            : dDay
+              ? `D-${dDay}`
+              : 'D-Day'}
         </Message>
 
         <Form.Group>
