@@ -108,7 +108,7 @@ const EquipmentUpdatePage = ({ equipmentInfo }) => {
             open={deleteModalOpen}
             target={name}
             deleteURI={`equip/${equipmentInfo.uuid}`}
-            afterDeleteURI={'equipment'}
+            afterDeleteURI={'/equipment'}
             trigger={
               <Button negative onClick={() => setDeleteModalOpen(true)}>
                 <Icon name={'trash'} /> 삭제

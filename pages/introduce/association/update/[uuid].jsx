@@ -121,7 +121,7 @@ const AssociationUpdatePage = ({ associationInfo }) => {
             open={deleteModalOpen}
             target={name}
             deleteURI={`introduce/association/${associationInfo.uuid}`}
-            afterDeleteURI={'introduce/association'}
+            afterDeleteURI={'/introduce/association'}
             trigger={
               <Button negative onClick={() => setDeleteModalOpen(true)}>
                 <Icon name={'trash'} /> 삭제

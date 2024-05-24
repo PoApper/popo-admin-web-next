@@ -144,7 +144,7 @@ const ClubUpdatePage = ({ clubInfo }) => {
             open={deleteModalOpen}
             target={name}
             deleteURI={`introduce/club/${clubInfo.uuid}`}
-            afterDeleteURI={'introduce/club'}
+            afterDeleteURI={'/introduce/club'}
             trigger={
               <Button negative onClick={() => setDeleteModalOpen(true)}>
                 <Icon name={'trash'} /> 삭제
