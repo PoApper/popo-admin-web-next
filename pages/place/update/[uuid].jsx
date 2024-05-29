@@ -161,6 +161,7 @@ const PlaceUpdatePage = ({ placeInfo }) => {
             open={deleteModalOpen}
             target={name}
             deleteURI={`place/${placeInfo.uuid}`}
+            afterDeleteURI={'/place'}
             trigger={
               <Button negative onClick={() => setDeleteModalOpen(true)}>
                 <Icon name={'trash'} /> 삭제
