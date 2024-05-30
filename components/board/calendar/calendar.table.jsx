@@ -15,7 +15,10 @@ const CalendarTable = ({ calendars }) => {
       <Table.Body>
         {calendars.map((calendar) => {
           const isDisabled = moment().isAfter(moment(calendar.event_date));
-          const dDay = moment(calendar.event_date).diff(moment(), 'days');
+          const dDay = moment(calendar.event_date).diff(
+            moment().format('YYYY-MM-DD'),
+            'days',
+          );
 
           return (
             <Link
@@ -37,7 +40,9 @@ const CalendarTable = ({ calendars }) => {
                   )}
                 </Table.Cell>
                 <Table.Cell>{calendar.event_date}</Table.Cell>
-                <Table.Cell>{dDay ? `D-${dDay}` : 'D-Day'}</Table.Cell>
+                <Table.Cell>
+                  {dDay > 0 ? `D-${dDay}` : dDay < 0 ? `D+${-dDay}` : 'D-Day'}
+                </Table.Cell>
               </Table.Row>
             </Link>
           );
