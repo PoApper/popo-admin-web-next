@@ -13,7 +13,7 @@ const LoginPage = () => {
   const [password, setPW] = useState('');
 
   useEffect(() => {
-    PoPoAxios.get('/auth/verifyToken', {
+    PoPoAxios.get('/auth/verifyToken/admin', {
       withCredentials: true,
     })
       .then(() => {
