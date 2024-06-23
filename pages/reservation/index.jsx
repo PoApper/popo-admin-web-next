@@ -55,17 +55,29 @@ const ReservationPage = ({
     <ReservationLayout>
       <h3>예약 대기 목록</h3>
       <ul style={{ padding: '0 0 0 20px' }}>
-        <li>총 장소 예약 수: {Number(totalPlaceReservationCnt).toLocaleString()}건</li>
-        <li>오늘 장소 예약 수: {Number(todayPlaceReservationCnt).toLocaleString()}건</li>
         <li>
-          이번 주 장소 예약 수: {Number(thisWeekPlaceReservationCnt).toLocaleString()}건
+          총 장소 예약 수: {Number(totalPlaceReservationCnt).toLocaleString()}건
+        </li>
+        <li>
+          오늘 장소 예약 수: {Number(todayPlaceReservationCnt).toLocaleString()}
+          건
+        </li>
+        <li>
+          이번 주 장소 예약 수:{' '}
+          {Number(thisWeekPlaceReservationCnt).toLocaleString()}건
         </li>
       </ul>
       <ul style={{ padding: '0 0 0 20px' }}>
-        <li>총 장비 예약 수: {Number(totalEquipReservationCnt).toLocaleString()}건</li>
-        <li>오늘 장비 예약 수: {Number(todayEquipReservationCnt).toLocaleString()}건</li>
         <li>
-          이번 주 장비 예약 수: {Number(thisWeekEquipReservationCnt).toLocaleString()}건
+          총 장비 예약 수: {Number(totalEquipReservationCnt).toLocaleString()}건
+        </li>
+        <li>
+          오늘 장비 예약 수: {Number(todayEquipReservationCnt).toLocaleString()}
+          건
+        </li>
+        <li>
+          이번 주 장비 예약 수:{' '}
+          {Number(thisWeekEquipReservationCnt).toLocaleString()}건
         </li>
       </ul>
       <p>
@@ -146,10 +158,12 @@ export async function getServerSideProps() {
     props: {
       totalPlaceReservationCnt: placeReservationCntStats.totalReservationCnt,
       todayPlaceReservationCnt: placeReservationCntStats.todayReservationCnt,
-      thisWeekPlaceReservationCnt: placeReservationCntStats.thisWeekReservationCnt,
+      thisWeekPlaceReservationCnt:
+        placeReservationCntStats.thisWeekReservationCnt,
       totalEquipReservationCnt: equipReservationCntStats.totalReservationCnt,
       todayEquipReservationCnt: equipReservationCntStats.todayReservationCnt,
-      thisWeekEquipReservationCnt: equipReservationCntStats.thisWeekReservationCnt,
+      thisWeekEquipReservationCnt:
+        equipReservationCntStats.thisWeekReservationCnt,
     },
   };
 }
