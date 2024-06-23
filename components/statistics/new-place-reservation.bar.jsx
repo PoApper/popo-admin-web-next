@@ -3,12 +3,12 @@ import { ResponsiveBar } from '@nivo/bar';
 
 import { PoPoAxios } from '@/utils/axios.instance';
 
-const NewReservationBar = ({ year }) => {
+const NewPlaceReservationBar = ({ year }) => {
   const [barData, setBarData] = useState([]);
 
   useEffect(() => {
     PoPoAxios.get(
-      `/statistics/reservation?start=${year}01&end=${year + 1}01`,
+      `/statistics/reservation/place?start=${year}01&end=${year + 1}01`,
     ).then((res) => {
       // process data format
       const barData = [];
@@ -37,4 +37,4 @@ const NewReservationBar = ({ year }) => {
   );
 };
 
-export default NewReservationBar;
+export default NewPlaceReservationBar;

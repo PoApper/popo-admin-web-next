@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
-import { Dropdown, List } from 'semantic-ui-react';
+import { Dropdown } from 'semantic-ui-react';
 import moment from 'moment';
 
 import LayoutWithAuth from '@/components/layout/layout.auth.with';
@@ -10,8 +10,12 @@ const NewUserBar = dynamic(
   () => import('../../components/statistics/new-user.bar'),
   { ssr: false },
 );
-const NewReservationBar = dynamic(
-  () => import('../../components/statistics/new-reservation.bar'),
+const NewPlaceReservationBar = dynamic(
+  () => import('../../components/statistics/new-place-reservation.bar'),
+  { ssr: false },
+);
+const NewEquipmentReservationBar = dynamic(
+  () => import('../../components/statistics/new-place-reservation.bar'),
   { ssr: false },
 );
 
@@ -50,20 +54,25 @@ const StatisticsPage = () => {
           }}
         />
       </div>
+
       <h3>신규 유저</h3>
       <div style={{ height: 360 }}>
         <NewUserBar year={year} />
       </div>
+
       <hr />
+
       <h3>신규 장소 예약</h3>
       <div style={{ height: 360 }}>
-        <NewReservationBar year={year} />
+        <NewPlaceReservationBar year={year} />
       </div>
+
       <hr />
-      <h3>ToDo List 🚀</h3>
-      <List as="ul">
-        <List.Item as="li">일일 활성 유저 (Daily Active User)</List.Item>
-      </List>
+
+      <h3>신규 장비 예약</h3>
+      <div style={{ height: 360 }}>
+        <NewEquipmentReservationBar year={year} />
+      </div>
     </LayoutWithAuth>
   );
 };
