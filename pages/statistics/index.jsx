@@ -15,7 +15,7 @@ const NewPlaceReservationBar = dynamic(
   { ssr: false },
 );
 const NewEquipmentReservationBar = dynamic(
-  () => import('../../components/statistics/new-place-reservation.bar'),
+  () => import('../../components/statistics/new-equip-reservation.bar'),
   { ssr: false },
 );
 

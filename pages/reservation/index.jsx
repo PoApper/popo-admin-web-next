@@ -8,9 +8,12 @@ import PlaceReservationWaitTable from '@/components/place/place.reservation.wait
 import EquipmentReservationWaitTable from '@/components/equipment/equipment.reservation.wait.table';
 
 const ReservationPage = ({
-  totalReservationCnt,
-  todayReservationCnt,
-  thisWeekReservationCnt,
+  totalPlaceReservationCnt,
+  todayPlaceReservationCnt,
+  thisWeekPlaceReservationCnt,
+  totalEquipReservationCnt,
+  todayEquipReservationCnt,
+  thisWeekEquipReservationCnt,
 }) => {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -52,10 +55,17 @@ const ReservationPage = ({
     <ReservationLayout>
       <h3>예약 대기 목록</h3>
       <ul style={{ padding: '0 0 0 20px' }}>
-        <li>총 예약 수: {Number(totalReservationCnt).toLocaleString()}건</li>
-        <li>오늘 예약 수: {Number(todayReservationCnt).toLocaleString()}건</li>
+        <li>총 장소 예약 수: {Number(totalPlaceReservationCnt).toLocaleString()}건</li>
+        <li>오늘 장소 예약 수: {Number(todayPlaceReservationCnt).toLocaleString()}건</li>
         <li>
-          이번 주 예약 수: {Number(thisWeekReservationCnt).toLocaleString()}건
+          이번 주 장소 예약 수: {Number(thisWeekPlaceReservationCnt).toLocaleString()}건
+        </li>
+      </ul>
+      <ul style={{ padding: '0 0 0 20px' }}>
+        <li>총 장비 예약 수: {Number(totalEquipReservationCnt).toLocaleString()}건</li>
+        <li>오늘 장비 예약 수: {Number(todayEquipReservationCnt).toLocaleString()}건</li>
+        <li>
+          이번 주 장비 예약 수: {Number(thisWeekEquipReservationCnt).toLocaleString()}건
         </li>
       </ul>
       <p>
@@ -126,17 +136,20 @@ const ReservationPage = ({
 export default ReservationPage;
 
 export async function getServerSideProps() {
-  const res1 = await PoPoAxios.get('statistics/reservation/count');
+  const res1 = await PoPoAxios.get('statistics/reservation/place/count');
   const placeReservationCntStats = res1.data;
 
-  const { totalReservationCnt, todayReservationCnt, thisWeekReservationCnt } =
-    placeReservationCntStats;
+  const res2 = await PoPoAxios.get('statistics/reservation/equipment/count');
+  const equipReservationCntStats = res2.data;
 
   return {
     props: {
-      totalReservationCnt,
-      todayReservationCnt,
-      thisWeekReservationCnt,
+      totalPlaceReservationCnt: placeReservationCntStats.totalReservationCnt,
+      todayPlaceReservationCnt: placeReservationCntStats.todayReservationCnt,
+      thisWeekPlaceReservationCnt: placeReservationCntStats.thisWeekReservationCnt,
+      totalEquipReservationCnt: equipReservationCntStats.totalReservationCnt,
+      todayEquipReservationCnt: equipReservationCntStats.todayReservationCnt,
+      thisWeekEquipReservationCnt: equipReservationCntStats.thisWeekReservationCnt,
     },
   };
 }
