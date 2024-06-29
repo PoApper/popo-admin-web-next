@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import moment from 'moment';
-import { Table } from 'semantic-ui-react';
+import { Icon, Table } from 'semantic-ui-react';
 
 const CalendarTable = ({ calendars }) => {
   return (
@@ -10,6 +10,7 @@ const CalendarTable = ({ calendars }) => {
           <Table.HeaderCell width={6}>제목</Table.HeaderCell>
           <Table.HeaderCell width={4}>날짜</Table.HeaderCell>
           <Table.HeaderCell width={2}>D-Day</Table.HeaderCell>
+          <Table.HeaderCell width={2}></Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
@@ -21,30 +22,26 @@ const CalendarTable = ({ calendars }) => {
           );
 
           return (
-            <Link
-              href={`/board/calendar/update/${calendar.id}`}
-              key={calendar.id}
-            >
-              <Table.Row key={calendar.id} disabled={isDisabled}>
-                <Table.Cell>
-                  {calendar.link ? (
-                    <a
-                      href={calendar.link}
-                      target={'_blank'}
-                      rel={'noreferrer'}
-                    >
-                      {calendar.title}
-                    </a>
-                  ) : (
-                    calendar.title
-                  )}
-                </Table.Cell>
-                <Table.Cell>{calendar.event_date}</Table.Cell>
-                <Table.Cell>
-                  {dDay > 0 ? `D-${dDay}` : dDay < 0 ? `D+${-dDay}` : 'D-Day'}
-                </Table.Cell>
-              </Table.Row>
-            </Link>
+            <Table.Row key={calendar.id} disabled={isDisabled}>
+              <Table.Cell>
+                {calendar.link ? (
+                  <a href={calendar.link} target={'_blank'} rel={'noreferrer'}>
+                    {calendar.title}
+                  </a>
+                ) : (
+                  calendar.title
+                )}
+              </Table.Cell>
+              <Table.Cell>{calendar.event_date}</Table.Cell>
+              <Table.Cell>
+                {dDay > 0 ? `D-${dDay}` : dDay < 0 ? `D+${-dDay}` : 'D-Day'}
+              </Table.Cell>
+              <Table.Cell>
+                <Link href={`/board/calendar/update/${calendar.id}`}>
+                  <Icon name={'edit'} />
+                </Link>
+              </Table.Cell>
+            </Table.Row>
           );
         })}
       </Table.Body>

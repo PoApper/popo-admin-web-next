@@ -1,18 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import styled, { ThemeProvider } from 'styled-components';
-import MediaQuery from 'react-responsive';
 
 import theme from '../../styles/theme';
 import { PoPoAxios } from '@/utils/axios.instance';
-import NavbarDesktop from '../navbar/navbar.desktop';
-import NavbarMobile from '../navbar/navbar.mobile';
-import SideBar from '../navbar/sidebar';
+import Navbar from '../navbar/navbar';
 
 const LayoutWithAuth = ({ children }) => {
   const router = useRouter();
-  const [sidebarVisible, setSidebarVisible] = useState(false);
 
   useEffect(() => {
     if (process.env.NEXT_PUBLIC_ENV === 'local') return;
@@ -32,25 +28,10 @@ const LayoutWithAuth = ({ children }) => {
       </Head>
       <>
         <main>
-          <MediaQuery maxWidth={768}>
-            <NavbarMobile openSidebar={() => setSidebarVisible(true)} />
-            <SideBar
-              visible={sidebarVisible}
-              toggleSidebar={() => setSidebarVisible(!sidebarVisible)}
-              pushContent={
-                <Wrapper>
-                  <div style={{ width: '100%' }}>{children}</div>
-                </Wrapper>
-              }
-            />
-          </MediaQuery>
-
-          <MediaQuery minWidth={768}>
-            <NavbarDesktop />
-            <Wrapper>
-              <div style={{ width: '100%' }}>{children}</div>
-            </Wrapper>
-          </MediaQuery>
+          <Navbar />
+          <Wrapper>
+            <div style={{ width: '100%' }}>{children}</div>
+          </Wrapper>
         </main>
       </>
     </ThemeProvider>

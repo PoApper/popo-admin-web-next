@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import moment from 'moment';
-import { Table } from 'semantic-ui-react';
+import { Icon, Table } from 'semantic-ui-react';
 
 const NoticeTable = ({ notices }) => {
   return (
@@ -11,8 +11,9 @@ const NoticeTable = ({ notices }) => {
           <Table.HeaderCell width={4}>제목</Table.HeaderCell>
           <Table.HeaderCell width={6}>내용</Table.HeaderCell>
           {/* <Table.HeaderCell>이미지</Table.HeaderCell> */}
-          <Table.HeaderCell width={5}>게시 일자</Table.HeaderCell>
-          <Table.HeaderCell width={1}>클릭수</Table.HeaderCell>
+          <Table.HeaderCell width={4}>게시 일자</Table.HeaderCell>
+          <Table.HeaderCell width={2}>클릭수</Table.HeaderCell>
+          <Table.HeaderCell width={2}></Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
@@ -26,35 +27,36 @@ const NoticeTable = ({ notices }) => {
             'hours',
           );
           return (
-            <Link href={`/board/notice/update/${notice.id}`} key={notice.id}>
-              <Table.Row key={notice.id} positive={isActive}>
-                <Table.Cell>{notice.id}</Table.Cell>
-                <Table.Cell>
-                  {notice.link ? (
-                    <a href={notice.link} target={'_blank'} rel={'noreferrer'}>
-                      {notice.title}
-                    </a>
-                  ) : (
-                    notice.title
-                  )}
-                </Table.Cell>
-                <Table.Cell
-                  style={{ whiteSpace: 'pre-line', textAlign: 'left' }}
-                >
-                  {notice.content}
-                </Table.Cell>
-                {/* <Table.Cell>
-                    <Image href={notice.link}/>
-                  </Table.Cell> */}
-                <Table.Cell>
-                  {moment(notice.start_datetime).format('YYYY-MM-DD HH:mm')} ~{' '}
-                  {moment(notice.end_datetime).format('YYYY-MM-DD HH:mm')}
-                  <br />({Number(duration / 24).toFixed(0)}일 {duration % 24}
-                  시간)
-                </Table.Cell>
-                <Table.Cell>{notice.click_count}</Table.Cell>
-              </Table.Row>
-            </Link>
+            <Table.Row key={notice.id} positive={isActive}>
+              <Table.Cell>{notice.id}</Table.Cell>
+              <Table.Cell>
+                {notice.link ? (
+                  <a href={notice.link} target={'_blank'} rel={'noreferrer'}>
+                    {notice.title}
+                  </a>
+                ) : (
+                  notice.title
+                )}
+              </Table.Cell>
+              <Table.Cell style={{ whiteSpace: 'pre-line', textAlign: 'left' }}>
+                {notice.content}
+              </Table.Cell>
+              {/* <Table.Cell>
+                  <Image href={notice.link}/>
+                </Table.Cell> */}
+              <Table.Cell>
+                {moment(notice.start_datetime).format('YYYY-MM-DD HH:mm')} ~{' '}
+                {moment(notice.end_datetime).format('YYYY-MM-DD HH:mm')}
+                <br />({Number(duration / 24).toFixed(0)}일 {duration % 24}
+                시간)
+              </Table.Cell>
+              <Table.Cell>{notice.click_count}</Table.Cell>
+              <Table.Cell>
+                <Link href={`/board/notice/update/${notice.id}`}>
+                  <Icon name={'edit'} />
+                </Link>
+              </Table.Cell>
+            </Table.Row>
           );
         })}
       </Table.Body>
