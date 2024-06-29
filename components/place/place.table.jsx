@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Table } from 'semantic-ui-react';
+import { Icon, Table } from 'semantic-ui-react';
 import _ from 'lodash';
 
 const regionNames = {
@@ -85,26 +85,30 @@ const PlaceTable = ({ placeList }) => {
           >
             총 예약 갯수
           </Table.HeaderCell>
+          <Table.HeaderCell></Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
         {data.map((place, idx) => (
-          <Link href={`place/update/${place.uuid}`} key={place.uuid}>
-            <Table.Row>
-              <Table.Cell>{idx + 1}</Table.Cell>
-              <Table.Cell>{place.name}</Table.Cell>
-              <Table.Cell>{place.location}</Table.Cell>
-              <Table.Cell>{regionNames[place.region]}</Table.Cell>
-              <Table.Cell>
-                {place.max_minutes === 1440
-                  ? '제한 없음'
-                  : place.max_minutes.toLocaleString()}
-              </Table.Cell>
-              <Table.Cell>
-                {place.total_reservation_count.toLocaleString()}
-              </Table.Cell>
-            </Table.Row>
-          </Link>
+          <Table.Row key={place.uuid}>
+            <Table.Cell>{idx + 1}</Table.Cell>
+            <Table.Cell>{place.name}</Table.Cell>
+            <Table.Cell>{place.location}</Table.Cell>
+            <Table.Cell>{regionNames[place.region]}</Table.Cell>
+            <Table.Cell>
+              {place.max_minutes === 1440
+                ? '제한 없음'
+                : place.max_minutes.toLocaleString()}
+            </Table.Cell>
+            <Table.Cell>
+              {place.total_reservation_count.toLocaleString()}
+            </Table.Cell>
+            <Table.Cell>
+              <Link href={`place/update/${place.uuid}`}>
+                <Icon name={'edit'} />
+              </Link>
+            </Table.Cell>
+          </Table.Row>
         ))}
       </Table.Body>
       <Table.Footer>

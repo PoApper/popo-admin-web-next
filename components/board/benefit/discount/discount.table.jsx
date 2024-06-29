@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import moment from 'moment';
-import { Table } from 'semantic-ui-react';
+import { Icon, Table } from 'semantic-ui-react';
 
 const DiscountTable = ({ discountList }) => {
   return (
@@ -15,26 +15,27 @@ const DiscountTable = ({ discountList }) => {
           <Table.HeaderCell width={2}>가게 번호</Table.HeaderCell>
           <Table.HeaderCell width={6}>할인 내용</Table.HeaderCell>
           <Table.HeaderCell width={2}>생성일</Table.HeaderCell>
+          <Table.HeaderCell width={2}></Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
         {discountList.map((discount) => (
-          <Link
-            href={`benefit/discount/update/${discount.id}`}
-            key={discount.id}
-          >
-            <Table.Row>
-              <Table.Cell>{discount.id}</Table.Cell>
-              <Table.Cell>{discount.title}</Table.Cell>
-              <Table.Cell>{discount.region}</Table.Cell>
-              <Table.Cell>{discount.open_hour}</Table.Cell>
-              <Table.Cell>{discount.phone}</Table.Cell>
-              <Table.Cell>{discount.content}</Table.Cell>
-              <Table.Cell>
-                {moment(discount.created_at).format('YYYY-MM-DD HH:mm')}
-              </Table.Cell>
-            </Table.Row>
-          </Link>
+          <Table.Row key={discount.id}>
+            <Table.Cell>{discount.id}</Table.Cell>
+            <Table.Cell>{discount.title}</Table.Cell>
+            <Table.Cell>{discount.region}</Table.Cell>
+            <Table.Cell>{discount.open_hour}</Table.Cell>
+            <Table.Cell>{discount.phone}</Table.Cell>
+            <Table.Cell>{discount.content}</Table.Cell>
+            <Table.Cell>
+              {moment(discount.created_at).format('YYYY-MM-DD HH:mm')}
+            </Table.Cell>
+            <Table.Cell>
+              <Link href={`/benefit/discount/update/${discount.id}`}>
+                <Icon name={'edit'} />
+              </Link>
+            </Table.Cell>
+          </Table.Row>
         ))}
       </Table.Body>
     </Table>

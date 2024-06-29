@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Table } from 'semantic-ui-react';
+import { Icon, Table } from 'semantic-ui-react';
 import _ from 'lodash';
 
 const ownerNames = {
@@ -84,29 +84,30 @@ const EquipmentTable = ({ equipmentList }) => {
           >
             총 예약 갯수
           </Table.HeaderCell>
+          <Table.HeaderCell></Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
         {data.map((equipment, idx) => (
-          <Link
-            href={`/equipment/update/${equipment.uuid}`}
-            key={equipment.uuid}
-          >
-            <Table.Row>
-              <Table.Cell>{idx + 1}</Table.Cell>
-              <Table.Cell>{equipment.name}</Table.Cell>
-              <Table.Cell>{ownerNames[equipment.equip_owner]}</Table.Cell>
-              <Table.Cell>{equipment.fee.toLocaleString()}</Table.Cell>
-              <Table.Cell>
-                {equipment.max_minutes === 1440
-                  ? '제한 없음'
-                  : equipment.max_minutes.toLocaleString()}
-              </Table.Cell>
-              <Table.Cell>
-                {equipment.total_reservation_count.toLocaleString()}
-              </Table.Cell>
-            </Table.Row>
-          </Link>
+          <Table.Row key={equipment.uuid}>
+            <Table.Cell>{idx + 1}</Table.Cell>
+            <Table.Cell>{equipment.name}</Table.Cell>
+            <Table.Cell>{ownerNames[equipment.equip_owner]}</Table.Cell>
+            <Table.Cell>{equipment.fee.toLocaleString()}</Table.Cell>
+            <Table.Cell>
+              {equipment.max_minutes === 1440
+                ? '제한 없음'
+                : equipment.max_minutes.toLocaleString()}
+            </Table.Cell>
+            <Table.Cell>
+              {equipment.total_reservation_count.toLocaleString()}
+            </Table.Cell>
+            <Table.Cell>
+              <Link href={`/equipment/update/${equipment.uuid}`}>
+                <Icon name={'edit'} />
+              </Link>
+            </Table.Cell>
+          </Table.Row>
         ))}
       </Table.Body>
       <Table.Footer>

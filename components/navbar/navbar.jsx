@@ -51,13 +51,13 @@ const MobileDiv = styled.div`
   @media only screen and (min-width: 800px) {
     display: none;
   }
-`
+`;
 
 const DesktopDiv = styled.span`
   @media only screen and (max-width: 768px) {
     display: none;
   }
-`
+`;
 
 const MobileNav = () => {
   return (
@@ -74,25 +74,33 @@ const MobileNav = () => {
       <NavbarInner>
         <NavbarMenu borderless>
           <Menu.Item style={{ margin: 10 }}>
-            <Dropdown icon={'sidebar'} style={{ margin: '0' }} >
+            <Dropdown icon={'sidebar'} style={{ margin: '0' }}>
               <Dropdown.Menu>
                 <Dropdown.Item>
-                  <Link href={'/reservation'} passHref style={{color: 'black'}}>
+                  <Link
+                    href={'/reservation'}
+                    passHref
+                    style={{ color: 'black' }}
+                  >
                     예약 관리
                   </Link>
                 </Dropdown.Item>
                 <Dropdown.Item>
-                  <Link href={'/introduce'} passHref style={{color: 'black'}}>
+                  <Link href={'/introduce'} passHref style={{ color: 'black' }}>
                     소개글 관리
                   </Link>
                 </Dropdown.Item>
                 <Dropdown.Item>
-                  <Link href={'/board'} passHref style={{color: 'black'}}>
+                  <Link href={'/board'} passHref style={{ color: 'black' }}>
                     게시물 관리
                   </Link>
                 </Dropdown.Item>
                 <Dropdown.Item>
-                  <Link href={'/statistics'} passHref style={{color: 'black'}}>
+                  <Link
+                    href={'/statistics'}
+                    passHref
+                    style={{ color: 'black' }}
+                  >
                     통계 보기
                   </Link>
                 </Dropdown.Item>
@@ -115,8 +123,8 @@ const MobileNav = () => {
         </NavbarMenu>
       </NavbarInner>
     </>
-  )
-}
+  );
+};
 
 const DesktopNav = () => {
   return (
@@ -125,43 +133,38 @@ const DesktopNav = () => {
         <Link href={'/'} passHref>
           <Menu.Item position={'left'} style={{ paddingLeft: 0 }}>
             <span style={{ textAlign: 'center' }}>
-              <Image
-                centered
-                src={'/popo.svg'}
-                alt={'logo'}
-                size={'small'}
-              />
+              <Image centered src={'/popo.svg'} alt={'logo'} size={'small'} />
             </span>
             관리자
           </Menu.Item>
         </Link>
         <Menu.Item>
-          <Link href={'/user'} passHref style={{color: 'black'}}>
+          <Link href={'/user'} passHref style={{ color: 'black' }}>
             유저 관리
           </Link>
         </Menu.Item>
         <Menu.Item>
-          <Link href={'/reservation'} passHref style={{color: 'black'}}>
+          <Link href={'/reservation'} passHref style={{ color: 'black' }}>
             예약 관리
           </Link>
         </Menu.Item>
         <Menu.Item>
-          <Link href={'/introduce'} passHref style={{color: 'black'}}>
+          <Link href={'/introduce'} passHref style={{ color: 'black' }}>
             소개글 관리
           </Link>
         </Menu.Item>
         <Menu.Item>
-          <Link href={'/board'} passHref style={{color: 'black'}}>
+          <Link href={'/board'} passHref style={{ color: 'black' }}>
             게시물 관리
           </Link>
         </Menu.Item>
         <Menu.Item>
-          <Link href={'/statistics'} passHref style={{color: 'black'}}>
+          <Link href={'/statistics'} passHref style={{ color: 'black' }}>
             통계 보기
           </Link>
         </Menu.Item>
         <MenuItemUser />
       </NavbarMenu>
     </NavbarInner>
-  )
-}
+  );
+};

@@ -38,9 +38,7 @@ const NoticeTable = ({ notices }) => {
                   notice.title
                 )}
               </Table.Cell>
-              <Table.Cell
-                style={{ whiteSpace: 'pre-line', textAlign: 'left' }}
-              >
+              <Table.Cell style={{ whiteSpace: 'pre-line', textAlign: 'left' }}>
                 {notice.content}
               </Table.Cell>
               {/* <Table.Cell>
@@ -54,7 +52,7 @@ const NoticeTable = ({ notices }) => {
               </Table.Cell>
               <Table.Cell>{notice.click_count}</Table.Cell>
               <Table.Cell>
-                <Link href={`/board/notice/update/${notice.id}`} key={notice.id}>
+                <Link href={`/board/notice/update/${notice.id}`}>
                   <Icon name={'edit'} />
                 </Link>
               </Table.Cell>
