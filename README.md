@@ -26,20 +26,21 @@ POPO는 PoApper에서 개발하고, POSTECH 총학생회에서 운영하는 포�
 
 ## How to Deploy
 
-POPO 어플리케이션은 Docker Container로 실행되고 있으며, [Swarmpit](https://swarmpit.io/)을 통해 오케스트레이션 되고 있다.
+POPO 어플리케이션은 Docker Container로 실행되고 있으며, [Portainer](https://www.portainer.io/)를 통해 오케스트레이션 되고 있다.
 Dev-Prod의 two-stage 배포 정책을 가지고 있으며, 각 stage에 배포하기 위한 조건은 아래와 같다.
 
 - Dev Stage
   - POPO 도커 이미지의 `latest` 버전을 업데이트 한다.
   - 이때, Web 어플리케이션의 경우는 도커 이미지 빌드 때 `NEXT_PUBLIC_ENV=dev`로 설정해줘야 한다.
-  - `latest` 버전이 업데이트 되면, Swarmpit에서 Auto-deploy 해준다.
+  - `latest` 버전이 업데이트 되면, Portainer에서 Auto-deploy 해준다.
 - Prod Stage
   - POPO 도커 이미지의 특정 태그를 업데이트 한다. (ex. `v1.2.3`)
   - 이때, Web 어플리케이션의 경우는 도커 이미지 빌드 때 `NEXT_PUBLIC_ENV=prod`로 설정해줘야 한다.
-  - Swarmpit에서 "직접" Prod stage의 버전을 바꿔준다.
+  - Portainer에서 "직접" Prod stage의 버전을 바꿔준다.
 
 ## Contributors & Maintainer
 
 - Seokyun Ha ([@bluehorn07](https://github.com/BlueHorn07))
 - Jeongwon Choi ([@jjeongone](https://github.com/jjeongone))
 - Hyojeong Yun ([@hodori314](https://github.com/hodori314))
+- Gwanho Kim ([@khkim6040](https://github.com/khkim6040))
