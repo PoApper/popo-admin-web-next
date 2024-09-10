@@ -13,7 +13,7 @@
   "dependencies": {
     "@nivo/bar": "^0.87.0",
     "@nivo/core": "^0.87.0",
-    "axios": "^1.7.2",
+    "axios": "^1.7.4",
     "moment": "^2.30.1",
     "next": "^14.2.4",
     "react": "^18.3.1",
