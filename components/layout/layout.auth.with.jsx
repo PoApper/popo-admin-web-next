@@ -11,7 +11,6 @@ const LayoutWithAuth = ({ children }) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (process.env.NEXT_PUBLIC_ENV === 'local') return;
     PoPoAxios.get('/auth/verifyToken/admin', {
       withCredentials: true,
     }).catch(() => {

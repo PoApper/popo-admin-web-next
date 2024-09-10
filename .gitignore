@@ -18,6 +18,7 @@
 # misc
 .DS_Store
 *.pem
+*.csr
 
 # debug
 npm-debug.log*
@@ -39,4 +40,4 @@ yarn-error.log*
 # webstorm
 .idea/
 
-
+certificates/*.pem

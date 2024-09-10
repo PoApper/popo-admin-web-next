@@ -3,7 +3,7 @@
   "version": "1.4.2",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --experimental-https",
     "build": "next build --no-lint",
     "start": "next start -p 3001",
     "format:check": "prettier --c .",
