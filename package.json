@@ -3,7 +3,7 @@
   "version": "1.4.2",
   "private": true,
   "scripts": {
-    "dev": "next dev --experimental-https",
+    "dev": "next dev --experimental-https --port 3001",
     "build": "next build --no-lint",
     "start": "next start -p 3001",
     "format:check": "prettier --c .",
@@ -13,23 +13,23 @@
   "dependencies": {
     "@nivo/bar": "^0.87.0",
     "@nivo/core": "^0.87.0",
-    "axios": "^1.7.2",
+    "axios": "^1.7.7",
     "moment": "^2.30.1",
-    "next": "^14.2.4",
+    "next": "^14.2.13",
     "react": "^18.3.1",
-    "react-datepicker": "^7.1.0",
+    "react-datepicker": "^7.4.0",
     "react-dom": "^18.3.1",
     "react-responsive": "^10.0.0",
     "semantic-ui-css": "^2.5.0",
     "semantic-ui-react": "^2.1.5",
-    "styled-components": "^6.1.11"
+    "styled-components": "^6.1.13"
   },
   "devDependencies": {
     "eslint": "^8.57.0",
-    "eslint-config-next": "^14.2.4",
+    "eslint-config-next": "^14.2.13",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.1.3",
-    "eslint-plugin-react": "^7.34.3",
-    "prettier": "^3.3.2"
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-react": "^7.36.1",
+    "prettier": "^3.3.3"
   }
 }
