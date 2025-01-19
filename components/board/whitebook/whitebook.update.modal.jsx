@@ -76,7 +76,7 @@ const WhitebookUpdateModal = ({ trigger, whitebook }) => {
               </Form.Button>
               <DeleteConfirmModal
                 open={deleteModalOpen}
-                target={name}
+                target={whitebook.title}
                 deleteURI={`whitebook/${whitebook.uuid}`}
                 trigger={
                   <Button negative onClick={() => setDeleteModalOpen(true)}>
