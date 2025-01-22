@@ -1,6 +1,6 @@
-import { Table } from 'semantic-ui-react';
+import { Table, Icon } from 'semantic-ui-react';
+import Link from 'next/link';
 import moment from 'moment';
-import UserUpdateModal from './user.update.modal';
 
 const userTypes = {
   STUDENT: '학생',
@@ -23,29 +23,29 @@ const UserTable = ({ users, startIdx }) => {
           <Table.HeaderCell>유저 타입</Table.HeaderCell>
           <Table.HeaderCell>가입일</Table.HeaderCell>
           <Table.HeaderCell>마지막 로그인</Table.HeaderCell>
+          <Table.HeaderCell></Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
         {users.map((user, idx) => {
           return (
-            <UserUpdateModal
-              key={user.uuid}
-              user={user}
-              trigger={
-                <Table.Row key={user.uuid}>
-                  <Table.Cell>{startIdx + idx + 1}</Table.Cell>
-                  <Table.Cell>{user.name}</Table.Cell>
-                  <Table.Cell>{userTypes[user.userType]}</Table.Cell>
-                  <Table.Cell>
-                    {moment(user.createdAt).format('YYYY-MM-DD HH:mm')}
-                  </Table.Cell>
-                  <Table.Cell>
-                    {moment(user.lastLoginAt).format('YYYY-MM-DD HH:mm')}
-                  </Table.Cell>
-                </Table.Row>
-              }
-            />
-          );
+            <Table.Row key={user.uuid}>
+              <Table.Cell>{startIdx + idx + 1}</Table.Cell>
+              <Table.Cell>{user.name}</Table.Cell>
+              <Table.Cell>{userTypes[user.userType]}</Table.Cell>
+              <Table.Cell>
+                {moment(user.createdAt).format('YYYY-MM-DD HH:mm')}
+              </Table.Cell>
+              <Table.Cell>
+                {moment(user.lastLoginAt).format('YYYY-MM-DD HH:mm')}
+              </Table.Cell>
+              <Table.Cell>
+                <Link href={`user/${user.uuid}`}>
+                  <Icon name={'edit'} />
+                </Link>
+              </Table.Cell>
+            </Table.Row>
+          )
         })}
       </Table.Body>
     </Table>
