@@ -19,13 +19,3 @@ export function CsvUpload(uri, csv_file) {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
 }
-
-export function PdfUpload(uri, pdf_file) {
-  let formData = new FormData();
-  formData.append('pdf_file', pdf_file);
-
-  return PoPoAxios.post(uri, formData, {
-    withCredentials: true,
-    headers: { 'Content-Type': 'multipart/form-data' },
-  });
-}

@@ -1,7 +1,6 @@
 import { Form, Modal, Radio } from 'semantic-ui-react';
 import { useState } from 'react';
 import { PoPoAxios } from '@/utils/axios.instance';
-import { PdfUpload } from '@/utils/file-upload';
 
 const WhitebookCreateModal = (props) => {
   const [open, setOpen] = useState(false);
@@ -17,10 +16,10 @@ const WhitebookCreateModal = (props) => {
   const handleFileChange = (file) => {
     if (!file || file.type !== 'application/pdf') {
       alert('PDF 파일만 업로드 가능합니다.');
-      setPdfFile(null); // 잘못된 파일 초기화
+      setPdfFile(null);
       return;
     }
-    setPdfFile(file); // 올바른 PDF 파일 설정
+    setPdfFile(file);
   };
 
   const handleSubmit = async () => {
@@ -30,35 +29,22 @@ const WhitebookCreateModal = (props) => {
       formData.append('content', content);
       formData.append('show_only_login', showOnlyLogin);
 
-      // PDF 업로드 처리
-      if (inputType === 'pdf' && pdfFile) {
-        try {
-          await PdfUpload('/upload/pdf', pdfFile); // PDF 업로드
-          formData.append('pdf_uploaded', true); // 업로드 상태 전달
-        } catch (err) {
-          const errMsg =
-            err.response?.data?.message || 'PDF 업로드 중 오류가 발생했습니다.';
-          alert(`PDF 업로드에 실패했습니다.\n${errMsg}`);
-          return; // 업로드 실패 시 생성 요청 중단
-        }
-      }
-
-      // 링크 입력 처리
       if (inputType === 'link' && link) {
         formData.append('link', link);
+      } else if (inputType === 'pdf' && pdfFile) {
+        formData.append('pdf_file', pdfFile);
       }
 
-      // 데이터 전송
-      await PoPoAxios.post('/whitebook', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
+      await PoPoAxios.post(`/whitebook`, formData, {
         withCredentials: true,
+        headers: { 'Content-Type': 'multipart/form-data' },
       });
 
       setOpen(false);
       window.location.reload();
     } catch (e) {
       alert('생활백서 생성에 실패했습니다.');
-      console.log(e);
+      console.error(e);
     }
   };
 
