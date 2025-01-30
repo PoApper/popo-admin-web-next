@@ -69,13 +69,6 @@ const PlaceReservationCreatePage = ({ placeList }) => {
   }, [router]);
 
   function handleSubmit() {
-    if (!isPossible) {
-      alert(
-        `예약이 불가능한 시간대입니다. ${placeInfo.name}의 사용 가능 시간을 확인해주세요.`,
-      );
-      return;
-    }
-
     if (title.length == 1 || description.length == 1) {
       alert('예약 설명이 너무 짤습니다.');
       return;
@@ -173,13 +166,6 @@ const PlaceReservationCreatePage = ({ placeList }) => {
               />
             </Form.Group>
 
-            {isPossible ? null : (
-              <Message negative>
-                예약이 불가능한 시간대입니다. {placeInfo.name}의 사용 가능
-                시간을 확인해주세요.
-              </Message>
-            )}
-
             <div className={'field'} style={{ maxWidth: 240 }}>
               <label>사용 가능 시간</label>
               <div style={{ color: 'gray' }}>
@@ -199,9 +185,9 @@ const PlaceReservationCreatePage = ({ placeList }) => {
               </p>
             </Message>
 
-            {isPossible ? (
+            {!isPossible ? (
               <Message negative>
-                선택하신 시간 대는 예약이 불가능한 시간대로 설정 되어 있습니다.
+                선택하신 시간 대는 예약이 <b>불가능한</b> 시간대로 설정 되어 있습니다.
                 다만, 관리자 화면에서는 강제로 {placeInfo.name}에 대한 예약을
                 진행할 수 있습니다. 계속 진행하시겠습니까?
               </Message>
