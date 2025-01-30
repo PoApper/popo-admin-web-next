@@ -1,7 +1,6 @@
 import React from 'react';
 import { Label, Table } from 'semantic-ui-react';
 import moment from 'moment';
-import EquipmentReservationConfirmModal from './equipment.reservation.confirm.modal';
 
 const EquipmentReservationTable2 = ({ reservations, startIdx }) => {
   return (
