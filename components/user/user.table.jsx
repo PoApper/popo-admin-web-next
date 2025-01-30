@@ -45,7 +45,7 @@ const UserTable = ({ users, startIdx }) => {
                 </Link>
               </Table.Cell>
             </Table.Row>
-          )
+          );
         })}
       </Table.Body>
     </Table>
