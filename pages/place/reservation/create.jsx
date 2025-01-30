@@ -38,7 +38,6 @@ const PlaceReservationCreatePage = ({ placeList }) => {
 
   const [placeInfo, setPlaceInfo] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
-  console.log(placeInfo);
 
   const [phone, setPhone] = useState('');
   const [title, setTitle] = useState('');
@@ -200,7 +199,17 @@ const PlaceReservationCreatePage = ({ placeList }) => {
               </p>
             </Message>
 
-            <Form.Button onClick={handleSubmit} disabled={!isPossible}>
+            {
+              isPossible ? (
+                <Message negative>
+                  선택하신 시간 대는 예약이 불가능한 시간대로 설정 되어 있습니다.
+                  다만, 관리자 화면에서는 강제로 {placeInfo.name}에 대한 예약을 진행할 수 있습니다.
+                  계속 진행하시겠습니까?
+                </Message>
+              ) : null
+            }
+
+            <Form.Button onClick={handleSubmit}>
               생성
             </Form.Button>
           </>
