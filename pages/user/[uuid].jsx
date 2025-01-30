@@ -59,6 +59,8 @@ const UserDetailPage = ({
     }
   };
 
+  console.log(user);
+
   return (
     <LayoutWithAuth>
       <h2>유저 세부 정보</h2>
@@ -75,6 +77,10 @@ const UserDetailPage = ({
               <h3>유저 정보</h3>
 
               <Form>
+                <Form.Field>
+                  <label>UUID</label>
+                  <p>{user.uuid}</p>
+                </Form.Field>
                 <Form.Input
                   required
                   label={'email'}
@@ -103,6 +109,16 @@ const UserDetailPage = ({
                   options={userStatusOptions}
                   onChange={(e, { value }) => setUserStatus(value)}
                 />
+                <Form.Group style={{display: 'flex'}}>
+                  <Form.Field style={{flex: 1}}>
+                  <label>생성일</label>
+                  <p>{user.createdAt}</p>
+                  </Form.Field>
+                  <Form.Field style={{flex: 1}}>
+                  <label>마지막 로그인</label>
+                  <p>{user.lastLoginAt}</p>
+                  </Form.Field>
+                </Form.Group>
                 <Form.Group>
                   <Form.Button type="submit" onClick={handleSubmit}>
                     수정
@@ -166,8 +182,6 @@ export async function getServerSideProps(ctx) {
   const res3 = await PoPoAxios.get(`reservation-equip/user/admin/${uuid}`, {
     withCredentials: true,
   })
-
-  console.log(res2.data);
 
   return {
     props: {
