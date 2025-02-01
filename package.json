@@ -8,7 +8,7 @@
     "start": "next start -p 3001",
     "format:check": "prettier --c .",
     "format": "prettier --w .",
-    "lint": "next lint"
+    "lint": "next lint --file"
   },
   "dependencies": {
     "@nivo/bar": "^0.87.0",
