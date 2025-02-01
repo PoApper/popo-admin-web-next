@@ -1,3 +1,4 @@
+default_stages: [commit, push]
 repos:
   - repo: local
     hooks:
@@ -5,9 +6,7 @@ repos:
         name: Run Prettier
         entry: npm run format
         language: system
-        types: [javascript, jsx]
       - id: npm-run-lint
         name: Run ESLint
         entry: npm run lint
         language: system
-        types: [javascript, jsx]
