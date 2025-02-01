@@ -5,10 +5,10 @@ repos:
         name: Run Prettier
         entry: npm run format
         language: system
-        types: [yaml]
+        types: [javascript, jsx, json, yaml]
         pass_filenames: true
       - id: npm-run-lint
         name: Run ESLint
-        entry: npm run lint
+        entry: npm run lint:file
         language: system
-        types: [yaml]
+        types: [javascript, jsx, json, yaml]
