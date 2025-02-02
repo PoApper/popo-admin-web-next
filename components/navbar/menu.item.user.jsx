@@ -37,9 +37,14 @@ const MenuItemUser = () => {
           }}
         >
           <Dropdown.Item text={'로그아웃'} onClick={handleLogout} />
-          <Dropdown.Item
-            text={`popo-${process.env.NEXT_PUBLIC_POPO_VERSION}`}
-          />
+          <a
+            href={`https://github.com/PoApper/popo-admin-web/commits/${process.env.NEXT_PUBLIC_POPO_VERSION}`}
+            target="_blank"
+          >
+            <Dropdown.Item
+              text={`popo-${process.env.NEXT_PUBLIC_POPO_VERSION}`}
+            />
+          </a>
         </Dropdown.Menu>
       </Dropdown>
     </Menu.Item>
