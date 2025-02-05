@@ -124,7 +124,7 @@ const WhitebookCreateModal = (props) => {
                       textDecoration: 'underline',
                     }}
                   >
-                    업로드한 PDF 확인
+                    {pdfFile.name}
                   </a>
                 )}
               </label>

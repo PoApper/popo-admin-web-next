@@ -12,6 +12,7 @@ const WhitebookUpdateModal = ({ trigger, whitebook }) => {
   const [showOnlyLogin, setShowOnlyLogin] = useState(whitebook.show_only_login);
   const [inputType, setInputType] = useState(whitebook.link ? 'link' : 'pdf');
   const [link, setLink] = useState(whitebook.link || '');
+  const [uploadedPDFLink, setUploadedPDFLink] = useState(null);
   const [pdfFile, setPdfFile] = useState(null);
 
   const handleModalOpen = () => {
@@ -20,11 +21,8 @@ const WhitebookUpdateModal = ({ trigger, whitebook }) => {
     if (whitebook.link && whitebook.link.includes('whitebook')) {
       const link = whitebook.link;
       setLink('');
+      setUploadedPDFLink(link);
       setInputType('pdf');
-      fetch(link)
-        .then((res) => res.blob())
-        .then((blob) => setPdfFile(blob))
-        .catch((err) => console.error(err));
     }
   };
 
@@ -133,16 +131,18 @@ const WhitebookUpdateModal = ({ trigger, whitebook }) => {
                 onChange={(e) => handleFileChange(e.target.files[0])}
               />
               <label>
-                {pdfFile && (
+                {(pdfFile || uploadedPDFLink) && (
                   <a
-                    href={URL.createObjectURL(pdfFile)}
+                    href={
+                      pdfFile ? URL.createObjectURL(pdfFile) : uploadedPDFLink
+                    }
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{
                       textDecoration: 'underline',
                     }}
                   >
-                    업로드한 PDF 확인
+                    {pdfFile ? pdfFile.name : '기존 PDF 확인'}
                   </a>
                 )}
               </label>
