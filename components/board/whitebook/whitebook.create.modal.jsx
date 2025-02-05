@@ -8,8 +8,7 @@ const WhitebookCreateModal = (props) => {
   const [content, setContent] = useState('');
   const [showOnlyLogin, setShowOnlyLogin] = useState(false);
 
-  // PDF 또는 링크 선택 관련 상태
-  const [inputType, setInputType] = useState('link'); // 기본값은 'link'
+  const [inputType, setInputType] = useState('link');
   const [link, setLink] = useState('');
   const [pdfFile, setPdfFile] = useState(null);
 
@@ -23,29 +22,32 @@ const WhitebookCreateModal = (props) => {
   };
 
   const handleSubmit = async () => {
-    try {
-      const formData = new FormData();
-      formData.append('title', title);
-      formData.append('content', content);
-      formData.append('show_only_login', showOnlyLogin);
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('content', content);
+    formData.append('show_only_login', showOnlyLogin);
 
-      if (inputType === 'link' && link) {
-        formData.append('link', link);
-      } else if (inputType === 'pdf' && pdfFile) {
-        formData.append('pdf_file', pdfFile);
-      }
-
-      await PoPoAxios.post(`/whitebook`, formData, {
-        withCredentials: true,
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
-
-      setOpen(false);
-      window.location.reload();
-    } catch (e) {
-      alert('생활백서 생성에 실패했습니다.');
-      console.error(e);
+    if (inputType === 'link' && link) {
+      formData.append('link', link);
+    } else if (inputType === 'pdf' && pdfFile) {
+      formData.append('pdf_file', pdfFile);
+    } else {
+      alert('링크 또는 PDF 파일을 입력해주세요.');
+      return;
     }
+
+    await PoPoAxios.post(`/whitebook`, formData, {
+      withCredentials: true,
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
+      .then(() => {
+        alert('생활백서를 생성 했습니다.');
+        window.location.reload();
+      })
+      .catch((err) => {
+        alert('생활백서 생성에 실패했습니다.');
+        console.error(err);
+      });
   };
 
   return (
@@ -76,7 +78,6 @@ const WhitebookCreateModal = (props) => {
                 checked={inputType === 'link'}
                 onChange={() => {
                   setInputType('link');
-                  setPdfFile(null); // PDF 파일 초기화
                 }}
               />
             </Form.Field>
@@ -88,7 +89,6 @@ const WhitebookCreateModal = (props) => {
                 checked={inputType === 'pdf'}
                 onChange={() => {
                   setInputType('pdf');
-                  setLink(''); // 링크 입력 초기화
                 }}
               />
             </Form.Field>
@@ -106,13 +106,29 @@ const WhitebookCreateModal = (props) => {
 
           {/* 조건부 렌더링: PDF 업로드 필드 */}
           {inputType === 'pdf' && (
-            <Form.Input
-              required
-              type="file"
-              label={'생활백서 PDF'}
-              accept="application/pdf"
-              onChange={(e) => handleFileChange(e.target.files[0])}
-            />
+            <Form.Field>
+              <Form.Input
+                required
+                label={'생활백서 PDF'}
+                type="file"
+                accept="application/pdf"
+                onChange={(e) => handleFileChange(e.target.files[0])}
+              />
+              <label>
+                {pdfFile && (
+                  <a
+                    href={URL.createObjectURL(pdfFile)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      textDecoration: 'underline',
+                    }}
+                  >
+                    업로드한 PDF 확인
+                  </a>
+                )}
+              </label>
+            </Form.Field>
           )}
 
           <Form.TextArea
