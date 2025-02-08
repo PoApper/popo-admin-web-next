@@ -46,8 +46,18 @@ const WhitebookUpdateModal = ({ trigger, whitebook }) => {
     } else if (inputType === 'pdf' && pdfFile) {
       formData.append('pdf_file', pdfFile);
     } else {
-      alert('링크 또는 PDF 파일을 입력해주세요.');
-      return;
+      // title, content, show_only_login 중 하나라도 변경되었다면 수정 가능
+      if (
+        title !== whitebook.title ||
+        content !== whitebook.cotent ||
+        showOnlyLogin !== whitebook.show_only_login
+      ) {
+        const link = inputType === 'link' ? link : uploadedPDFLink;
+        formData.append('link', link);
+      } else {
+        alert('링크 또는 PDF 파일을 입력해주세요.');
+        return;
+      }
     }
 
     await PoPoAxios.put(`/whitebook/${whitebook.uuid}`, formData, {
